@@ -54,7 +54,8 @@ class ProjectsController < ApplicationController
     xml_string = Project.first.xml_schema
     doc = Nokogiri::XML(xml_string)
 
-    @tables_arr = []
+    tables_arr = []
+    @show_tables_arr = []
     doc.root.search('table').each do |table|
       # find primary key
       primary_row_name = table.search('key/part').text
@@ -89,13 +90,17 @@ class ProjectsController < ApplicationController
         }
       end
 
-      @tables_arr << {
+      tables_arr << {
+        table_name: table.attribute("name").value,
+        columns: columns_arr
+      }
+      @show_tables_arr << {
         table_name: table.attribute("name").value,
         columns: columns_arr
       }
     end
 
-    @ordered_tables_arr = order(@tables_arr) # Josh, temporary, to get to function from views
+    @ordered_tables_arr = order(tables_arr) # Josh, temporary, to get to function from views
 
   end
 
