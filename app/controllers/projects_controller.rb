@@ -43,10 +43,37 @@ class ProjectsController < ApplicationController
         columns: columns_arr
       }
     end
-
+      @commands = commands
   end
 
+
   private
+
+  def commands
+    @commands = []
+    @tables_arr.each do |table|
+      command = "rails g model #{table[:table_name].downcase[0..-2]} "
+        table[:columns].each do |column|
+        next if column[:column_name] == "id"
+
+          column_name = column[:column_name]
+          data_type = column[:data_type]
+
+            command += " #{column_name}:#{data_type}"
+
+          if column[:fk] == true
+            column[:relations].each do |e|
+            relation_table_name = e[:relation_table].downcase[0..-2]
+
+            command += " #{relation_table_name}:refrences"
+          end
+        end
+      end
+    @commands << command
+    end
+
+    @commands
+  end
 
   def to_data_type(schema_data_type)
     case schema_data_type.downcase
