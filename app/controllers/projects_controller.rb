@@ -2,9 +2,11 @@ class ProjectsController < ApplicationController
   def show
     file = File.open('example.xml')
     doc = Nokogiri::XML(file)
+
     doc.root.xpath('table').each do |table|
       name = table.xpath('name').text
     end
+
 raise
   end
 end
