@@ -16,6 +16,7 @@ class ProjectsController < ApplicationController
         data_type = row.search('datatype').text
         relations = row.search('relation')
         relations_arr = []
+        sorting_relations_arr = []
         fk = relations.count > 0
         pk = column_name == primary_row_name
 
@@ -27,6 +28,7 @@ class ProjectsController < ApplicationController
             relation_row: relation_row
           }
           relations_arr << relation_hash
+          sorting_relations_arr << relation_hash
         end
 
         columns_arr << {
@@ -36,7 +38,7 @@ class ProjectsController < ApplicationController
           pk: pk,
           fk: fk,
           # for sorting
-          sorting_relations: relations_arr
+          sorting_relations: sorting_relations_arr
         }
       end
 
