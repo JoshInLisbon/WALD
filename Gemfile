@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 ruby '2.6.3'
 
+# for heroku app creation
+gem 'platform-api'
+
 gem 'bootsnap', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.0'

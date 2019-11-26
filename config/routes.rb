@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'signup', to: 'devise/registrations#new'
   end
 
-  resources :pages, only: [:home, :about]
+  get 'generate', to: 'pages#generate'
   resources :projects, only: [:index, :show, :create, :new] do
     resources :files, only: [:index]
   end
