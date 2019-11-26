@@ -11,15 +11,20 @@
   width: 40px;
 }
 
+.navbar {
+  padding: 10px 60px;
+}
+
 .nav-item {
   background: #6C72FA;
   border-radius: 6px;
-  padding: 2px 20px;
+  padding: 1px 30px;
   font-weight: bold;
 }
 
 .nav-link {
   color: white !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 .navbar-brand {
