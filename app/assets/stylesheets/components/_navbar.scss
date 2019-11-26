@@ -12,6 +12,12 @@
 }
 
 .nav-item {
-  background-color: #6C72FA;
+  background: #6C72FA;
   border-radius: 6px;
+  padding: 2px 20px;
+  font-weight: bold;
+}
+
+.nav-link {
+  color: white !important;
 }
