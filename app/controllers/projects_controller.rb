@@ -1,7 +1,31 @@
 class ProjectsController < ApplicationController
-  def show
+  before_action :set_project, only: [:show]
+  before_action :check_if_user_is_owner?,  only: [:show]
 
-    xml_string = Project.first.xml_schema
+
+  def index
+    @projects = Project.where(user_id: current_user.id)
+  end
+
+  def new
+    @project = Project.new
+    @project.user = current_user
+  end
+
+  def create
+    @project = Project.new(project_params)
+    @project.user = current_user
+    if @project.save
+      redirect_to projects_path
+    else
+      render :new
+    end
+  end
+
+  def show
+    @project.user = current_user
+
+    xml_string = @project.xml_schema
     doc = Nokogiri::XML(xml_string)
 
     tables_arr = []
@@ -16,6 +40,7 @@ class ProjectsController < ApplicationController
         data_type = row.search('datatype').text
         relations = row.search('relation')
         relations_arr = []
+        sorting_relations_arr = []
         fk = relations.count > 0
         pk = column_name == primary_row_name
 
@@ -27,6 +52,7 @@ class ProjectsController < ApplicationController
             relation_row: relation_row
           }
           relations_arr << relation_hash
+          sorting_relations_arr << relation_hash
         end
 
         columns_arr << {
@@ -36,7 +62,7 @@ class ProjectsController < ApplicationController
           pk: pk,
           fk: fk,
           # for sorting
-          sorting_relations: relations_arr
+          sorting_relations: sorting_relations_arr
         }
       end
 
@@ -46,12 +72,9 @@ class ProjectsController < ApplicationController
       }
     end
 
-
     @tables_arr = order(tables_arr) # Josh, temporary, to get to function from views
 
-
     @commands = commands
-
   end
 
   private
@@ -154,4 +177,15 @@ class ProjectsController < ApplicationController
     return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
   end
 
+  def project_params
+    params.require(:project).permit(:name, :user_id, :xml_schema)
+  end
+
+  def check_if_user_is_owner?
+    current_user.id == @project.user_id
+  end
+
+  def set_project
+    @project = Project.find(params[:id])
+  end
 end
