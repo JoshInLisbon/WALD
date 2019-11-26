@@ -1,35 +1,12 @@
 
 <div class="container">
-  <% @commands.each do |command| %>
-  <p><%= command %></p>
-  <% end %>
+    <div>
+      <pre>
+        <code class="plaintext">
+          <% @commands.each do |command| %>
+          <%= command %>
+          <% end %>
+        </code>
+      </pre>
+    </div>
 </div>
-
-
-
-
-
-<!-- <div class="row"> -->
-  <!-- unordered -->
-  <!-- <div class="col-6"> -->
-    <!-- <h5>Unordered</h5> -->
-    <%# @show_tables_arr.each_with_index do |table, index| %>
-    <!-- <p> -->
-      <!-- <strong><%#= index + 1 %></strong> -->
-      <%#= table[:table_name] %>
-    <!-- </p> -->
-    <%# end %>
-  <!-- </div> -->
-
-
-  <!-- ordered -->
-  <!-- <div class="col-6"> -->
-    <!-- <h5>Ordered</h5> -->
-    <%# @ordered_tables_arr.each_with_index do |table, index| %>
-    <!-- <p> -->
-      <!-- <strong><%#= index + 1 %></strong> -->
-      <%#= table[:table_name] %>
-    <!-- </p> -->
-    <%# end %>
-  <!-- </div> -->
-<!-- </div> -->
