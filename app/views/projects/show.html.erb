@@ -1,12 +1,17 @@
 
 <div class="container">
-    <div>
-      <pre>
-        <code class="plaintext">
-          <% @commands.each do |command| %>
-          <%= command %>
-          <% end %>
-        </code>
-      </pre>
-    </div>
+
+<h1><%= @project.name %></h1>
+<p>Edit text by clicking on it.</p>
+<p>Click <i class="fas fa-copy"></i> to copy a command.</p>
+<p><strong>Your model commands</strong></p>
+  <div class="code-block">
+    <% @commands.each_with_index do |command, index| %>
+      <div class="code-row">
+        <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-<%= index + 1%>" id="copy-icon-<%= index + 1%>"></i></div>
+        <input class="code-input" type="text" id="code-input-<%= index + 1%>" value="<%= command %>">
+      </div>
+    <% end %>
+  </div>
+
 </div>

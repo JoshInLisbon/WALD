@@ -1,0 +1,32 @@
+.code-block {
+  background: #23241f;
+  padding: 20px 30px;
+}
+
+.code-row {
+  display: flex;
+}
+
+.code-input {
+  display: block;
+  flex-grow: 1;
+  color: #f8f8f2;
+  background: #23241f;
+  font-size: 87.5%;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  border: none;
+  padding: 0 3px 8px 3px;
+  &::selection {
+    background-color: transparent;
+  }
+}
+
+.code-copy-icon {
+  display:inline-block;
+  color: #bdc3c7;
+  margin-right: 10px;
+  &:hover {
+    color: #746EF1;
+    cursor: pointer;
+  }
+}
