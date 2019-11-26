@@ -1,0 +1,427 @@
+[
+  {
+    :table_name=>"albums",
+    :columns=>
+      [
+        {
+          :column_name=>"id",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>true,
+          :fk=>false
+        },
+        {
+          :column_name=>"artist_id",
+          :data_type=>:integer,
+          :relations=>
+            [
+              {
+                :relation_table=>"artists",
+                :relation_row=>"id"
+              }
+            ],
+          :pk=>false,
+          :fk=>true},
+        {
+          :column_name=>"title",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        }
+      ]
+  },
+
+  {
+    :table_name=>"artists",
+    :columns=>
+      [
+        {
+          :column_name=>"id",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>true,
+          :fk=>false},
+        {
+          :column_name=>"name",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        }
+      ]
+  },
+
+  {
+    :table_name=>"genres",
+    :columns=>
+      [
+        {
+          :column_name=>"id",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>true,
+          :fk=>false
+        },
+        {
+          :column_name=>"name",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        }
+      ]
+  },
+
+  {
+    :table_name=>"media_types",
+    :columns=>
+      [
+        {
+          :column_name=>"id",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>true,
+          :fk=>false
+        },
+        {
+          :column_name=>"name",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        }
+      ]
+  },
+
+  {
+    :table_name=>"tracks",
+    :columns=>
+      [
+        {
+          :column_name=>"id",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>true,
+          :fk=>false
+        },
+
+        {
+          :column_name=>"album_id",
+          :data_type=>:integer,
+          :relations=>
+            [
+              {
+                :relation_table=>"albums",
+                :relation_row=>"id"
+              }
+            ],
+          :pk=>false,
+          :fk=>true
+        },
+
+        {
+          :column_name=>"genre_id",
+          :data_type=>:integer,
+          :relations=>
+            [
+              {
+                :relation_table=>"genres",
+                :relation_row=>"id"
+              }
+            ],
+          :pk=>false,
+          :fk=>true
+        },
+
+        {
+          :column_name=>"mediatype_id",
+          :data_type=>:integer,
+          :relations=>
+            [
+              {
+                :relation_table=>"media_types",
+                :relation_row=>"id"
+              }
+            ],
+          :pk=>false,
+          :fk=>true
+        },
+
+        {
+          :column_name=>"name",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        },
+
+        {
+          :column_name=>"composer",
+          :data_type=>:string,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        },
+
+        {
+          :column_name=>"miliseconds",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        },
+
+        {
+          :column_name=>"bytes",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        },
+
+        {
+          :column_name=>"unit_price",
+          :data_type=>:integer,
+          :relations=>[],
+          :pk=>false,
+          :fk=>false
+        }
+      ]
+  },
+
+  {
+      :table_name=>"customers",
+      :columns=>
+        [
+          {
+            :column_name=>"id",
+            :data_type=>:integer,
+            :relations=>[],
+            :pk=>true,
+            :fk=>false
+          },
+
+          {
+            :column_name=>"first_name",
+            :data_type=>:integer,
+            :relations=>[],
+            :pk=>false,
+            :fk=>false
+          },
+
+          {
+            :column_name=>"last_name",
+            :data_type=>:integer,
+            :relations=>[],
+            :pk=>false,
+            :fk=>false
+          },
+
+          {
+            :column_name=>"country",
+            :data_type=>:integer,
+            :relations=>[],
+            :pk=>false,
+            :fk=>false
+          },
+
+          {
+            :column_name=>"email",
+            :data_type=>:integer,
+            :relations=>[],
+            :pk=>false,
+            :fk=>false
+          }
+        ]
+      },
+
+  {
+    :table_name=>"invoice_lines",
+    :columns=>
+      [
+            {
+              :column_name=>"id",
+              :data_type=>:integer,
+              :relations=>[],
+              :pk=>true,
+              :fk=>false
+            },
+
+            {
+              :column_name=>"track_id",
+              :data_type=>:integer,
+              :relations=>
+                [
+                  {
+                    :relation_table=>"tracks",
+                    :relation_row=>"id"
+                  }
+                ],
+              :pk=>false,
+              :fk=>true
+            },
+
+            {
+              :column_name=>"invoice_id",
+              :data_type=>:integer,
+              :relations=>
+                [
+                  {
+                    :relation_table=>"invoices",
+                    :relation_row=>"id"
+                  }
+                ],
+              :pk=>false,
+              :fk=>true
+            },
+
+            {
+              :column_name=>"unit_price",
+              :data_type=>:integer,
+              :relations=>[],
+              :pk=>false,
+              :fk=>false
+            }
+      ]
+        },
+
+        {
+          :table_name=>"invoices",
+          :columns=>
+            [
+              {
+                :column_name=>"id",
+                :data_type=>:integer,
+                :relations=>[],
+                :pk=>true,
+                :fk=>false
+              },
+
+              {
+                :column_name=>"customer_id",
+                :data_type=>:integer,
+                :relations=>
+                  [
+                    {
+                      :relation_table=>"customers",
+                      :relation_row=>"id"
+                    }
+                  ],
+                :pk=>false,
+                :fk=>true
+              },
+
+              {
+                :column_name=>"invoice_date",
+                :data_type=>:integer,
+                :relations=>[],
+                :pk=>false,
+                :fk=>false
+              },
+
+              {
+                :column_name=>"total",
+                :data_type=>:integer,
+                :relations=>[],
+                :pk=>false,
+                :fk=>false
+              }
+            ]
+          },
+
+          {
+            :table_name=>"playlist_tracks",
+            :columns=>
+              [
+                {
+                  :column_name=>"id",
+                  :data_type=>:integer,
+                  :relations=>[],
+                  :pk=>true,
+                  :fk=>false
+                },
+
+                {
+                  :column_name=>"playlist_id",
+                  :data_type=>:integer,
+                  :relations=>
+                    [
+                      {
+                        :relation_table=>"playlists",
+                        :relation_row=>"id"
+                      }
+                    ],
+                  :pk=>false,
+                  :fk=>true
+                },
+
+                {
+                  :column_name=>"track_id",
+                  :data_type=>:integer,
+                  :relations=>
+                    [
+                      {
+                        :relation_table=>"tracks",
+                        :relation_row=>"id"
+                      }
+                    ],
+                  :pk=>false,
+                  :fk=>true
+                }
+              ]
+            },
+
+            {
+              :table_name=>"playlists",
+                :columns=>
+                  [
+                    {
+                      :column_name=>"id",
+                      :data_type=>:integer,
+                      :relations=>[],
+                      :pk=>true,
+                      :fk=>false
+                    },
+
+                    {
+                      :column_name=>"name",
+                      :data_type=>:integer,
+                      :relations=>[],
+                      :pk=>false,
+                      :fk=>false
+                    }
+                  ]
+                }
+              ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
