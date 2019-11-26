@@ -49,6 +49,7 @@ class ProjectsController < ApplicationController
   private
     def commands
       @commands = []
+
       @tables_arr.each do |table|
         command = "rails g model #{table[:table_name].downcase[0..-2]} "
           table[:columns].each do |column|
@@ -63,13 +64,16 @@ class ProjectsController < ApplicationController
               column[:relations].each do |e|
               relation_table_name = e[:relation_table].downcase[0..-2]
 
-              command += " #{relation_table_name}:refrences"
+              command += " #{relation_table_name}:references"
             end
           end
         end
-      @commands << command
-      end
 
+        splitted_commands = command.split(" ").map do |cmd|
+          cmd.include?("id") ? cmd = " " : cmd + " "
+        end
+        @commands << splitted_commands.join("")
+      end
       @commands
     end
 
