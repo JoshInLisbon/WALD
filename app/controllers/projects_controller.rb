@@ -96,37 +96,32 @@ class ProjectsController < ApplicationController
         command = "rails g model #{table_name} "
       end
 
-        table[:columns].each do |column|
-          next if column[:column_name] == "id"
+      table[:columns].each do |column|
+        next if column[:column_name] == "id"
 
-          column_name = column[:column_name]
-          data_type = column[:data_type]
+        column_name = column[:column_name]
+        data_type = column[:data_type]
 
-          command += " #{column_name}:#{data_type}"
+        command += " #{column_name}:#{data_type}"
 
-          if column[:fk] == true
-            column[:relations].each do |relation|
-              relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+        if column[:fk] == true
+          column[:relations].each do |relation|
+            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
 
-              if relation_table_name.length <= 1
-                command += "#{relation_table_name}:references"
-              elsif relation_table_name.chars.last(3).join == "ies"
-                command += "#{relation_table_name[0..-4]}y:references"
-              elsif relation_table_name.chars.last == "s"
-                command += "#{relation_table_name[0..-2]}:references"
-              else
-                command += "#{relation_table_name}:references"
-              end
-
-
-              # relation_table_name = e[:relation_table].downcase[0..-2]
-
-              # command += " #{relation_table_name}:references"
+            if relation_table_name.length <= 1
+              command += " #{relation_table_name}:references"
+            elsif relation_table_name.chars.last(3).join == "ies"
+              command += " #{relation_table_name[0..-4]}y:references"
+            elsif relation_table_name.chars.last == "s"
+              command += " #{relation_table_name[0..-2]}:references"
+            else
+              command += " #{relation_table_name}:references"
             end
           end
         end
+      end
 
-        splitted_commands = command.split(" ").map do |cmd|
+      splitted_commands = command.split(" ").map do |cmd|
         cmd.include?("id") ? cmd = " " : cmd + " "
       end
       @commands << splitted_commands.join("")
