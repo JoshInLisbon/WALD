@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: [:show]
   before_action :check_if_user_is_owner?,  only: [:show]
 
-
   def index
     @projects = Project.where(user_id: current_user.id)
   end
@@ -24,7 +23,6 @@ class ProjectsController < ApplicationController
 
   def show
     @project.user = current_user
-
     xml_string = @project.xml_schema
     doc = Nokogiri::XML(xml_string)
 
@@ -73,7 +71,6 @@ class ProjectsController < ApplicationController
     end
 
     @tables_arr = order(tables_arr) # Josh, temporary, to get to function from views
-
     @commands = commands
   end
 
