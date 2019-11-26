@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: https://kitt.lewagon.com/db/3409 -->
+<sql>
+<datatypes db="mysql">
+    <group color="rgb(238,238,170)" label="Numeric">
+      <type label="TINYINT" length="0" quote="" sql="TINYINT"/>
+      <type label="SMALLINT" length="0" quote="" sql="SMALLINT"/>
+      <type label="MEDIUMINT" length="0" quote="" sql="MEDIUMINT"/>
+      <type label="INT" length="0" quote="" sql="INT"/>
+      <type label="Integer" length="0" quote="" sql="INTEGER"/>
+      <type label="BIGINT" length="0" quote="" sql="BIGINT"/>
+      <type label="Decimal" length="1" quote="" re="DEC" sql="DECIMAL"/>
+      <type label="Single precision" length="0" quote="" sql="FLOAT"/>
+      <type label="Double precision" length="0" quote="" re="DOUBLE" sql="DOUBLE"/>
+    </group>
+    <group color="rgb(255,200,200)" label="Character">
+      <type label="Char" length="1" quote="'" sql="CHAR"/>
+      <type label="Varchar" length="1" quote="'" sql="VARCHAR"/>
+      <type label="Text" length="0" quote="'" re="TEXT" sql="MEDIUMTEXT"/>
+      <type label="Binary" length="1" quote="'" sql="BINARY"/>
+      <type label="Varbinary" length="1" quote="'" sql="VARBINARY"/>
+      <type label="BLOB" length="0" quote="'" re="BLOB" sql="BLOB"/>
+    </group>
+    <group color="rgb(200,255,200)" label="Date &amp; Time">
+      <type label="Date" length="0" quote="'" sql="DATE"/>
+      <type label="Time" length="0" quote="'" sql="TIME"/>
+      <type label="Datetime" length="0" quote="'" sql="DATETIME"/>
+      <type label="Year" length="0" quote="" sql="YEAR"/>
+      <type label="Timestamp" length="0" quote="'" sql="TIMESTAMP"/>
+    </group>
+    <group color="rgb(200,200,255)" label="Miscellaneous">
+      <type label="ENUM" length="1" quote="" sql="ENUM"/>
+      <type label="SET" length="1" quote="" sql="SET"/>
+      <type label="Bit" length="0" quote="" sql="bit"/>
+    </group>
+  </datatypes><table x="180" y="97" name="X">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="519" y="422" name="S">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="id_Rug" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="Rug" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="672" y="188" name="Users">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="baaa" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="id_S" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="S" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="804" y="362" name="Jellies">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="id_X" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="X" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="341" y="416" name="Rug">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="id_X" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="X" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="461" y="57" name="all the spaces">
+<row name="id" null="1" autoincrement="1">
+<datatype>TINYINT</datatype>
+<default>NULL</default></row>
+<row name="id_X" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="X" row="id" />
+</row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+</sql>

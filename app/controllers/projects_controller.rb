@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     @project.user = current_user
     if @project.save
-      redirect_to projects_path
+      redirect_to project_path(@project)
     else
       render :new
     end
@@ -24,6 +24,12 @@ class ProjectsController < ApplicationController
   def show
     @project.user = current_user
     xml_string = @project.xml_schema
+    parse_xml(xml_string)
+  end
+
+  private
+
+  def parse_xml(xml_string)
     doc = Nokogiri::XML(xml_string)
 
     tables_arr = []
@@ -74,26 +80,43 @@ class ProjectsController < ApplicationController
     @commands = commands
   end
 
-  private
-
   def commands
     @commands = []
 
     @tables_arr.each do |table|
-      command = "rails g model #{table[:table_name].downcase[0..-2]} "
-        table[:columns].each do |column|
+      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+
+      if table_name.length <= 1
+        command = "rails g model #{table_name} "
+      elsif table_name.chars.last(3).join == "ies"
+        command = "rails g model #{table_name[0..-4]}y "
+      elsif table_name.chars.last == "s"
+        command = "rails g model #{table_name[0..-2]} "
+      else
+        command = "rails g model #{table_name} "
+      end
+
+      table[:columns].each do |column|
         next if column[:column_name] == "id"
 
-          column_name = column[:column_name]
-          data_type = column[:data_type]
+        column_name = column[:column_name]
+        data_type = column[:data_type]
 
-            command += " #{column_name}:#{data_type}"
+        command += " #{column_name}:#{data_type}"
 
-          if column[:fk] == true
-            column[:relations].each do |e|
-            relation_table_name = e[:relation_table].downcase[0..-2]
+        if column[:fk] == true
+          column[:relations].each do |relation|
+            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
 
-            command += " #{relation_table_name}:references"
+            if relation_table_name.length <= 1
+              command += " #{relation_table_name}:references"
+            elsif relation_table_name.chars.last(3).join == "ies"
+              command += " #{relation_table_name[0..-4]}y:references"
+            elsif relation_table_name.chars.last == "s"
+              command += " #{relation_table_name[0..-2]}:references"
+            else
+              command += " #{relation_table_name}:references"
+            end
           end
         end
       end
@@ -102,6 +125,8 @@ class ProjectsController < ApplicationController
         cmd.include?("id") ? cmd = " " : cmd + " "
       end
       @commands << splitted_commands.join("")
+
+
     end
     @commands
   end
@@ -185,4 +210,6 @@ class ProjectsController < ApplicationController
   def set_project
     @project = Project.find(params[:id])
   end
+
+
 end
