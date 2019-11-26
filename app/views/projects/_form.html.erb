@@ -1,0 +1,13 @@
+<%= simple_form_for [@user, @project] do |f| %>
+  <div class="form-inputs">
+    <%= f.input :name, label: 'Your project name', error: 'Project Name is mandatory, please specify one', placeholder: 'Cool name here' %>
+    <%= f.input :xml_schema, label: 'Paste your XML schema code here', error: 'You must paste XML code to convert', placeholder: '<table x="252" y="109" name="files">
+<row name="id" null="1" autoincrement="1">' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn" %>
+  </div>
+<% end %>
+
+
