@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show]
   before_action :check_if_user_is_owner?,  only: [:show]
+  skip_before_action :authenticate_user!, only: [:template]
 
   def index
     @projects = Project.where(user_id: current_user.id)
@@ -29,7 +30,9 @@ class ProjectsController < ApplicationController
 
   def template
     @project = Project.find(params[:project_id])
-    send_data @project.template, filename: 'template.rb', disposition: 'attachment'
+    xml_string = @project.xml_schema
+    parse_xml(xml_string)
+    send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
   end
 
   private
@@ -83,6 +86,7 @@ class ProjectsController < ApplicationController
 
     @tables_arr = order(tables_arr) # Josh, temporary, to get to function from views
     @commands = commands
+    @rails_commands = rails_commands
   end
 
   def commands
@@ -135,6 +139,59 @@ class ProjectsController < ApplicationController
     end
     @commands
   end
+
+  def rails_commands
+    @rails_commands = []
+
+    @tables_arr.each do |table|
+      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+
+      if table_name.length <= 1
+        command = "model #{table_name} "
+      elsif table_name.chars.last(3).join == "ies"
+        command = "model #{table_name[0..-4]}y "
+      elsif table_name.chars.last == "s"
+        command = "model #{table_name[0..-2]} "
+      else
+        command = "model #{table_name} "
+      end
+
+      table[:columns].each do |column|
+        next if column[:column_name] == "id"
+
+        column_name = column[:column_name]
+        data_type = column[:data_type]
+
+        command += " #{column_name}:#{data_type}"
+
+        if column[:fk] == true
+          column[:relations].each do |relation|
+            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+
+            if relation_table_name.length <= 1
+              command += " #{relation_table_name}:references"
+            elsif relation_table_name.chars.last(3).join == "ies"
+              command += " #{relation_table_name[0..-4]}y:references"
+            elsif relation_table_name.chars.last == "s"
+              command += " #{relation_table_name[0..-2]}:references"
+            else
+              command += " #{relation_table_name}:references"
+            end
+          end
+        end
+      end
+
+      splitted_commands = command.split(" ").map do |cmd|
+        cmd.include?("id") ? cmd = "" : cmd + " "
+      end
+      @rails_commands << splitted_commands.join("")
+
+
+    end
+    @rails_commands
+  end
+
+
 
   def to_data_type(schema_data_type)
     case schema_data_type.downcase
@@ -216,5 +273,189 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def method(commands)
+    array = commands.map do |command|
+      "generate '#{command}'"
+    end
+    array.join("\n")
+  end
 
+  def templating(commands)
+    "run 'pgrep spring | xargs kill -9'
+
+    # GEMFILE
+    ########################################
+    run 'rm Gemfile'
+    file 'Gemfile', <<-RUBY
+    source 'https://rubygems.org'
+    ruby '\#{RUBY_VERSION}'
+
+    \#{\"gem 'bootsnap', require: false\" if Rails.version >= \"5.2\"}
+    gem 'jbuilder', '~> 2.0'
+    gem 'pg', '~> 0.21'
+    gem 'puma'
+    gem 'rails', '\#{Rails.version}'
+    gem 'redis'
+
+    gem 'autoprefixer-rails'
+    gem 'font-awesome-sass', '~> 5.6.1'
+    gem 'sassc-rails'
+    gem 'simple_form'
+    gem 'uglifier'
+    gem 'webpacker'
+
+    group :development do
+      gem 'web-console', '>= 3.3.0'
+    end
+
+    group :development, :test do
+      gem 'pry-byebug'
+      gem 'pry-rails'
+      gem 'listen', '~> 3.0.5'
+      gem 'spring'
+      gem 'spring-watcher-listen', '~> 2.0.0'
+      gem 'dotenv-rails'
+    end
+    RUBY
+
+    # Ruby version
+    ########################################
+    file '.ruby-version', RUBY_VERSION
+
+    # Procfile
+    ########################################
+    file 'Procfile', <<-YAML
+    web: bundle exec puma -C config/puma.rb
+    YAML
+
+    # Assets
+    ########################################
+    run 'rm -rf app/assets/stylesheets'
+    run 'rm -rf vendor'
+    run 'curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip'
+    run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
+
+    run 'rm app/assets/javascripts/application.js'
+    file 'app/assets/javascripts/application.js', <<-JS
+    //= require rails-ujs
+    //= require_tree .
+    JS
+
+    # Dev environment
+    ########################################
+    gsub_file('config/environments/development.rb', /config\\.assets\\.debug.*/, 'config.assets.debug = false')
+
+    # Layout
+    ########################################
+    run 'rm app/views/layouts/application.html.erb'
+    file 'app/views/layouts/application.html.erb', <<-HTML
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset=\"UTF-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">
+        <title>TODO</title>
+        <%= csrf_meta_tags %>
+        <%= action_cable_meta_tag %>
+        <%= stylesheet_link_tag 'application', media: 'all' %>
+        <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
+      </head>
+      <body>
+        <%= yield %>
+        <%= javascript_include_tag 'application' %>
+        <%= javascript_pack_tag 'application' %>
+      </body>
+    </html>
+    HTML
+
+    # README
+    ########################################
+    markdown_file_content = <<-MARKDOWN
+    Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+    MARKDOWN
+    file 'README.md', markdown_file_content, force: true
+
+    # Generators
+    ########################################
+    generators = <<-RUBY
+    config.generators do |generate|
+          generate.assets false
+          generate.helper false
+          generate.test_framework  :test_unit, fixture: false
+        end
+    RUBY
+
+    environment generators
+
+    ########################################
+    # AFTER BUNDLE
+    ########################################
+    after_bundle do
+      # Generators: db + simple form + pages controller
+      ########################################
+      rails_command 'db:drop db:create db:migrate'
+      generate('simple_form:install', '--bootstrap')
+      generate(:controller, 'pages', 'home', '--skip-routes', '--no-test-framework')
+
+      # Routes
+      ########################################
+      route \"root to: 'pages#home'\"
+
+      # Git ignore
+      ########################################
+      append_file '.gitignore', <<-TXT
+
+    # Ignore .env file containing credentials.
+    .env*
+
+    # Ignore Mac and Linux file system files
+    *.swp
+    .DS_Store
+    TXT
+
+      # Webpacker / Yarn
+      ########################################
+      run 'rm app/javascript/packs/application.js'
+      run 'yarn add popper.js jquery bootstrap'
+      file 'app/javascript/packs/application.js', <<-JS
+    import \"bootstrap\";
+    JS
+
+      inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
+    <<-JS
+    const webpack = require('webpack')
+
+    // Preventing Babel from transpiling NodeModules packages
+    environment.loaders.delete('nodeModules');
+
+    // Bootstrap 4 has a dependency over jQuery & Popper.js:
+    environment.plugins.prepend('Provide',
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery',
+        Popper: ['popper.js', 'default']
+      })
+    )
+
+    JS
+      end
+
+      # Building your models
+      #{ method(@rails_commands) }
+
+      # Dotenv
+      ########################################
+      run 'touch .env'
+
+      # Rubocop
+      ########################################
+      run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/.rubocop.yml > .rubocop.yml'
+
+      # Git
+      ########################################
+      git :init
+      git add: '.'
+      git commit: \"-m 'Initial commit with minimal template from https://github.com/lewagon/rails-templates'\"
+    end"
+  end
 end

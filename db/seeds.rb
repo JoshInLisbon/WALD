@@ -12,7 +12,7 @@ Project.destroy_all
 puts "destroying users"
 User.destroy_all
 
-file = File.open("#{Rails.root}/db/example_xml_files/plural.xml")
+file = File.open("#{Rails.root}/db/example_xml_files/music.xml")
 xml_schema = file.read
 # different files to use
 # simple_chain.xml (simple way to check order calculations)
