@@ -2,6 +2,7 @@
 <div class="container">
 
 <h1><%= @project.name %></h1>
+<%= link_to 'download',  project_template_path(@project) %>
 <p>Edit text by clicking on it.</p>
 <p>Click <i class="fas fa-copy"></i> to copy a command.</p>
 <p><strong>Your model commands</strong></p>

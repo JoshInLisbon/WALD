@@ -27,6 +27,11 @@ class ProjectsController < ApplicationController
     parse_xml(xml_string)
   end
 
+  def template
+    @project = Project.find(params[:project_id])
+    send_data @project.template, filename: 'template.rb', disposition: 'attachment'
+  end
+
   private
 
   def parse_xml(xml_string)
