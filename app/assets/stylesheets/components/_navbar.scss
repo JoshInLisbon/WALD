@@ -14,7 +14,7 @@
 .navbar {
   padding-right: 10%;
   padding-left: 8%;
-  padding-top: 20px;
+  // padding-top: 20px;
   font-family: 'Roboto', sans-serif;
   background-color: transparent;
   position: absolute;
@@ -45,10 +45,14 @@
 .nav-link {
   color: white !important;
   font-family: 'Roboto', sans-serif;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 40px !important;
+  padding-left: 0px !important;
 }
 
 .navbar-brand {
   font-weight: bold;
+}
+
+#logo_wald {
+  width: 100px;
 }
