@@ -122,7 +122,7 @@ class ProjectsController < ApplicationController
       end
 
       splitted_commands = command.split(" ").map do |cmd|
-        cmd.include?("id") ? cmd = " " : cmd + " "
+        cmd.include?("id") ? cmd = "" : cmd + " "
       end
       @commands << splitted_commands.join("")
 
