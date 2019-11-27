@@ -16,10 +16,14 @@
   padding-left: 8%;
   // padding-top: 20px;
   font-family: 'Roboto', sans-serif;
-  background-color: transparent;
+  background-color: #EFF0F1;
   position: absolute;
   width: 100%;
   z-index: 1;
+}
+
+.navbar-transparent{
+  background-color: transparent;
 }
 
 #navbar-login-button {

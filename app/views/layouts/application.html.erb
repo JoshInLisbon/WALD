@@ -9,8 +9,11 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
+
   <body>
-    <%= render 'shared/navbar' %>
+    <div class="navbar-div">
+      <%= render 'shared/navbar' %>
+    </div>
     <div class="<%= controller_name %>-<%= action_name %>">
       <%= render 'shared/flashes' %>
       <%= yield %>
