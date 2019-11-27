@@ -1,6 +1,7 @@
 
 <div class="container">
-<h3><%= current_user.name %></h3>
+<h1>Your Projects</h1>
+<div class="border-bottom my-4"></div>
 <% @projects.each do |p| %>
   <p><%= p.name %></p>
 <% end %>
