@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show]
-  before_action :check_if_user_is_owner?,  only: [:show]
-  skip_before_action :authenticate_user!, only: [:template]
+  # before_action :check_if_user_is_owner?,  only: [:show]
+  skip_before_action :authenticate_user!, only: [:template, :show]
 
   def index
     @projects = Project.where(user_id: current_user.id)

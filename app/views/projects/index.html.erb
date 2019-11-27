@@ -1,6 +1,9 @@
-<h3>list of your projects</h3>
+
+<div class="container">
+<h3><%= current_user.name %></h3>
 <% @projects.each do |p| %>
   <p><%= p.name %></p>
 <% end %>
 
+</div>
 <!-- here we will add a list of all file for each project -->
