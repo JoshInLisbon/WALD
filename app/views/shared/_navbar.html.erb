@@ -26,8 +26,8 @@
           </div>
         </li>
       <% else %>
-        <li id="navbar-login-button" class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+        <li id="navbar-login-button" class="nav-item" style ="text-color: white;">
+          <%= link_to "Sign in with", user_github_omniauth_authorize_path, style: "color: white;" %> <i class="fab fa-github" style="color: white;"></i><br />
         </li>
       <% end %>
     </ul>
