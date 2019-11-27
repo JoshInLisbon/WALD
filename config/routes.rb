@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'generate', to: 'pages#generate'
   resources :projects, only: [:index, :show, :create, :new] do
     resources :files, only: [:index]
+    get 'template', to: 'projects#template'
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
