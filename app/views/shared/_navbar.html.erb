@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon <%= controller_name == 'pages' && action_name == 'home' ? 'navbar-transparent' : '' %>">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag 'WALD_Oficial_Logo.png', id: "logo_wald" %>
     <% end %>
