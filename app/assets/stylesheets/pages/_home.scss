@@ -1,1 +1,21 @@
 // Specific CSS for your home-page
+.home-img {
+  background-image: url("home_background.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  background-position: center center;
+  position: relative;
+}
+
+.home-text {
+  font-family: $body-font;
+  color: white;
+  position: absolute;
+  top: 140px;
+  left: 140px;
+
+  h3 {
+    opacity: 0.4;
+  }
+}
