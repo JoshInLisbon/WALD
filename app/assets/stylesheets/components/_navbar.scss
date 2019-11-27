@@ -15,7 +15,6 @@
   padding-right: 10%;
   padding-left: 8%;
   padding-top: 20px;
-  // padding: 10px 60px;
   font-family: 'Roboto', sans-serif;
   background-color: transparent;
   position: absolute;
@@ -25,14 +24,29 @@
 
 #navbar-login-button {
   background: #6C72FA;
-  border-radius: 6px;
-  padding: 1px 30px;
-  // font-weight: bold;
+  border-radius: 4px;
+  padding: 10px 30px;
+}
+
+#convert-now-button {
+  background: #6C72FA;
+  border-radius: 4px;
+  padding: 10px 30px;
+  width: 173px;
+  height: 50px;
+}
+
+.convert-now-class {
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+  line-height: 100px;
 }
 
 .nav-link {
   color: white !important;
   font-family: 'Roboto', sans-serif;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .navbar-brand {
