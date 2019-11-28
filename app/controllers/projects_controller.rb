@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show]
+  before_action :set_project, only: [:show, :destroy]
   # before_action :check_if_user_is_owner?,  only: [:show]
   skip_before_action :authenticate_user!, only: [:template, :show]
 
@@ -29,6 +29,11 @@ class ProjectsController < ApplicationController
     @project.user = current_user
     xml_string = @project.xml_schema
     parse_xml(xml_string)
+  end
+
+  def destroy
+    @project.destroy
+    redirect_to projects_path
   end
 
   def template
