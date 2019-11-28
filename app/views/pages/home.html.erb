@@ -9,27 +9,48 @@
   </div>
 </div>
 
-<div class="container steps text-center" >
+<div class="steps text-center" >
   <h1 class="my-5">How does WALD works?</h1>
   <div class="row steps-with-icons">
 
     <div class="col-sm-12 col-md-4 col-lg-3">
       <i class="fas fa-database"></i>
-      <div class="step-title mb-3"><h4>Draw schema</h4></div>
+      <div class="svg-wrapper">
+        <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="100%" />
+        </svg>
+        <div class="step-title mb-3"><h4>Draw schema</h4></div>
+      </div>
     </div>
 
     <div class="col-sm-12 col-md-4 col-lg-3">
-      <i class="fas fa-file-upload"></i>
-      <div class="step-title"><h4>Paste XML code</h4></div>
+      <div><i class="fas fa-file-upload"></i></div>
+      <div class="svg-wrapper">
+        <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="100%" />
+        </svg>
+        <div class="step-title mb-3"><h4>Paste XML code</h4></div>
+      </div>
     </div>
 
     <div class="col-sm-12 col-md-4 col-lg-3">
       <i class="fas fa-check-circle"></i>
-      <div class="step-title"><h4>Check our work</h4></div>
+      <div class="svg-wrapper">
+        <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="100%" />
+        </svg>
+        <div class="step-title mb-3"><h4>Check our work</h4></div>
+      </div>
     </div>
+
     <div class="col-sm-12 col-md-4 col-lg-3">
       <i class="fas fa-trophy"></i>
-      <div class="step-title"><h4>Run your app!</h4></div>
+      <div class="svg-wrapper">
+        <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
+          <rect class="shape" height="60" width="100%" />
+        </svg>
+        <div class="step-title mb-3"><h4>Run your app!</h4></div>
+      </div>
     </div>
   </div>
 
@@ -37,34 +58,59 @@
 
 
 
-<div class="">
-  <div class="col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
+<div class="lg-step-card d-inline-flex">
+  <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
     <h2>Drawing database schema</h2>
     <p>Every app starts with the database schema. It's the skeleton that defines how the data is organized and how the relations among them are associated.</p>
     <p>Schema contains tables, columns, data types, relationships, primary keys, foreign keys, etc.</p>
-    <p>Here are few important rules to follow to make our program works perfectly:</p>
+    <p class="mt-3">Here are few important <i>rules</i> to follow to make our program works perfectly:</p>
     <ul>
       <li>Choose the right data-type for each column</li>
       <li>Names matter! you should name your tables in plural, and your columns singular</li>
       <li>Think about the relations between your tables and use foreign keys to connect them.</li>
     </ul>
+    <a href="https://kitt.lewagon.com/db/3411" class="btn mt-3">CREATE NOW</a>
+  </div>
+</div>
+
+<div class="lg-step-card d-inline-flex">
+  <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
+    <h2>Copy XML schema code</h2>
+    <p>Once you've finished create a logical schema, press the 'Save/Load' button.</p>
+    <p>In the window that opened press 'Save XML' and copy the code that shows up in the output section.</p>
+    <p><i>That's all you need to make our app working for you!</i></p>
+    <%= link_to "START NEW PROJECT", new_project_path %>
+  </div>
+<!--   <div class="lg-card-img">
+    <%#= image_tag "schema1.png" %>
+  </div> -->
+</div>
+
+
+<div class="lg-step-card d-inline-flex">
+  <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
+    <h2>Check the results we've made for you</h2>
+    <p>After your schema was converted you will be directed to a page with all the commands that was generated for your app.</p>
+    <p>Before running the commands in your terminal, please check:</p>
+    <ul>
+      <li>Models and Columns names should be singular.</li>
+      <li>Data-types should match to the column.</li>
+      <li>Foreign keys should have the ':references' addition.</li>
+    </ul>
+    <p>All the commands are editable so you could apply any changes if necessary.</p>
+    <%= link_to "SEE YOUR WORK", projects_path %>
   </div>
 </div>
 
 
 
-<section class="step-big">
-</section>
-
-<section class="step-big">
-
-</section>
-
-<section class="step-big">
-
-</section>
-
-<section class="step-big">
-
-</section>
+<div class="lg-step-card d-inline-flex">
+  <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
+    <h2><i class="fas fa-terminal terminal"></i>  Your app it ready to run!</h2>
+    <p>Now it's time to run the commands that will generate your app.</p>
+    <p>You can copy the 'rails new' command to your terminal and watch the magic happens!</p>
+    <p>You could also create a new app by yourself and use the commands on the bottom to generate each model with matching migration by copying each comma to the terminal separately.</p>
+    <%= link_to "PROJECT PAGE", projects_path %>
+  </div>
+</div>
 
