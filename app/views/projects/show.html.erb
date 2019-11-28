@@ -3,6 +3,14 @@
 
 <h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
 
+<%= form_tag("/projects/:project_id/template-devise", {:method => :get, :class => "devise-form-class"}) do %>
+<%= select_tag :devise_model, options_for_select(@project.models, "user") %>
+<%= check_box, class: "devise-checkbox-class" %>
+<% end %>
+
+<%  @devise_model = @project.models.last %>
+<%= link_to "TEST", project_template_devise_path(@project, :model => @devise_model) %>
+
 <div class="border-bottom my-4"></div>
 <div class="row">
 <div class="col-md-6">

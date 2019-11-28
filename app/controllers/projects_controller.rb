@@ -38,6 +38,13 @@ class ProjectsController < ApplicationController
     send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
   end
 
+  def devise_template
+    @project = Project.find(params[:project_id])
+    xml_string = @project.xml_schema
+    parse_xml(xml_string)
+    send_data devise_templating(@commands, devise_model), filename: 'template-devise.rb', disposition: 'attachment'
+  end
+
   private
 
   def parse_xml(xml_string)
@@ -299,6 +306,12 @@ class ProjectsController < ApplicationController
       "generate '#{command}'"
     end
     array.join("\n")
+  end
+
+  def devise_templating(commands, thing)
+    "p #{commands}
+
+    p #{thing}"
   end
 
   def templating(commands)
