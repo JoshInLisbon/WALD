@@ -1,7 +1,7 @@
 
 <div class="container">
 
-<h1><%= @project.name %></h1>
+<h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
 
 <div class="border-bottom my-4"></div>
 

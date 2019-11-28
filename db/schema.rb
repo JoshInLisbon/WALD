@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_27_175849) do
+ActiveRecord::Schema.define(version: 2019_11_28_102937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 2019_11_27_175849) do
     t.text "xml_schema"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "tables", default: [], array: true
+    t.text "models", default: [], array: true
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -42,13 +44,13 @@ ActiveRecord::Schema.define(version: 2019_11_27_175849) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.string "provider"
     t.string "uid"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.integer "sign_in_count", default: 0, null: false
     t.string "name"
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
