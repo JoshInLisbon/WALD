@@ -14,12 +14,25 @@
 .navbar {
   padding-right: 10%;
   padding-left: 8%;
-  // padding-top: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   font-family: 'Roboto', sans-serif;
-  background-color: transparent;
+  background-color: #EFF0F1;
   position: absolute;
   width: 100%;
   z-index: 1;
+}
+
+.navbar-padding-class {
+  padding-bottom: 140px;
+}
+
+.navbar-transparent{
+  background-color: transparent;
+
+    #logo_wald {
+    width: 160px;
+  }
 }
 
 #navbar-login-button {
@@ -51,8 +64,9 @@
 
 .navbar-brand {
   font-weight: bold;
+  padding-top: 2px;
 }
 
 #logo_wald {
-  width: 100px;
+  width: 70px;
 }

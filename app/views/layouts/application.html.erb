@@ -3,15 +3,18 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>TODO</title>
+    <title>WALD</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
+
   <body>
-    <%= render 'shared/navbar' %>
-    <div class="<%= controller_name %>-<%= action_name %>">
+    <div class="navbar-div <%= controller_name == 'pages' && action_name == 'home' ? 'navbar-transparent' : 'navbar-padding-class' %>">
+      <%= render 'shared/navbar' %>
+    </div>
+    <div class="content-div <%= controller_name %>-<%= action_name %>">
       <%= render 'shared/flashes' %>
       <%= yield %>
       <%= javascript_include_tag 'application' %>
