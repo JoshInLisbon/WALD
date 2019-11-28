@@ -74,3 +74,21 @@
     background-color: transparent;
   }
 }
+
+.share-link-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+
+  .share-link-mobile {
+    display: block;
+  }
+
+  .share-link-desktop {
+    display: none;
+  }
+  /* Target devices narrower than 768px. */
+}
+
+
