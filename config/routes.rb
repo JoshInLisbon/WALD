@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
 
   get 'generate', to: 'pages#generate'
-  resources :projects, only: [:index, :show, :create, :new] do
+  resources :projects, only: [:index, :show, :create, :new, :destroy] do
     resources :files, only: [:index]
     get 'template', to: 'projects#template'
   end
