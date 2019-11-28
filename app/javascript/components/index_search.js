@@ -8,14 +8,30 @@ const indexSearch = () => {
     // document.getElementById("test").innerText.replace("Search","hghgh")
 
     searchableAreas.forEach(area => {
+      if (query === "") {
+        projectResults.forEach(result => {
+          result.style = "display: block;"
+        });
+        let all_results = document.querySelectorAll(`[data-test]`)
+        all_results.forEach(result => {
+          result.style = "color: #858C93;"
+        });
+      }
       if (!area.innerText.match(query)) {
         let result = document.querySelector(`#${area.dataset.target}`);
         result.style = "display:none;";
+
+        let non_matches = document.querySelectorAll(`span:not([data-test^=${query}])`);
+        non_matches.forEach(match => {
+          match.style = "color:#858C93 !important;"
+        });
       } else {
         let result = document.querySelector(`#${area.dataset.target}`);
         result.style = "display:block;";
-        let matches = document.querySelectorAll(`.${query}`)
-        console.log(matches)
+        let matches = document.querySelectorAll(`[data-test^=${query}]`)
+        matches.forEach(match => {
+          match.style = "color:#FF5F3F !important;"
+        });
         // matched = area.innerText.match(query);
       }
     });

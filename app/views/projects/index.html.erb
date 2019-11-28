@@ -14,12 +14,12 @@
     <% @projects.each do |project| %>
       <p class="project-result" id="project-<%= project.id %>" >
         <span class="searchable-area" data-target="project-<%= project.id %>">
-          <span class="<%= project.name.gsub(/\s+/m, '_').downcase %>-<%= project.id %>">
+          <span data-test="<%= project.name.gsub(/\s+/m, '_').downcase %>-<%= project.id %>">
           <%= link_to project.name.gsub(/\s+/m, '_').downcase, project_path(project) %>
           </span>
           <span class="models-grey-text">
             <% project.models.each_with_index do |model, i| %>
-              <span class="<%= model %>-<%= project.id %>">
+              <span data-test="<%= model %>-<%= project.id %>">
                 <%= " #{model}" %>
               </span>
               <%="#{ i+1 < project.models.length ? "," : "" }" %>

@@ -97,13 +97,13 @@ class ProjectsController < ApplicationController
 
     tables.each do |table|
       if table[:table_name].length <= 1
-        model_names << "#{table[:table_name]}".downcase
+        model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
       elsif table[:table_name].chars.last(3).join == "ies"
-        model_names << "#{table[:table_name][0..-4]}y".downcase
+        model_names << "#{table[:table_name][0..-4]}y".gsub(/\s+/m, '_').downcase
       elsif table[:table_name].chars.last == "s"
-        model_names << "#{table[:table_name][0..-2]}".downcase
+        model_names << "#{table[:table_name][0..-2]}".gsub(/\s+/m, '_').downcase
       else
-        model_names << "#{table[:table_name]}".downcase
+        model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
       end
     end
 
