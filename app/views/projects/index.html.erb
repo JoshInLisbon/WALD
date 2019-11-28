@@ -1,22 +1,35 @@
 
 <div class="container">
 <h1>Your Projects</h1>
-</div>
+<div class="border-bottom my-4"></div>
 
 <div class="light-grey-area">
-  <div class="container">
-    <div class="border-bottom my-4"></div>
+  <p id="test">
+    <strong>Search</strong> for project or model names
+  </p>
+  <input type="text" class="form-control index-search-box" id="index-search-box">
+</div>
+
+
     <% @projects.each do |project| %>
-      <p> <%= link_to project.name, project_path(project) %>
-        <span class="models-grey-text">
-          models:
-          <% project.models.each_with_index do |model, i| %>
-            <%= " #{model}#{ i+1 < project.models.length ? "," : "" }" %>
-          <% end %>
+      <p class="project-result" id="project-<%= project.id %>" >
+        <span class="searchable-area" data-target="project-<%= project.id %>">
+          <span class="<%= project.name.gsub(/\s+/m, '_').downcase %>-<%= project.id %>">
+          <%= link_to project.name.gsub(/\s+/m, '_').downcase, project_path(project) %>
+          </span>
+          <span class="models-grey-text">
+            <% project.models.each_with_index do |model, i| %>
+              <span class="<%= model %>-<%= project.id %>">
+                <%= " #{model}" %>
+              </span>
+              <%="#{ i+1 < project.models.length ? "," : "" }" %>
+            <% end %>
+          </span>
         </span>
+        <span class="date-grey-text"><%= project.created_at.strftime("%m/%d/%Y %I:%M%p") %></span>
       </p>
 
     <% end %>
-  </div>
+
 </div>
 <!-- here we will add a list of all file for each project -->
