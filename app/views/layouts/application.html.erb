@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <div class="navbar-div">
+    <div class="navbar-div <%= controller_name == 'pages' && action_name == 'home' ? 'navbar-transparent' : 'navbar-padding-class' %>">
       <%= render 'shared/navbar' %>
     </div>
     <div class="content-div <%= controller_name %>-<%= action_name %>">
