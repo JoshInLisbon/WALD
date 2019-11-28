@@ -3,14 +3,20 @@
     <h1>Create Rails app in 5 minutes!</h1>
     <h3>WALD converts your visual database schema into a <strong>working app</strong> with your own models migrations and database</h3>
 
-    <div class="convert-now-class-div">
-      <%= link_to "convert now", new_project_path, class: "btn convert-now-button" %>
+    <div class="d-flex justify-content-between", style="width: 370px;">
+      <div class="convert-now-class-div hvr-grow">
+        <%= link_to "Convert Now", new_project_path, class: "btn convert-now-button" %>
+      </div>
+
+      <div class="how-it-works-class-div hvr-grow">
+        <%= link_to "How It Works", "#howitworks", class: "btn how-it-works-button" %>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="steps text-center" >
-  <h1 class="my-5">How does WALD works?</h1>
+<div id="howitworks" class="steps text-center" >
+  <h1 class="my-5">How does WALD work?</h1>
   <div class="row steps-with-icons">
 
     <div class="col-sm-12 col-md-4 col-lg-3">

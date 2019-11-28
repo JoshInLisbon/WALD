@@ -57,8 +57,8 @@
 .link-code-block {
   background: #eff0f1;
   padding: 20px 30px;
-  margin-bottom: 2rem;
-  max-width: 400px;
+  // margin-bottom: 2rem;
+  // max-width: 400px;
 }
 
 .link-code-input {
@@ -74,3 +74,21 @@
     background-color: transparent;
   }
 }
+
+.share-link-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+
+  .share-link-mobile {
+    display: block;
+  }
+
+  .share-link-desktop {
+    display: none;
+  }
+  /* Target devices narrower than 768px. */
+}
+
+

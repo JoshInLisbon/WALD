@@ -3,14 +3,25 @@
     <%= image_tag 'WALD_Oficial_Logo.png', id: "logo_wald" %>
     <% end %>
 
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<!--   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> -->
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
+
+      <div class="d-flex align-items-center in-nav-link-div">
+        <li class="nav-item in-nav-link hvr-float-shadow">
+          <%= link_to "New Project", new_project_path, class: "nav-item" %>
+        </li>
+        <li class="nav-item in-nav-link hvr-float-shadow">
+          <%= link_to "Projects", projects_path, class: "nav-item" %>
+        </li>
+      </div>
+
+
         <li class="nav-item dropdown">
           <%= image_tag current_user.avatar, class: "avatar dropdown-toggle avatar-size-navbar", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

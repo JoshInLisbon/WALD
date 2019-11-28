@@ -4,19 +4,28 @@
 <h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
 
 <div class="border-bottom my-4"></div>
-
-<p>Edit text by clicking on it.</p>
-<p>Click <i class="fas fa-copy"></i> to copy a command.</p>
-<p>Run commands in your terminal.</p>
-<p><strong>Share this page</strong></p>
-<div class="link-code-block">
-  <div class="code-row">
-    <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-link"></i></div>
-    <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false">
-  </div>
+<div class="row">
+<div class="col-md-6">
+  <p>Edit text by clicking on it.</p>
+  <p>Click <i class="fas fa-copy"></i> to copy a command.</p>
+  <p>Run commands in your terminal.</p>
 </div>
 
-<div class="my-4 border-bottom"></div>
+<div class="col-md-6 text-right">
+  <div class="share-link-desktop">
+    <!-- <p><strong>Share this page</strong></p> -->
+    <div class="link-code-block" style="float: right; min-width: 380px;">
+      <div class="code-row">
+        <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-link"></i></div>
+        <!-- <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false"> -->
+        <strong style="margin-top: 1px;">Share&nbsp</strong>
+        <span class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" contenteditable="true"><%= request.original_url %></span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="mb-4 mt-2 border-bottom"></div>
 
 <p><strong>Create a Rails project</strong></p>
 <p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
@@ -46,6 +55,20 @@ rails new \
         <input class="code-input" type="text" id="code-input-<%= index + 1%>" value="<%= command %>" spellcheck="false">
       </div>
     <% end %>
+  </div>
+
+  <div class="share-link-mobile">
+
+    <div class="my-4 border-bottom"></div>
+
+    <p><strong>Share this page</strong></p>
+    <div class="link-code-block">
+      <div class="code-row">
+        <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-link"></i></div>
+        <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false">
+      </div>
+    </div>
+
   </div>
 
 </div>
