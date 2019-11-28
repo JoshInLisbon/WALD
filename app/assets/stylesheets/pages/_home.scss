@@ -1,4 +1,5 @@
 // first part of home page
+
 .home-img {
   background-image: url("home_background.jpg");
   background-size: cover;
@@ -25,7 +26,7 @@
 // steps in home page
 
 .steps {
-  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('undraw_web_development_w2vv.svg');
+  background: linear-gradient(rgba(255,255,255,.6), rgba(255,255,255,.6)), url('undraw_web_development_w2vv.svg');
   background-repeat: no-repeat;
   background-position-y: 50px;
   background-size : contain;
@@ -44,24 +45,95 @@
   }
 }
 
+
+// hover on icon-step titles
+
+.svg-wrapper {
+  height: 60px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.shape {
+  fill: transparent;
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  stroke: #19f6e8;
+}
+
+
 .step-title {
-  // width: 5%;
-  margin-top: 16px;
+  font-family: 'Roboto Condensed';
+  letter-spacing: 2px;
+  line-height: 32px;
+  position: relative;
+  top: -48px;
 }
 
-.step-title:hover {
-  border-bottom: 2.5px solid;
-  margin-left: 0;
-  margin-right: 0;
-  transition: opacity 0.35s, transform 0.35s;
-  // -webkit-transform: scale(0,1);
-  // transform: scale(0,1);
+@keyframes draw {
+  0% {
+    stroke-dasharray: 140 540;
+    stroke-dashoffset: -474;
+    stroke-width: 8px;
+  }
+  100% {
+    stroke-dasharray: 760;
+    stroke-dashoffset: 0;
+    stroke-width: 2px;
+  }
+}
+
+.svg-wrapper:hover .shape {
+  -webkit-animation: 0.5s draw linear forwards;
+  animation: 0.5s draw linear forwards;
+}
+
+// large steps cards
+
+.lg-step-card {
+  width: 100%;
+  margin-top: 10%;
+  margin-left: 10%;
+  height: 100vh;
+
+}
+
+.card-text {
+  letter-spacing: 1px;
+  max-width: 55%;
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    color: $mid-gray;
+  }
+
+  ul {
+    list-style-type: circle;
+    color: $mid-gray;
+  }
+
+  .terminal {
+    color: $purple;
+  }
 }
 
 
+.lg-card-img {
+  max-width: 40%;
+
+  }
 
 
-
+// responsivness for small screens
 
 @media(max-width: 768px) {
   .home-text {
