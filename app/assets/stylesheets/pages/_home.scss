@@ -13,11 +13,9 @@
   color: white;
   padding: 20% 10% 20%;
 
-
   h3 {
     opacity: 0.4;
   }
-
   h1 {
     font-weight: bold;
   }
@@ -27,25 +25,50 @@
   padding-top: 160px;
 }
 
-// .content-div {
-//   padding-top: 140px;
-// }
+
 
 // steps in home page
+
 .steps {
+  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url('undraw_web_development_w2vv.svg');
+  background-repeat: no-repeat;
+  background-position-y: 50px;
+  background-size : contain;
   margin: auto;
   height: 100vh;
   color: $dark-gray;
 
   i {
     color: $purple;
-    font-size: xx-large;
+    font-size: -webkit-xxx-large;
   }
 
   h1 {
     padding: 20px;
+    font-weight: bold;
   }
 }
+
+// .code-img {
+//   width: 100vw;
+//   opacity: 0.4;
+// }
+
+.step-title {
+  // width: 5%;
+  margin-top: 16px;
+}
+
+.step-title:hover {
+  border-bottom: 2.5px solid;
+  margin-left: 0;
+  margin-right: 0;
+  transition: opacity 0.35s, transform 0.35s;
+  // -webkit-transform: scale(0,1);
+  // transform: scale(0,1);
+}
+
+
 
 
 
