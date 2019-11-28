@@ -1,0 +1,40 @@
+.footer {
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding: 0px 50px;
+  color: rgba(0,0,0,0.3);
+
+  a{
+    text-decoration: none;
+  }
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  a {
+    color: black;
+    opacity: 0.15;
+    text-decoration: none;
+    font-size: 24px;
+    padding: 0px 10px;
+  }
+}
+
+.a1:hover {
+  opacity: 1;
+  color: #561f55;
+}
+
+.a2:hover {
+  opacity: 1;
+  color: #8b2f97;
+}
+
+.a3:hover {
+  opacity: 1;
+  color: #cf56a1;
+}
