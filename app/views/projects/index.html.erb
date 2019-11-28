@@ -6,8 +6,16 @@
 <div class="light-grey-area">
   <div class="container">
     <div class="border-bottom my-4"></div>
-    <% @projects.each do |p| %>
-      <p><%= p.name %></p>
+    <% @projects.each do |project| %>
+      <p> <%= link_to project.name, project_path(project) %>
+        <span class="models-grey-text">
+          models:
+          <% project.models.each_with_index do |model, i| %>
+            <%= " #{model}#{ i+1 < project.models.length ? "," : "" }" %>
+          <% end %>
+        </span>
+      </p>
+
     <% end %>
   </div>
 </div>

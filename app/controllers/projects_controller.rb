@@ -14,6 +14,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    parse_xml(params[:project][:xml_schema])
+    @project.tables = @tables_arr
+    @project.models = model_names(@tables_arr)
     @project.user = current_user
     if @project.save
       redirect_to project_path(@project)
@@ -84,9 +87,27 @@ class ProjectsController < ApplicationController
       }
     end
 
-    @tables_arr = order(tables_arr) # Josh, temporary, to get to function from views
+    @tables_arr = order(tables_arr)
     @commands = commands
     @rails_commands = rails_commands
+  end
+
+  def model_names(tables)
+    model_names = []
+
+    tables.each do |table|
+      if table[:table_name].length <= 1
+        model_names << "#{table[:table_name]}".downcase
+      elsif table[:table_name].chars.last(3).join == "ies"
+        model_names << "#{table[:table_name][0..-4]}y".downcase
+      elsif table[:table_name].chars.last == "s"
+        model_names << "#{table[:table_name][0..-2]}".downcase
+      else
+        model_names << "#{table[:table_name]}".downcase
+      end
+    end
+
+    model_names
   end
 
   def commands
