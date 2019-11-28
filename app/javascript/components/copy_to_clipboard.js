@@ -13,7 +13,7 @@ const copyToClipboard = () => {
 
     elem.addEventListener('click', (event) => {
       commadToCpy.select()
-      commadToCpy.style = "color: #6C72FA; outline: none; user-select: none;"
+      commadToCpy.style = "color: #6C72FA; outline: none;"
       document.execCommand("copy")
     });
 
