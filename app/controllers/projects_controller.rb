@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:template, :show]
 
   def index
-    @projects = Project.where(user_id: current_user.id)
+    @projects = Project.where(user_id: current_user.id).order(created_at: :desc)
   end
 
   def new
