@@ -67,7 +67,6 @@
 
 
 .step-title {
-  font-family: 'Roboto Condensed';
   letter-spacing: 2px;
   line-height: 32px;
   position: relative;
@@ -99,12 +98,19 @@
   margin-top: 10%;
   margin-left: 10%;
   height: 100vh;
+}
+
+.lg-step-card-left {
+  width: 100%;
+  margin-top: 10%;
+  padding-right: 5%;
+  height: 100vh;
 
 }
 
 .card-text {
   letter-spacing: 1px;
-  max-width: 55%;
+  // max-width: 55%;
 
   h2 {
     font-weight: bold;
@@ -126,11 +132,6 @@
   }
 }
 
-
-.lg-card-img {
-  max-width: 40%;
-
-  }
 
 
 // responsivness for small screens
