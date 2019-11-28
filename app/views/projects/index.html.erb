@@ -1,10 +1,14 @@
 
 <div class="container">
 <h1>Your Projects</h1>
-<div class="border-bottom my-4"></div>
-<% @projects.each do |p| %>
-  <p><%= p.name %></p>
-<% end %>
+</div>
 
+<div class="light-grey-area">
+  <div class="container">
+    <div class="border-bottom my-4"></div>
+    <% @projects.each do |p| %>
+      <p><%= p.name %></p>
+    <% end %>
+  </div>
 </div>
 <!-- here we will add a list of all file for each project -->
