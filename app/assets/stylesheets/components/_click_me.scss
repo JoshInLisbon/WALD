@@ -1,0 +1,38 @@
+.pulsate-bck {
+  -webkit-animation: pulsate-bck 0.7s ease-in-out infinite both;
+          animation: pulsate-bck 0.7s ease-in-out infinite both;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+  display: inline-flex;
+  color: $light-purple;
+  box-shadow: 0 0 2px 2px rgba(136, 130, 194, 0.40);
+}
+
+@-webkit-keyframes pulsate-bck {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@keyframes pulsate-bck {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(0.9);
+            transform: scale(0.9);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}

@@ -1,7 +1,7 @@
 
 <div class="container">
 
-<h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
+  <h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
 
 <div class="border-bottom my-4"></div>
 <div class="row">
@@ -26,10 +26,12 @@
 </div>
 </div>
 <div class="mb-4 mt-2 border-bottom"></div>
-
-<p><strong>Create a Rails project</strong></p>
-<p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
-
+<p style="padding-top: 10px; padding-right: 5px;"><strong>Create a Rails project</strong></p>
+<div class="d-flex" style="margin-bottom: 15px;">
+<p style="padding-top: 10px;">This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
+  <div class="flex-grow-1"></div>
+    <button class="align-items-center pulsate-bck" data-toggle="modal" data-target="#exampleModalCenter">Understand your template</button>
+  </div>
 <div class="code-block">
   <div class="code-row">
     <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-command"></i></div>
@@ -68,7 +70,24 @@ rails new \
         <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false">
       </div>
     </div>
-
   </div>
+</div>
 
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><%= @project.name.gsub(/\s+/m, '_').downcase %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        EXPLANATION
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
