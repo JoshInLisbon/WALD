@@ -29,9 +29,9 @@ const indexSearch = () => {
           // match.style = "color:#858C93 !important;"
           if (match.children.length > 0) {
             console.log(match.firstElementChild)
-            match.firstElementChild.style = "color:#6C72FA !important;"
+            match.firstElementChild.style = "color:#6C72FA;"
           } else {
-            match.style = "color:#858C93 !important;"
+            match.style = "color:#858C93;"
           }
         });
       } else {
