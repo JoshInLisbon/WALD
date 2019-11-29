@@ -1,10 +1,12 @@
 const deviseLink = () => {
   const deviseCheckbox = document.querySelector('#devise_checkbox');
-  const codeInputCommand = document.querySelector('#code-input-command')
+  const codeInputCommand = document.querySelector('#code-input-command');
+  const showHide = document.querySelector('#show_hide_devise_span');
   const originalCodeCommand = codeInputCommand.value;
 
   deviseCheckbox.addEventListener('change', event => {
     let codeCommand = codeInputCommand.value;
+    showHide.classList.toggle("devise-hidden")
     if (deviseCheckbox.checked) {
       const deviseDropdownSelect = document.querySelector('#devise-dropdown-select');
       let codeCommand = codeInputCommand.value;
