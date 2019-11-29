@@ -27,7 +27,10 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 }
 
 
-
+.devise-hidden {
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 // .code-input-big {
 //   display: block;
