@@ -588,6 +588,7 @@ class ProjectsController < ApplicationController
 
       # Building your models
       #{ method(@rails_commands) }
+      rails_command 'db:migrate'
 
       # Dotenv
       ########################################
