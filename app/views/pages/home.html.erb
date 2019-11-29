@@ -25,7 +25,7 @@
         <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
           <rect class="shape" height="60" width="100%" />
         </svg>
-        <div class="step-title mb-3"><h4>Draw schema</h4></div>
+        <div class="step-title mb-3"><a href="#drawSchema"><h4>Draw schema</h4></a></div>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
         <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
           <rect class="shape" height="60" width="100%" />
         </svg>
-        <div class="step-title mb-3"><h4>Paste XML code</h4></div>
+        <div class="step-title mb-3"><a href="#pasteXML"><h4>Paste XML code</h4></a></div>
       </div>
     </div>
 
@@ -45,7 +45,7 @@
         <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
           <rect class="shape" height="60" width="100%" />
         </svg>
-        <div class="step-title mb-3"><h4>Check our work</h4></div>
+        <div class="step-title mb-3"><a href="#checkOurWork"><h4>Check our work</h4></a></div>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
         <svg height="60" width="100%" xmlns="http://www.w3.org/2000/svg">
           <rect class="shape" height="60" width="100%" />
         </svg>
-        <div class="step-title mb-3"><h4>Run your app!</h4></div>
+        <div class="step-title mb-3"><a href="#runYourApp"><h4>Run your app!</h4></a></div>
       </div>
     </div>
   </div>
@@ -64,7 +64,7 @@
 
 
 
-<div class="lg-step-card d-inline-flex">
+<div id="drawSchema" class="lg-step-card d-inline-flex">
   <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
     <h2><i class="fas fa-terminal terminal"></i>  Drawing database schema</h2>
     <p>Every app starts with the database schema. It's the skeleton that defines how the data is organized and how the relations among them are associated.</p>
@@ -83,7 +83,7 @@
   </div>
 </div>
 
-<div class="lg-step-card-left d-inline-flex">
+<div id="pasteXML" class="lg-step-card-left d-inline-flex">
   <div class="lg-card-img col-sm-12 col-md-6 align-self-center">
     <%= image_tag "files.svg", style: "width: 82%; margin-left: 15%;" %>
   </div>
@@ -98,7 +98,7 @@
 </div>
 
 
-<div class="lg-step-card d-inline-flex">
+<div id="checkOurWork" class="lg-step-card d-inline-flex">
   <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
     <h2><i class="fas fa-terminal terminal"></i>  Check the results we've made for you</h2>
     <p>After your schema was converted you will be directed to a page with all the commands that was generated for your app.</p>
@@ -119,7 +119,7 @@
 
 
 
-<div class="lg-step-card-left d-inline-flex">
+<div id="runYourApp" class="lg-step-card-left d-inline-flex">
   <div class="lg-card-img col-sm-12 col-md-6 align-self-center">
     <%= image_tag "man_laptop.svg", style: "width: 77%; margin-left: 15%;" %>
   </div>
