@@ -4,7 +4,7 @@
   margin-bottom: 2rem;
 }
 
-$highlight-col: #f9ca24;
+$highlight-col: rgba(235, 255, 238, 0.74);
 
 .code-input {
   display: block;
@@ -91,5 +91,46 @@ $highlight-col: #f9ca24;
   }
   /* Target devices narrower than 768px. */
 }
+
+
+.d-flex-for-devise {
+  display: inline-block;
+}
+
+.devise-span {
+  display: inline-block;
+  margin-right: 25px;
+}
+
+.devise-for-span {
+  margin-right: 9px;
+}
+
+.devise-checkbox {
+  display: inline-block;
+  margin-top: -2px
+}
+
+.devise-selector {
+  display: inline-block;
+}
+
+
+
+
+.devise-dropdown {
+  margin-top: -7px;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 

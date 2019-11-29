@@ -3,15 +3,6 @@
 
 <h1><%= @project.name.gsub(/\s+/m, '_').downcase %></h1>
 
-<%= form_tag("/projects/:project_id/template-devise", {:method => :get, :class => "devise-form-class"}) do %>
-<%= select_tag :devise_model, options_for_select(@project.models, "user") %>
-<%= submit_tag %>
-<%#= check_box, class: "devise-checkbox-class" %>
-<% end %>
-
-<%  @devise_model = @project.models.last %>
-<%#= link_to "TEST", project_template_devise_path(@project, :model => @devise_model) %>
-
 <div class="border-bottom my-4"></div>
 <div class="row">
 <div class="col-md-6">
@@ -27,7 +18,7 @@
       <div class="code-row">
         <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-link"></i></div>
         <!-- <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false"> -->
-        <strong style="margin-top: 1px;">Share&nbsp</strong>
+        <strong style="margin-top: 2px;">Share&nbsp</strong>
         <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" style="width:<%= request.original_url.length * 9 %>px">
         <!-- <span class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" contenteditable="true"><%= request.original_url %></span> -->
       </div>
@@ -39,6 +30,30 @@
 
 <p><strong>Create a Rails project</strong></p>
 <p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
+
+<p>
+<div class="d-flex d-flex-for-devise">
+  <span class="devise-span"><strong>Devise?</strong></span>
+    <div class="devise-checkbox">
+      <input type="checkbox" class="form-check-input devise-checkbox-input" id="devise_checkbox">
+    </div>
+      <span class="devise-for-span">Use devise for</span>
+      <div class="devise-dropdown">
+
+        <select class="form-control" id="devise-dropdown-select">
+          <% @project.models.each do |model| %>
+            <% if model == "user" %>
+              <option selected="selected" value="<%= model %>"><%= model %></option>
+            <% else %>
+              <option value="<%= model %>"><%= model %></option>
+            <% end %>
+          <% end %>
+        </select>
+
+      </div>
+ </div>
+</p>
+
 
 <div class="code-block">
   <div class="code-row">

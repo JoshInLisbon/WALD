@@ -6,7 +6,6 @@ const copyToClipboard = () => {
   copyBtns.forEach(elem => {
     let command = elem.dataset.target
 
-
     let commadToCpy = document.querySelector(`#${command}`);
     //console.log("hhheey", commadToCpy.value)
 

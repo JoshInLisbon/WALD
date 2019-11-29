@@ -1,15 +1,13 @@
 import "bootstrap";
-import { highterjs } from "../plugins/highlight"
 import { copyToClipboard } from "../components/copy_to_clipboard"
 import { indexSearch } from "../components/index_search"
 
-import { submitDevise } from "../components/submit_devise"
+import { deviseLink } from "../components/devise_link"
 
 const projectShow = document.querySelector(".projects-show");
 if(projectShow) {
-  highterjs();
+  deviseLink();
   copyToClipboard();
-  submitDevise();
 }
 
 const projectIndex = document.querySelector(".projects-index");
