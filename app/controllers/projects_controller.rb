@@ -602,6 +602,42 @@ class ProjectsController < ApplicationController
       git :init
       git add: '.'
       git commit: \"-m 'Initial commit with minimal template from https://github.com/lewagon/rails-templates'\"
+
+      puts '$$\\      $$\\  $$$$$$\\  $$\\      $$$$$$$\\         '
+      puts '$$ | $\\  $$ |$$  __$$\\ $$ |     $$  __$$\\        '
+      puts '$$ |$$$\\ $$ |$$ /  $$ |$$ |     $$ |  $$ |       '
+      puts '$$ $$ $$\\$$ |$$$$$$$$ |$$ |     $$ |  $$ |       '
+      puts '$$$$  _$$$$ |$$  __$$ |$$ |     $$ |  $$ |       '
+      puts '$$$  / \\$$$ |$$ |  $$ |$$ |     $$ |  $$ |       '
+      puts '$$  /| |\\$$ |$$ |  $$ |$$$$$$$$\\$$$$$$$  |       '
+      puts '\\__/ | | \\__|\\__|  \\__|\\________\\_______/        '
+      puts '| |  | |                                         '
+      puts '| |  | | ___                                     '
+      puts '| |/\\| |/ _ \\                                    '
+      puts '\\  /\\  /  __/                                    '
+      puts ' \\/__\\/ \\___|                                    '
+      puts ' / _ \\                                           '
+      puts '/ /_\\ \\_ __ ___                                  '
+      puts '|  _  |  __/ _ \\                                 '
+      puts '| | | | | |  __/                                 '
+      puts '\\_| |_/_|  \\___|                                 '
+      puts '| |                                              '
+      puts '| |     __ _ _____   _                           '
+      puts '| |    / _` |_  / | | |                          '
+      puts '| |___| (_| |/ /| |_| |                          '
+      puts '\\_____/\\__,_/___|\\__, |                          '
+      puts '                  __/ |                          '
+      puts '______           |___/                           '
+      puts '|  _  \\             | |                          '
+      puts '| | | |_____   _____| | ___  _ __   ___ _ __ ___ '
+      puts '| | | / _ \\ \\ / / _ \\ |/ _ \\|  _ \\ / _ \\  __/ __|'
+      puts '| |/ /  __/\\ V /  __/ | (_) | |_) |  __/ |  \\__ \\\\'
+      puts '|___/ \\___| \\_/ \\___|_|\\___/| .__/ \\___|_|  |___/'
+      puts '                            | |                  '
+      puts '                            |_|                  '
+      puts 'Made by:'
+      puts 'Josh, Lucas, Pedro & Sapir'
+      puts '☎️ - Hire us: waldevelopers@gmail.com'
     end"
   end
 
@@ -841,8 +877,43 @@ class ProjectsController < ApplicationController
       git :init
       git add: '.'
       git commit: \"-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'\"
-    end
-    "
+
+      puts '$$\\      $$\\  $$$$$$\\  $$\\      $$$$$$$\\         '
+      puts '$$ | $\\  $$ |$$  __$$\\ $$ |     $$  __$$\\        '
+      puts '$$ |$$$\\ $$ |$$ /  $$ |$$ |     $$ |  $$ |       '
+      puts '$$ $$ $$\\$$ |$$$$$$$$ |$$ |     $$ |  $$ |       '
+      puts '$$$$  _$$$$ |$$  __$$ |$$ |     $$ |  $$ |       '
+      puts '$$$  / \\$$$ |$$ |  $$ |$$ |     $$ |  $$ |       '
+      puts '$$  /| |\\$$ |$$ |  $$ |$$$$$$$$\\$$$$$$$  |       '
+      puts '\\__/ | | \\__|\\__|  \\__|\\________\\_______/        '
+      puts '| |  | |                                         '
+      puts '| |  | | ___                                     '
+      puts '| |/\\| |/ _ \\                                    '
+      puts '\\  /\\  /  __/                                    '
+      puts ' \\/__\\/ \\___|                                    '
+      puts ' / _ \\                                           '
+      puts '/ /_\\ \\_ __ ___                                  '
+      puts '|  _  |  __/ _ \\                                 '
+      puts '| | | | | |  __/                                 '
+      puts '\\_| |_/_|  \\___|                                 '
+      puts '| |                                              '
+      puts '| |     __ _ _____   _                           '
+      puts '| |    / _` |_  / | | |                          '
+      puts '| |___| (_| |/ /| |_| |                          '
+      puts '\\_____/\\__,_/___|\\__, |                          '
+      puts '                  __/ |                          '
+      puts '______           |___/                           '
+      puts '|  _  \\             | |                          '
+      puts '| | | |_____   _____| | ___  _ __   ___ _ __ ___ '
+      puts '| | | / _ \\ \\ / / _ \\ |/ _ \\|  _ \\ / _ \\  __/ __|'
+      puts '| |/ /  __/\\ V /  __/ | (_) | |_) |  __/ |  \\__ \\\\'
+      puts '|___/ \\___| \\_/ \\___|_|\\___/| .__/ \\___|_|  |___/'
+      puts '                            | |                  '
+      puts '                            |_|                  '
+      puts 'Made by:'
+      puts 'Josh, Lucas, Pedro & Sapir'
+      puts '☎️ - Hire us: waldevelopers@gmail.com'
+    end"
   end
 
 
