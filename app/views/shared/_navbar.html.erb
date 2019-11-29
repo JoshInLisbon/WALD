@@ -21,7 +21,6 @@
         </li>
       </div>
 
-
         <li class="nav-item dropdown">
           <%= image_tag current_user.avatar, class: "avatar dropdown-toggle avatar-size-navbar", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -30,6 +29,7 @@
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
+
       <% else %>
         <li id="navbar-login-button" class="nav-item" style ="text-color: white;">
           <%= link_to "Sign in with", user_github_omniauth_authorize_path, style: "color: white;" %> <i class="fab fa-github" style="color: white;"></i><br />
