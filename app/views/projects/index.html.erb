@@ -17,7 +17,7 @@
           <span data-test="<%= project.name.gsub(/\s+/m, '_').downcase %>-<%= project.id %>">
           <%= link_to project.name.gsub(/\s+/m, '_').downcase, project_path(project) %>
           </span>
-          <span class="models-grey-text">
+          <span class="models-grey-text"><span></span>
             <% project.models.each_with_index do |model, i| %>
               <span data-test="<%= model %>-<%= project.id %>">
                 <%= " #{model}" %>
