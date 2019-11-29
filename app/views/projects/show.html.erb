@@ -28,7 +28,8 @@
         <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-link"></i></div>
         <!-- <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false"> -->
         <strong style="margin-top: 1px;">Share&nbsp</strong>
-        <span class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" contenteditable="true"><%= request.original_url %></span>
+        <input class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" style="width:<%= request.original_url.length * 9 %>px">
+        <!-- <span class="link-code-input" type="text" id="code-input-link" value="<%= request.original_url %>" spellcheck="false" contenteditable="true"><%= request.original_url %></span> -->
       </div>
     </div>
   </div>
