@@ -27,16 +27,14 @@
 </div>
 </div>
 <div class="mb-4 mt-2 border-bottom"></div>
-<p style="padding-top: 10px; padding-right: 5px;"><strong>Create a Rails project</strong></p>
+
+
+<p><strong>Create a Rails project</strong></p>
 <div class="d-flex" style="margin-bottom: 15px;">
-<p style="padding-top: 10px;">This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
+<p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
   <div class="flex-grow-1"></div>
     <button class="align-items-center pulsate-bck" data-toggle="modal" data-target="#exampleModalCenter">Understand your template</button>
   </div>
-
-<p><strong>Create a Rails project</strong></p>
-<p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
-
 <p>
 <div class="d-flex d-flex-for-devise">
   <span class="devise-span"><strong>Devise?</strong></span>
@@ -108,13 +106,22 @@ rails new \
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><%= @project.name.gsub(/\s+/m, '_').downcase %></h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Your app '<%= @project.name.gsub(/\s+/m, '_').downcase %>' will contain:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        EXPLANATION
+      <div class="modal-body" style="font-family: Roboto, sans-serif;">
+        <p>- JavaScript enabled</p>
+        <p>- Webpacker</p>
+        <p>- Yarn</p>
+        <p>- Le wagon stylesheets</p>
+        <p>- gem 'font-awesome'</p>
+        <p>- gem 'simple form'</p>
+        <p>- gem 'bootstrap'</p>
+        <p>- gem 'devise'</p>
+        <p>- gem 'jbuilder'</p>
+        <p>And much more!</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
