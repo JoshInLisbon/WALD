@@ -337,8 +337,6 @@ class ProjectsController < ApplicationController
     @rails_commands
   end
 
-
-
   def to_data_type(schema_data_type)
     case schema_data_type.downcase
     when "integer", "tinyint", "smallint", "mediumint", "int", "bigint", "single precision", "double precision"
@@ -917,5 +915,11 @@ class ProjectsController < ApplicationController
     end"
   end
 
+  def github_templat
+    "heroku create #{@project.name.gsub(/\s+/m, '_').downcase} --region eu
+    git push heroku master
+    heroku run rails db:migrate
+    heroku open"
+  end
 
 end
