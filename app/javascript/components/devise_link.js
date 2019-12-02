@@ -94,11 +94,11 @@ const alertsInfo = () => {
 
 
   herokuBox.addEventListener("click", (event) => {
-    swal('Please note', 'You must install and log-in to Heroku before running the commands! \n Your app name have to be unique! Heroku will raise an error if not', 'info');
+    swal('You must install and log-in to Heroku before running the commands! \n Your app name have to be unique! Heroku will raise an error if not', {icon: 'info'});
   });
 
   deviseBox.addEventListener("click", (event) => {
-    swal('Please note', '\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!', 'info');
+    swal('\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!', {icon: 'info'});
   });
 }
 
