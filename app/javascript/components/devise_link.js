@@ -25,27 +25,26 @@ const deviseLink = () => {
 }
 
 
+const githubLink = () => {
+  const githubCheckbox = document.querySelector('#github_checkbox');
+  const codeInputCommand = document.querySelector('#code-input-command');
+  const originalCodeCommand = codeInputCommand.value;
 
-// const githubLink = () => {
-//   const githubCheckbox = document.querySelector('#github_checkbox');
-//   const codeInputCommand = document.querySelector('#code-input-command');
-//   const originalCodeCommand = codeInputCommand.value;
-
-//   githubCheckbox.addEventListener('change', event => {
-//     let codeCommand = codeInputCommand.value;
-//     if (githubCheckbox.checked) {
-//       let codeCommand = codeInputCommand.value;
-//       const regex = /(\/templat[^\s]+)/
-//       let match = codeCommand.match(regex)
-//       codeInputCommand.value = codeCommand.replace(regex, `/template-github`);
-//     } else {
-//       codeInputCommand.value = originalCodeCommand
-//     }
-//   });
-// }
+  githubCheckbox.addEventListener('change', event => {
+    let codeCommand = codeInputCommand.value;
+    if (githubCheckbox.checked) {
+      let codeCommand = codeInputCommand.value;
+      const regex = /(\/templat[^\s]+)/
+      let match = codeCommand.match(regex)
+      codeInputCommand.value = codeCommand.replace(regex, `/template-github`);
+    } else {
+      codeInputCommand.value = originalCodeCommand
+    }
+  });
+}
 
 
 
 
 export { deviseLink }
-// export { githubLink }
+export { githubLink }

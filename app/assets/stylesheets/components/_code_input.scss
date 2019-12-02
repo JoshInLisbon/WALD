@@ -102,7 +102,17 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 .devise-span {
   display: inline-block;
-  margin-right: 25px;
+  margin-right: 2.5%;
+}
+
+.github-span {
+  display: inline-block;
+  margin-right: 2.5%;
+}
+
+.heroku-span {
+  display: inline-block;
+  margin-right: 2.5%;
 }
 
 .devise-for-span {
@@ -110,6 +120,16 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 }
 
 .devise-checkbox {
+  display: inline-block;
+  margin-top: -2px
+}
+
+.github-checkbox {
+  display: inline-block;
+  margin-top: -2px
+}
+
+.heroku-checkbox {
   display: inline-block;
   margin-top: -2px
 }
