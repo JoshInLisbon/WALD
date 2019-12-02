@@ -915,11 +915,20 @@ class ProjectsController < ApplicationController
     end"
   end
 
-  def github_templat
-    "heroku create #{@project.name.gsub(/\s+/m, '_').downcase} --region eu
-    git push heroku master
-    heroku run rails db:migrate
+  def heroku_commands
+    "heroku create #{@project.name.gsub(/\s+/m, '_').downcase} --region eu \n
+    git push heroku master \n
+    heroku run rails db:migrate \n
     heroku open"
   end
+
+  def github_commands
+    "hub create \n
+    git add . \n
+    git commit -m 'first commit to new app repository' \n
+    git push origin master"
+  end
+
+
 
 end
