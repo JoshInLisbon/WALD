@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show]
   # before_action :check_if_user_is_owner?,  only: [:show]
-  skip_before_action :authenticate_user!, only: [:template, :devise_template, :show]
+  skip_before_action :authenticate_user!, only: [:template, :template_params, :devise_template, :devise_template_params, :show]
 
   def index
     @projects = Project.where(user_id: current_user.id).order(created_at: :desc)
@@ -31,15 +31,18 @@ class ProjectsController < ApplicationController
     parse_xml(xml_string)
   end
 
-  # def destroy
-  #   @project = Project.find(params[:project_id])
-  #   @project.user = current_user
-  #   @project.destroy
-  # end
-
   def template
     @project = Project.find(params[:project_id])
     xml_string = @project.xml_schema
+    parse_xml(xml_string)
+    send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
+  end
+
+  def template_params
+    @project = Project.find(params[:project_id])
+    xml_string = @project.xml_schema
+    check_github(params[:all_params])
+    check_heroku(params[:all_params])
     parse_xml(xml_string)
     send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
   end
@@ -48,6 +51,16 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     @devise_model = "user"
     xml_string = @project.xml_schema
+    devise_parse_xml(xml_string)
+    send_data devise_templating(@commands), filename: "template-devise-#{params[:devise_model]}.rb", disposition: 'attachment'
+  end
+
+  def devise_template_params
+    @project = Project.find(params[:project_id])
+    @devise_model = "user"
+    xml_string = @project.xml_schema
+    check_github(params[:all_params])
+    check_heroku(params[:all_params])
     devise_parse_xml(xml_string)
     send_data devise_templating(@commands), filename: "template-devise-#{params[:devise_model]}.rb", disposition: 'attachment'
   end
@@ -424,6 +437,45 @@ class ProjectsController < ApplicationController
     array.join("\n")
   end
 
+  def check_heroku(params)
+    if params.match("&heroku")
+      @heroku = true
+    else
+      @heroku = false
+    end
+  end
+
+  def check_github(params)
+    if params.match("&github")
+      @github = true
+    else
+      @github = false
+    end
+  end
+
+  def heroku_commands
+    if @heroku == true
+
+      "run 'heroku create #{@project.name.gsub(/\s+/m, '-').downcase}#{rand(10000..99999)} --region eu' \n
+      git push: 'heroku master' \n
+      run 'heroku run rails db:migrate' \n
+      run 'heroku open'"
+    else
+      ""
+    end
+  end
+
+  def github_commands
+    if @github == true
+      "run 'hub create' \n
+      git add: '.' \n
+      git commit: \"-m 'first commit to new app repository'\" \n
+      git push: 'origin master' "
+    else
+      ""
+    end
+  end
+
   def templating(commands)
     "run 'pgrep spring | xargs kill -9'
 
@@ -601,6 +653,9 @@ class ProjectsController < ApplicationController
       git :init
       git add: '.'
       git commit: \"-m 'Initial commit with minimal template from https://github.com/lewagon/rails-templates'\"
+
+      #{heroku_commands}
+      #{github_commands}
 
       puts '$$\\      $$\\  $$$$$$\\  $$\\      $$$$$$$\\         '
       puts '$$ | $\\  $$ |$$  __$$\\ $$ |     $$  __$$\\        '
@@ -877,6 +932,9 @@ class ProjectsController < ApplicationController
       git add: '.'
       git commit: \"-m 'Initial commit with devise template from https://github.com/lewagon/rails-templates'\"
 
+      #{heroku_commands}
+      #{github_commands}
+
       puts '$$\\      $$\\  $$$$$$\\  $$\\      $$$$$$$\\         '
       puts '$$ | $\\  $$ |$$  __$$\\ $$ |     $$  __$$\\        '
       puts '$$ |$$$\\ $$ |$$ /  $$ |$$ |     $$ |  $$ |       '
@@ -914,21 +972,4 @@ class ProjectsController < ApplicationController
       puts '☎️ - Hire us: waldevelopers@gmail.com'
     end"
   end
-
-  def heroku_commands
-    "heroku create #{@project.name.gsub(/\s+/m, '_').downcase} --region eu \n
-    git push heroku master \n
-    heroku run rails db:migrate \n
-    heroku open"
-  end
-
-  def github_commands
-    "hub create \n
-    git add . \n
-    git commit -m 'first commit to new app repository' \n
-    git push origin master"
-  end
-
-
-
 end
