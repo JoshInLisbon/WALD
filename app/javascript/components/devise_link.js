@@ -87,3 +87,20 @@ export { checkBoxes }
 // export { deviseLink }
 // export { githubLink }
 
+
+const alertsInfo = () => {
+  const herokuBox = document.querySelector('#heroku_checkbox');
+  const deviseBox = document.querySelector('#devise_checkbox');
+
+
+  herokuBox.addEventListener("click", (event) => {
+    swal('Please note', 'You must install and log-in to Heroku before running the commands! \n Your app name have to be unique! Heroku will raise an error if not', 'info');
+  });
+
+  deviseBox.addEventListener("click", (event) => {
+    swal('Please note', '\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!', 'info');
+  });
+}
+
+
+export { alertsInfo }
