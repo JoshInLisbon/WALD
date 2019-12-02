@@ -1,5 +1,5 @@
 <div class="home-img">
-  <div class="container home-text">
+  <div class="container home-text" id="home-page">
     <h1>Skip the boring bits of Ruby On Rails!</h1>
     <h3>WALD converts your visual database schema into a <strong>working app</strong> with your own models migrations and database in minutes</h3>
 
@@ -76,7 +76,12 @@
       <li>Names matter! you should name your tables in plural, and your columns singular</li>
       <li>Think about the relations between your tables and use foreign keys to connect them.</li>
     </ul>
-    <a href="https://ondras.zarovi.cz/sql/demo/" class="purple-button-class mt-3 hvr-grow" style="text-decoration: none;" target="_blank" >Create now</a>
+    <div class="d-flex align-items-center">
+      <a href="https://ondras.zarovi.cz/sql/demo/" class="purple-button-class hvr-grow" style="text-decoration: none;" target="_blank" >Create now</a>
+      <%= link_to "#home-page" do %>
+          <i class="fas fa-arrow-circle-up come-back"></i>
+      <% end %>
+    </div>
   </div>
 
   <div class="lg-card-img col-sm-12 col-md-6 align-self-center">
@@ -94,7 +99,13 @@
     <p>Once you've finished create a logical schema, press the 'Save/Load' button.</p>
     <p>In the window that opened press 'Save XML' and copy the code that shows up in the output section.</p>
     <p class="mb-3"><i>That's all you need to make our app working for you!</i></p>
-    <%= link_to "Start new project", new_project_path, class: "purple-button-class-start hvr-grow", style: "text-decoration: none;" %>
+    <div class="d-flex align-items-center">
+      <%= link_to "Start new project", new_project_path, class: "purple-button-class-start hvr-grow", style: "text-decoration: none;" %>
+      <%= link_to "#home-page" do %>
+          <i class="fas fa-arrow-circle-up come-back"></i>
+      <% end %>
+    </div>
+    </div>
   </div>
 
 </div>
@@ -111,8 +122,13 @@
       <li>Foreign keys should have the ':references' addition.</li>
     </ul>
     <p class="mb-3">All the commands are editable so you could apply any changes if necessary.</p>
-    <%= link_to "See your work", projects_path, class: "purple-button-class hvr-grow", style: "text-decoration: none;" %>
-  </div>
+    <div class="d-flex align-items-center">
+      <%= link_to "See your work", projects_path, class: "purple-button-class hvr-grow", style: "text-decoration: none;" %>
+      <%= link_to "#home-page" do %>
+        <i class="fas fa-arrow-circle-up come-back"></i>
+      <% end %>
+    </div>
+ </div>
 
   <div class="lg-card-img col-sm-12 col-md-6 align-self-center">
     <%= image_tag "check_com.svg", style: "width: 65%; padding-left: 1.5rem;" %>
@@ -131,7 +147,12 @@
     <p>Now it's time to run the commands that will generate your app.</p>
     <p>You can copy the 'rails new' command to your terminal and watch the magic happens!</p>
     <p class="mb-3">You could also create a new app by yourself and use the commands on the bottom to generate each model with matching migration by copying each comma to the terminal separately.</p>
-    <%= link_to "Project page", projects_path, class: "purple-button-class hvr-grow", style: "text-decoration: none;" %>
+    <div class="d-flex align-items-center">
+      <%= link_to "Project page", projects_path, class: "purple-button-class hvr-grow", style: "text-decoration: none;" %>
+      <%= link_to "#home-page" do %>
+        <i class="fas fa-arrow-circle-up come-back"></i>
+      <% end %>
+    </div>
   </div>
 
 <!--   <div class="arrow">
