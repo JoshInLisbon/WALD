@@ -24,27 +24,66 @@ const deviseLink = () => {
   });
 }
 
+// const githubLink = () => {
+//   const githubCheckbox = document.querySelector('#github_checkbox');
+//   const codeInputCommand = document.querySelector('#code-input-command');
+//   const originalCodeCommand = codeInputCommand.value;
+//   const allCheckBoxes
 
-const githubLink = () => {
-  const githubCheckbox = document.querySelector('#github_checkbox');
+//   array.delete(elem.dataset.target)
+
+
+//   allCheckBoxes.forEach(box...
+//     box.addEventListener...)
+
+//   githubCheckbox.addEventListener('change', event => {
+//     let codeCommand = codeInputCommand.value;
+//     if (githubCheckbox.checked) {
+//       let codeCommand = codeInputCommand.value;
+//       const regex = /(\/templat[^\s]+)/
+//       let match = codeCommand.match(regex)
+//       codeInputCommand.value = codeCommand.replace(regex, `/template/${array.join("")}`);
+//     } else {
+//       codeInputCommand.value = originalCodeCommand
+//     }
+//   });
+// }
+
+
+const checkBoxes = () => {
+  let checkBoxArray = [];
+
+  const allCheckBoxes = document.querySelectorAll('.wald-checkbox');
   const codeInputCommand = document.querySelector('#code-input-command');
   const originalCodeCommand = codeInputCommand.value;
 
-  githubCheckbox.addEventListener('change', event => {
-    let codeCommand = codeInputCommand.value;
-    if (githubCheckbox.checked) {
+  allCheckBoxes.forEach (box => {
+    let checked = box.dataset.target;
+    box.addEventListener ('change', (event) => {
+      if (box.checked) {
+        checkBoxArray.push(checked);
+      console.log(checkBoxArray);
       let codeCommand = codeInputCommand.value;
       const regex = /(\/templat[^\s]+)/
       let match = codeCommand.match(regex)
-      codeInputCommand.value = codeCommand.replace(regex, `/template-github`);
-    } else {
-      codeInputCommand.value = originalCodeCommand
-    }
+      codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+      }
+      else {
+        let index = checkBoxArray.indexOf(checked)
+        checkBoxArray.splice(index, 1)
+        let codeCommand = codeInputCommand.value;
+        const regex = /(\/templat[^\s]+)/
+        let match = codeCommand.match(regex)
+        codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+        console.log(checkBoxArray);
+      }
+    });
   });
 }
 
+export { checkBoxes }
 
+// export { githubCheckbox }
+// export { deviseLink }
+// export { githubLink }
 
-
-export { deviseLink }
-export { githubLink }
