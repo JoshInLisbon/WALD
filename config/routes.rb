@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :files, only: [:index]
     get 'template', to: 'projects#template'
     get 'template/devise', to: 'projects#devise_template'
+    get 'template/:all_params', to: 'projects#template_params'
+    get 'template/devise/:all_params', to: 'projects#devise_template_params'
   end
 
 end
