@@ -8,21 +8,22 @@ const deviseLink = () => {
     let codeCommand = codeInputCommand.value;
     showHide.classList.toggle("devise-hidden")
     if (deviseCheckbox.checked) {
-      const deviseDropdownSelect = document.querySelector('#devise-dropdown-select');
+      // const deviseDropdownSelect = document.querySelector('#devise-dropdown-select');
       let codeCommand = codeInputCommand.value;
-      let deviseModel = deviseDropdownSelect.value;
+      // let deviseModel = deviseDropdownSelect.value;
       const regex = /(\/templat[^\s]+)/
       let match = codeCommand.match(regex)
-      codeInputCommand.value = codeCommand.replace(regex, `/template/devise/${deviseModel}`);
-      deviseDropdownSelect.addEventListener('change', event => {
-        let deviseModel = deviseDropdownSelect.value;
-        codeInputCommand.value = codeCommand.replace(regex, `/template/devise/${deviseModel}`);
-      });
+      codeInputCommand.value = codeCommand.replace(regex, `/template/devise`);
+      // deviseDropdownSelect.addEventListener('change', event => {
+      //   let deviseModel = deviseDropdownSelect.value;
+      //   codeInputCommand.value = codeCommand.replace(regex, `/template/devise`);
+      // });
     } else {
       codeInputCommand.value = originalCodeCommand
     }
   });
 }
+
 
 
 // const githubLink = () => {
@@ -47,4 +48,4 @@ const deviseLink = () => {
 
 
 export { deviseLink }
-export { githubLink }
+// export { githubLink }
