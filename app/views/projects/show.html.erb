@@ -102,6 +102,19 @@ rails new \
     <% end %>
   </div>
 
+  <div class="my-4 border-bottom"></div>
+
+  <p><strong>Your XML File</strong></p>
+  <p>Here you can check your XML schema and update it.</p>
+  <div class="code-block code-xmlfile">
+  <div class="code-row">
+    <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-command"></i></div>
+    <textarea class="code-input" rows="5" cols="50" id="code-input-command" spellcheck="false" style="height: 437px;">
+<%= @project.xml_schema %>
+    </textarea>
+  </div>
+</div>
+
   <div class="share-link-mobile">
 
     <div class="my-4 border-bottom"></div>
