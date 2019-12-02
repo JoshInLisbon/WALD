@@ -41,28 +41,17 @@ class ProjectsController < ApplicationController
   def template_params
     @project = Project.find(params[:project_id])
     xml_string = @project.xml_schema
+    check_devise(params[:all_params])
     check_github(params[:all_params])
     check_heroku(params[:all_params])
-    parse_xml(xml_string)
-    send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
-  end
-
-  def devise_template
-    @project = Project.find(params[:project_id])
-    @devise_model = "user"
-    xml_string = @project.xml_schema
-    devise_parse_xml(xml_string)
-    send_data devise_templating(@commands), filename: "template-devise-#{params[:devise_model]}.rb", disposition: 'attachment'
-  end
-
-  def devise_template_params
-    @project = Project.find(params[:project_id])
-    @devise_model = "user"
-    xml_string = @project.xml_schema
-    check_github(params[:all_params])
-    check_heroku(params[:all_params])
-    devise_parse_xml(xml_string)
-    send_data devise_templating(@commands), filename: "template-devise-#{params[:devise_model]}.rb", disposition: 'attachment'
+    if @devise == true
+      @devise_model = "user"
+      devise_parse_xml(xml_string)
+      send_data devise_templating(@commands), filename: "template-#{@project.name}.rb", disposition: 'attachment'
+    else
+      parse_xml(xml_string)
+      send_data templating(@commands), filename: "template.rb-#{@project.name}", disposition: 'attachment'
+    end
   end
 
   private
@@ -435,6 +424,14 @@ class ProjectsController < ApplicationController
       "generate '#{command}'"
     end
     array.join("\n")
+  end
+
+  def check_devise(params)
+    if params.match("&devise")
+      @devise = true
+    else
+      @devise = false
+    end
   end
 
   def check_heroku(params)
