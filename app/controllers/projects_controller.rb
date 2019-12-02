@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
 
   def devise_template
     @project = Project.find(params[:project_id])
-    @devise_model = params[:devise_model]
+    @devise_model = "user"
     xml_string = @project.xml_schema
     devise_parse_xml(xml_string)
     send_data devise_templating(@commands), filename: "template-devise-#{params[:devise_model]}.rb", disposition: 'attachment'
@@ -280,9 +280,9 @@ class ProjectsController < ApplicationController
         cmd.include?("id") ? cmd = "" : cmd + " "
       end
       @commands << splitted_commands.join("")
-
-
     end
+    @commands << "devise user" if @project.models.exclude?("user")
+
     @commands
   end
 

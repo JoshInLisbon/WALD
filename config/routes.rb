@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :projects, only: [:index, :show, :create, :new, :destroy] do
     resources :files, only: [:index]
     get 'template', to: 'projects#template'
-    get 'template/devise/:devise_model', to: 'projects#devise_template'
+    get 'template/devise', to: 'projects#devise_template'
   end
 
 end
