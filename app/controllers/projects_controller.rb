@@ -805,8 +805,8 @@ class ProjectsController < ApplicationController
     <\% end %>
     HTML
 
-    run 'curl -L https://github.com/lewagon/awesome-navbars/raw/master/templates/_navbar_wagon.html.erb > app/views/shared/_navbar.html.erb'
-    run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/logo.png > app/assets/images/logo.png'
+    run 'curl -L https://raw.githubusercontent.com/JoshInLisbon/WALD/master/for_WALD_apps/_navbar_wald.html.erb > app/views/shared/_navbar.html.erb'
+    run 'curl -L https://raw.githubusercontent.com/JoshInLisbon/WALD/master/for_WALD_apps/logo.png > app/assets/images/logo.png'
 
     # README
     ########################################
