@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :destroy]
+  before_action :set_project, only: [:show, :destroy, :update]
   # before_action :check_if_user_is_owner?,  only: [:show]
   skip_before_action :authenticate_user!, only: [:template, :template_params, :devise_template, :devise_template_params, :show]
 
@@ -39,8 +39,14 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.js
     end
-
   end
+
+  def update
+    @project.update(project_params)
+
+    redirect_to project_path(@project)
+  end
+
 
   def template
     @project = Project.find(params[:project_id])
