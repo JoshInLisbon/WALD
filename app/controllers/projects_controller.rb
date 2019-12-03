@@ -600,7 +600,9 @@ class ProjectsController < ApplicationController
         <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
       </head>
       <body>
+        <div class=\"container\">
         <%= yield %>
+        </div>
         <%= javascript_include_tag 'application' %>
         <%= javascript_pack_tag 'application' %>
       </body>
@@ -690,6 +692,16 @@ class ProjectsController < ApplicationController
       # Rubocop
       ########################################
       run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/.rubocop.yml > .rubocop.yml'
+
+      # Homepage
+      ########################################
+      run 'rm app/views/pages/home.html.erb'
+      file 'app/views/pages/home.html.erb', <<-HTML
+
+      <h1>🍻 Welcome to your WALD app</h1>
+      #{pages_in_your_app}
+      #{models_without_pages}
+      HTML
 
       # Git
       ########################################
