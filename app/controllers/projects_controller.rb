@@ -41,7 +41,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:project_id])
     xml_string = @project.xml_schema
     parse_xml(xml_string)
-    send_data templating(@commands), filename: 'template.rb', disposition: 'attachment'
+    send_data templating(@commands), filename: "template-#{@project.name.gsub(/\s+/m, '-').downcase}.rb", disposition: 'attachment'
   end
 
   def template_params
@@ -54,10 +54,10 @@ class ProjectsController < ApplicationController
     if @devise == true
       @devise_model = "user"
       devise_parse_xml(xml_string)
-      send_data devise_templating(@commands), filename: "template-#{@project.name}.rb", disposition: 'attachment'
+      send_data devise_templating(@commands), filename: "template-#{@project.name.gsub(/\s+/m, '-').downcase}.rb", disposition: 'attachment'
     else
       parse_xml(xml_string)
-      send_data templating(@commands), filename: "template.rb-#{@project.name}", disposition: 'attachment'
+      send_data templating(@commands), filename: "template-#{@project.name.gsub(/\s+/m, '-').downcase}.rb", disposition: 'attachment'
     end
   end
 
@@ -277,6 +277,7 @@ class ProjectsController < ApplicationController
 
 
   def rails_commands
+
     @rails_commands = []
 
     @tables_arr.each do |table|
@@ -492,7 +493,7 @@ class ProjectsController < ApplicationController
   ##########################################
 
   def check_scaffold(params)
-    @scaffold_models = params.scan(/&s-([^&\z]+)/).flatten.compact
+    @scaffold_models = params.scan(/&s-([^&]+)/).flatten.compact
   end
 
   def heroku_commands
@@ -821,7 +822,9 @@ class ProjectsController < ApplicationController
       <body>
         <%= render 'shared/navbar' %>
         <%= render 'shared/flashes' %>
+        <div class=\"container\">
         <%= yield %>
+        </div>
         <%= javascript_include_tag 'application' %>
         <%= javascript_pack_tag 'application' %>
       </body>
@@ -968,6 +971,16 @@ class ProjectsController < ApplicationController
       ########################################
       run 'curl -L https://raw.githubusercontent.com/lewagon/rails-templates/master/.rubocop.yml > .rubocop.yml'
 
+      # Homepage
+      ########################################
+      run 'rm app/views/pages/home.html.erb'
+      file 'app/views/pages/home.html.erb', <<-HTML
+
+      <h1>🍻 Welcome to your WALD app</h1>
+      #{pages_in_your_app}
+      #{models_without_pages}
+      HTML
+
       # Git
       ########################################
       git :init
@@ -1013,5 +1026,32 @@ class ProjectsController < ApplicationController
       puts 'Josh, Lucas, Pedro & Sapir'
       puts '☎️ - Hire us: waldevelopers@gmail.com'
     end"
+  end
+
+  def pages_in_your_app
+    indexes_array = []
+    if @scaffold_models.present?
+      indexes_array << "<h3>Models with views</h3>"
+      @scaffold_models.each do |s_model|
+        indexes_array << "
+          <p><%= link_to '#{s_model.pluralize} Index', #{s_model.pluralize}_path %></p>
+        "
+      end
+    end
+    indexes_array.join("\n")
+  end
+
+  def models_without_pages
+    models_without_pages_array = @project.models - @scaffold_models
+    no_indexes_array = []
+    if models_without_pages_array.any?
+      no_indexes_array << "<h3>Models without views</h3>"
+      models_without_pages_array.each do |model|
+        no_indexes_array << "
+          <p>#{model.pluralize}</p>
+        "
+      end
+    end
+    no_indexes_array.join("\n")
   end
 end
