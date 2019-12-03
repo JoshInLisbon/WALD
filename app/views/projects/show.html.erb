@@ -36,8 +36,23 @@
     <button class="align-items-center pulsate-bck" data-toggle="modal" data-target="#exampleModalCenter">Understand your template</button>
   </div>
 
+
+  <div class="d-flex template-option-div">
+   <span class="template-option-span">Create repository on <strong>Github</strong>?</span>
+     <div class="github-checkbox show-page-checkbox">
+       <input data-target="&github" type="checkbox" class="form-check-input wald-checkbox" id="github_checkbox">
+     </div>
+  </div>
+
+   <div class="d-flex template-option-div">
+     <span class="template-option-span">Deploy to <strong>Heroku</strong>?</span>
+       <div class="heroku-checkbox show-page-checkbox">
+         <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
+       </div>
+    </div>
+
 <div class="d-flex template-option-div">
-  <span class="template-option-span"><strong>Devise for user model?</strong></span>
+  <span class="template-option-span"><strong>Devise</strong> for user model?</span>
     <div class="devise-checkbox show-page-checkbox">
       <input type="checkbox" data-target="&devise" class="form-check-input wald-checkbox" id="devise_checkbox">
     </div>
@@ -52,22 +67,10 @@
     </span>
  </div>
 
- <div class="d-flex template-option-div">
-  <span class="template-option-span"><strong>Create repository on Github?</strong></span>
-    <div class="github-checkbox show-page-checkbox">
-      <input data-target="&github" type="checkbox" class="form-check-input wald-checkbox" id="github_checkbox">
-    </div>
- </div>
 
-  <div class="d-flex template-option-div">
-    <span class="template-option-span"><strong>Deploy to Heroku?</strong></span>
-      <div class="heroku-checkbox show-page-checkbox">
-        <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
-      </div>
-   </div>
 
 <div class="d-flex flex-wrap template-option-div">
-  <span class="scaffold-title-template-option-span"><strong class="scaffold-span">Scaffold your models?</strong></span>
+  <span class="scaffold-title-template-option-span"><span class="scaffold-span"><strong>Scaffold</strong> your models?</span></span>
   <% @project.models.each do |model| %>
   <div>
     <div class="heroku-checkbox show-page-checkbox">
@@ -76,6 +79,13 @@
     <span class="scaffold-template-option-span"><%= model %></span>
   </div>
   <% end %>
+</div>
+
+<div class="d-flex template-option-div">
+ <span class="template-option-span"><strong>Seed</strong> your models?</span>
+   <div class="seed-checkbox show-page-checkbox">
+     <input data-target="&seed" type="checkbox" class="form-check-input wald-checkbox" id="seed_checkbox">
+   </div>
 </div>
 
 
