@@ -27,5 +27,10 @@
     position: absolute;
     font-size: 1.5rem;
     padding: 0.5rem;
+    color: $light-purple;
+  }
+
+  .icon:hover {
+    color: $purple;
   }
 }
