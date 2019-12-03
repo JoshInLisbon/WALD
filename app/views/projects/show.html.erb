@@ -67,13 +67,14 @@
    </div>
 
 <div class="d-flex flex-wrap template-option-div">
-  <span class="scaffold-template-option-span"><strong class="scaffold-span">Scaffold your models?</strong></span>
+  <span class="scaffold-title-template-option-span"><strong class="scaffold-span">Scaffold your models?</strong></span>
   <% @project.models.each do |model| %>
-
-  <div class="heroku-checkbox show-page-checkbox">
-    <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox" id="s-<%= model %>">
+  <div>
+    <div class="heroku-checkbox show-page-checkbox">
+      <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox" id="s-<%= model %>">
+    </div>
+    <span class="scaffold-template-option-span"><%= model %></span>
   </div>
-  <span class="template-option-span"><%= model %></span>
   <% end %>
 </div>
 
