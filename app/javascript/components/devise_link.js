@@ -84,9 +84,35 @@ const checkBoxes = () => {
   });
 }
 
-export { checkBoxes }
+
 
 // export { githubCheckbox }
 // export { deviseLink }
 // export { githubLink }
 
+
+const alertsInfo = () => {
+  const herokuBox = document.querySelector('#heroku_checkbox');
+  const deviseBox = document.querySelector('#devise_checkbox');
+
+  let herokuAlerted = false;
+  let deviseAlerted = false;
+
+  herokuBox.addEventListener("click", (event) => {
+    if (herokuAlerted === false) {
+      swal('You must install and log-in to Heroku before starting! \n App name must be unique! Heroku will raise an error if not.');
+      herokuAlerted = true;
+    }
+  });
+
+  deviseBox.addEventListener("click", (event) => {
+    if (deviseAlerted === false) {
+      swal('\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!');
+      deviseAlerted = true;
+    }
+  });
+}
+
+
+export { alertsInfo }
+export { checkBoxes }

@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show]
+  before_action :set_project, only: [:show, :destroy]
   # before_action :check_if_user_is_owner?,  only: [:show]
   skip_before_action :authenticate_user!, only: [:template, :template_params, :devise_template, :devise_template_params, :show]
 
@@ -31,6 +31,12 @@ class ProjectsController < ApplicationController
     parse_xml(xml_string)
   end
 
+  def destroy
+    @project.user = current_user
+    @project.destroy
+    redirect_to projects_path
+  end
+
   def template
     @project = Project.find(params[:project_id])
     xml_string = @project.xml_schema
@@ -56,6 +62,26 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  ##########################################
+  # basic controller methods :
+  ##########################################
+
+  def project_params
+    params.require(:project).permit(:name, :user_id, :xml_schema)
+  end
+
+  def check_if_user_is_owner?
+    current_user.id == @project.user_id
+  end
+
+  def set_project
+    @project = Project.find(params[:id])
+  end
+
+  ##########################################
+  # parsing XML methods :
+  ##########################################
 
   def parse_xml(xml_string)
     doc = Nokogiri::XML(xml_string)
@@ -127,6 +153,79 @@ class ProjectsController < ApplicationController
     model_names
   end
 
+  def to_data_type(schema_data_type)
+    case schema_data_type.downcase
+    when "integer", "tinyint", "smallint", "mediumint", "int", "bigint", "single precision", "double precision"
+      :integer
+    when "decimal"
+      :decimal
+    when "char", "varchar", "varbinary"
+      :string
+    when "text"
+      :text
+    when "binary", "bit"
+      :binary
+    when "boolean"
+      :boolean
+    when "date", "year"
+      :date
+    when "time"
+      :time
+    when "timestamp", "timestamp w/ tz", "timestamp wo/ tz"
+      :timestamp
+    when "datetime"
+      :datetime
+    end
+  end
+
+  def order(tables_arr)
+    sorting_tables_arr = tables_arr
+    ordered_tables_arr = []
+
+    return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
+  end
+
+  def return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
+    # if statement to stop infinate recurrsion
+    if sorting_tables_arr.any?
+      # check tables for no fks & set sorting_fk
+      sorting_tables_arr.each do |table|
+        no_fks_array = []
+        table[:columns].each do |column|
+          no_fks_array << column[:sorting_relations].empty?
+        end
+        # push table to ordered_tables_arr if no_fks, and remove it from sorting_table_arr
+        unless no_fks_array.include?(false)
+          ordered_tables_arr << table
+          sorting_tables_arr.delete(table)
+        end
+      end
+
+      # remove now sorted table from other tables sorting_relations
+      ordered_tables_arr.each do |ord_table|
+        # for every ordered table, go through the remaining tables
+        sorting_tables_arr.each do |table|
+          table[:columns].each do |column|
+            column[:sorting_relations].each do |relation|
+              # remove any relation from sorting_relations which has been sorted already
+              if relation[:relation_table] == ord_table[:table_name]
+                column[:sorting_relations].delete(relation)
+              end # if
+            end # relations loop
+          end # column loop
+        end # remaining tables loop
+      end # already ordered tables loop
+    else
+      return ordered_tables_arr
+    end
+    return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
+  end
+
+
+  ##########################################
+  # creating the commands methods :
+  ##########################################
+
   def commands
     @commands = []
 
@@ -172,11 +271,106 @@ class ProjectsController < ApplicationController
         cmd.include?("id") ? cmd = "" : cmd + " "
       end
       @commands << splitted_commands.join("")
-
-
     end
     @commands
   end
+
+
+  def rails_commands
+    @rails_commands = []
+
+    @tables_arr.each do |table|
+      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+
+      if table_name.length <= 1
+        singular_table_name = "#{table_name}"
+      elsif table_name.chars.last(3).join == "ies"
+        singular_table_name = "#{table_name[0..-4]}y"
+      elsif table_name.chars.last == "s"
+        singular_table_name = "#{table_name[0..-2]}"
+      else
+        singular_table_name = "#{table_name}"
+      end
+
+      if @scaffold_models.present?
+        if @scaffold_models.include?(singular_table_name)
+          command = "scaffold #{singular_table_name} "
+        else
+          command = "model #{singular_table_name} "
+        end
+      else
+        command = "model #{singular_table_name} "
+      end
+
+      table[:columns].each do |column|
+        next if column[:column_name] == "id"
+
+        column_name = column[:column_name]
+        data_type = column[:data_type]
+
+        command += " #{column_name}:#{data_type}"
+
+        if column[:fk] == true
+          column[:relations].each do |relation|
+            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+
+            if relation_table_name.length <= 1
+              command += " #{relation_table_name}:references"
+            elsif relation_table_name.chars.last(3).join == "ies"
+              command += " #{relation_table_name[0..-4]}y:references"
+            elsif relation_table_name.chars.last == "s"
+              command += " #{relation_table_name[0..-2]}:references"
+            else
+              command += " #{relation_table_name}:references"
+            end
+          end
+        end
+      end
+
+      splitted_commands = command.split(" ").map do |cmd|
+        cmd.include?("id") ? cmd = "" : cmd + " "
+      end
+      @rails_commands << splitted_commands.join("")
+
+    end
+    @rails_commands
+  end
+
+  def method(commands)
+    array = commands.map do |command|
+      "generate '#{command}'"
+    end
+    array.join("\n")
+  end
+
+  def check_devise(params)
+    if params.match("&devise")
+      @devise = true
+    else
+      @devise = false
+    end
+  end
+
+  def check_heroku(params)
+    if params.match("&heroku")
+      @heroku = true
+    else
+      @heroku = false
+    end
+  end
+
+  def check_github(params)
+    if params.match("&github")
+      @github = true
+    else
+      @github = false
+    end
+  end
+
+
+  ##########################################
+  # creating Devise commands:
+  ##########################################
 
   def devise_parse_xml(xml_string)
     doc = Nokogiri::XML(xml_string)
@@ -293,190 +487,9 @@ class ProjectsController < ApplicationController
     @commands
   end
 
-  def rails_commands
-    @rails_commands = []
-
-    @tables_arr.each do |table|
-      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
-
-      if table_name.length <= 1
-        singular_table_name = "#{table_name}"
-      elsif table_name.chars.last(3).join == "ies"
-        singular_table_name = "#{table_name[0..-4]}y"
-      elsif table_name.chars.last == "s"
-        singular_table_name = "#{table_name[0..-2]}"
-      else
-        singular_table_name = "#{table_name}"
-      end
-
-      if @scaffold_models.present?
-        if @scaffold_models.include?(singular_table_name)
-          command = "scaffold #{singular_table_name} "
-        else
-          command = "model #{singular_table_name} "
-        end
-      else
-        command = "model #{singular_table_name} "
-      end
-
-
-
-
-      # if table_name.length <= 1
-      #   command = "model #{table_name} "
-      # elsif table_name.chars.last(3).join == "ies"
-      #   command = "model #{table_name[0..-4]}y "
-      # elsif table_name.chars.last == "s"
-      #   command = "model #{table_name[0..-2]} "
-      # else
-      #   command = "model #{table_name} "
-      # end
-
-      table[:columns].each do |column|
-        next if column[:column_name] == "id"
-
-        column_name = column[:column_name]
-        data_type = column[:data_type]
-
-        command += " #{column_name}:#{data_type}"
-
-        if column[:fk] == true
-          column[:relations].each do |relation|
-            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
-
-            if relation_table_name.length <= 1
-              command += " #{relation_table_name}:references"
-            elsif relation_table_name.chars.last(3).join == "ies"
-              command += " #{relation_table_name[0..-4]}y:references"
-            elsif relation_table_name.chars.last == "s"
-              command += " #{relation_table_name[0..-2]}:references"
-            else
-              command += " #{relation_table_name}:references"
-            end
-          end
-        end
-      end
-
-      splitted_commands = command.split(" ").map do |cmd|
-        cmd.include?("id") ? cmd = "" : cmd + " "
-      end
-      @rails_commands << splitted_commands.join("")
-
-
-    end
-    @rails_commands
-  end
-
-  def to_data_type(schema_data_type)
-    case schema_data_type.downcase
-    when "integer", "tinyint", "smallint", "mediumint", "int", "bigint", "single precision", "double precision"
-      :integer
-    when "decimal"
-      :decimal
-    when "char", "varchar", "varbinary"
-      :string
-    when "text"
-      :text
-    when "binary", "bit"
-      :binary
-    when "boolean"
-      :boolean
-    when "date", "year"
-      :date
-    when "time"
-      :time
-    when "timestamp", "timestamp w/ tz", "timestamp wo/ tz"
-      :timestamp
-    when "datetime"
-      :datetime
-    end
-  end
-
-  def order(tables_arr)
-    sorting_tables_arr = tables_arr
-    ordered_tables_arr = []
-
-    return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
-  end
-
-  def return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
-    # if statement to stop infinate recurrsion
-    if sorting_tables_arr.any?
-      # check tables for no fks & set sorting_fk
-      sorting_tables_arr.each do |table|
-        no_fks_array = []
-        table[:columns].each do |column|
-          no_fks_array << column[:sorting_relations].empty?
-        end
-        # push table to ordered_tables_arr if no_fks, and remove it from sorting_table_arr
-        unless no_fks_array.include?(false)
-          ordered_tables_arr << table
-          sorting_tables_arr.delete(table)
-        end
-      end
-
-      # remove now sorted table from other tables sorting_relations
-      ordered_tables_arr.each do |ord_table|
-        # for every ordered table, go through the remaining tables
-        sorting_tables_arr.each do |table|
-          table[:columns].each do |column|
-            column[:sorting_relations].each do |relation|
-              # remove any relation from sorting_relations which has been sorted already
-              if relation[:relation_table] == ord_table[:table_name]
-                column[:sorting_relations].delete(relation)
-              end # if
-            end # relations loop
-          end # column loop
-        end # remaining tables loop
-      end # already ordered tables loop
-    else
-      return ordered_tables_arr
-    end
-    return_and_remove_fks(sorting_tables_arr, ordered_tables_arr)
-  end
-
-  def project_params
-    params.require(:project).permit(:name, :user_id, :xml_schema)
-  end
-
-  def check_if_user_is_owner?
-    current_user.id == @project.user_id
-  end
-
-  def set_project
-    @project = Project.find(params[:id])
-  end
-
-  def method(commands)
-    array = commands.map do |command|
-      "generate '#{command}'"
-    end
-    array.join("\n")
-  end
-
-  def check_devise(params)
-    if params.match("&devise")
-      @devise = true
-    else
-      @devise = false
-    end
-  end
-
-  def check_heroku(params)
-    if params.match("&heroku")
-      @heroku = true
-    else
-      @heroku = false
-    end
-  end
-
-  def check_github(params)
-    if params.match("&github")
-      @github = true
-    else
-      @github = false
-    end
-  end
+  ##########################################
+  # templates
+  ##########################################
 
   def check_scaffold(params)
     @scaffold_models = params.scan(/&s-([^&\z]+)/).flatten.compact

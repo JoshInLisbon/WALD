@@ -1,4 +1,3 @@
-
 <div class="container" style="min-height: 100vh">
 <h1>Your Projects</h1>
 <div class="border-bottom my-4"></div>
@@ -27,6 +26,13 @@
           </span>
         </span>
         <span class="date-grey-text"><%= project.created_at.strftime("%m/%d/%Y %I:%M%p") %></span>
+
+        <%= link_to project_path(project), method: :delete do %>
+          <span>
+            <i class="far fa-trash-alt"></i>
+          </span>
+        <% end %>
+
       </p>
 
     <% end %>
