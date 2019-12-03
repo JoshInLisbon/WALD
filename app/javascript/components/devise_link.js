@@ -81,7 +81,7 @@ const checkBoxes = () => {
   });
 }
 
-export { checkBoxes }
+
 
 // export { githubCheckbox }
 // export { deviseLink }
@@ -104,3 +104,4 @@ const alertsInfo = () => {
 
 
 export { alertsInfo }
+export { checkBoxes }
