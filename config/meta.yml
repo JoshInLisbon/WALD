@@ -1,0 +1,4 @@
+meta_product_name: "Wald"
+meta_title: "Wald - Create rails app out of database schema"
+meta_description: "Wald allow you to create and deploy rails app out of a visual database schema, all you need to do is draw one!"
+meta_image: "WALD_oficial_Logo.png" # should exist in `app/assets/images/`
