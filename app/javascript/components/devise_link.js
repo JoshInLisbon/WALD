@@ -92,13 +92,21 @@ const alertsInfo = () => {
   const herokuBox = document.querySelector('#heroku_checkbox');
   const deviseBox = document.querySelector('#devise_checkbox');
 
+  let herokuAlerted = false;
+  let deviseAlerted = false;
 
   herokuBox.addEventListener("click", (event) => {
-    swal('You must install and log-in to Heroku before running the commands! \n Your app name have to be unique! Heroku will raise an error if not', {icon: 'info'});
+    if (herokuAlerted === false) {
+      swal('You must install and log-in to Heroku before starting! \n App name must be unique! Heroku will raise an error if not.');
+      herokuAlerted = true;
+    }
   });
 
   deviseBox.addEventListener("click", (event) => {
-    swal('\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!', {icon: 'info'});
+    if (deviseAlerted === false) {
+      swal('\'Devise\' require \'user\' table, therefore if you don\'t have one we will create it for you!');
+      deviseAlerted = true;
+    }
   });
 }
 
