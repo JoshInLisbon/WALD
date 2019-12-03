@@ -78,8 +78,8 @@
     </ul>
     <div class="d-flex align-items-center">
       <a href="https://ondras.zarovi.cz/sql/demo/" class="purple-button-class hvr-grow" style="text-decoration: none;" target="_blank" >Create now</a>
-      <%= link_to "#home-page" do %>
-          <i class="fas fa-arrow-circle-up come-back"></i>
+      <%= link_to "#pasteXML" do %>
+          <i class="fas fa-arrow-circle-down come-back"></i>
       <% end %>
     </div>
   </div>
@@ -101,8 +101,8 @@
     <p class="mb-3"><i>That's all you need to make our app working for you!</i></p>
     <div class="d-flex align-items-center">
       <%= link_to "Start new project", new_project_path, class: "purple-button-class-start hvr-grow", style: "text-decoration: none;" %>
-      <%= link_to "#home-page" do %>
-          <i class="fas fa-arrow-circle-up come-back"></i>
+      <%= link_to "#checkOurWork" do %>
+          <i class="fas fa-arrow-circle-down come-back"></i>
       <% end %>
     </div>
   </div>
@@ -123,8 +123,8 @@
     <p class="mb-3">All the commands are editable so you could apply any changes if necessary.</p>
     <div class="d-flex align-items-center">
       <%= link_to "See your work", projects_path, class: "purple-button-class hvr-grow", style: "text-decoration: none;" %>
-      <%= link_to "#home-page" do %>
-        <i class="fas fa-arrow-circle-up come-back"></i>
+      <%= link_to "#runYourApp" do %>
+        <i class="fas fa-arrow-circle-down come-back"></i>
       <% end %>
     </div>
   </div>
@@ -141,7 +141,7 @@
     <%= image_tag "man_laptop.svg", style: "width: 77%; margin-left: 15%;" %>
   </div>
 
-  <div class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
+  <div id="last-step" class="card-text col-sm-12 col-md-6 align-self-center pr-md-4 pr-lg-0">
     <h2><i class="fas fa-terminal terminal"></i>  Your app is ready to run!</h2>
     <p>Now it's time to run the commands that will generate your app.</p>
     <p>You can copy the 'rails new' command to your terminal and watch the magic happens!</p>
