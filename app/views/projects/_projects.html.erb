@@ -1,0 +1,24 @@
+<% @projects.each do |project| %>
+  <p class="project-result" data-project-class="<%= project.id %>" id="project-<%= project.id %>" >
+    <span class="searchable-area" data-target="project-<%= project.id %>">
+      <span data-test="<%= project.name.gsub(/\s+/m, '_').downcase %>-<%= project.id %>">
+      <%= link_to project.name.gsub(/\s+/m, '_').downcase, project_path(project) %>
+      </span>
+      <span class="models-grey-text"><span></span>
+        <% project.models.each_with_index do |model, i| %>
+          <span data-test="<%= model %>-<%= project.id %>">
+            <%= " #{model}" %>
+          </span>
+          <%="#{ i+1 < project.models.length ? "," : "" }" %>
+        <% end %>
+      </span>
+    </span>
+    <span class="date-grey-text"><%= project.created_at.strftime("%m/%d/%Y %I:%M%p") %></span>
+
+    <%= link_to project_path(project), class: "delete-icon", remote: true do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+
+  </p>
+
+<% end %>
