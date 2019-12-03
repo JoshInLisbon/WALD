@@ -8,4 +8,7 @@ class PagesController < ApplicationController
   def generate
     HerokuService.call
   end
+
+  def about
+  end
 end

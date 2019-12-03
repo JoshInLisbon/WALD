@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     get 'template/:all_params', to: 'projects#template_params'
   end
 
+  get 'about', to: 'pages#about'
+
 end
