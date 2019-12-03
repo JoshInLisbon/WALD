@@ -8,6 +8,7 @@ import { githubLink } from "../components/devise_link"
 import { githubCheckbox } from "../components/devise_link"
 import { checkBoxes } from "../components/devise_link"
 import { alertsInfo } from "../components/devise_link"
+import { confirmation } from "../components/destroy_confirmation"
 
 
 const projectShow = document.querySelector(".projects-show");
@@ -18,11 +19,11 @@ if(projectShow) {
   // githubCheckbox();
   checkBoxes();
   alertsInfo();
+
 }
 
 const projectIndex = document.querySelector(".projects-index");
 if(projectIndex) {
   indexSearch();
+  confirmation();
 }
-
-

@@ -33,8 +33,13 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.user = current_user
+
     @project.destroy
-    redirect_to projects_path
+
+    respond_to do |format|
+      format.js
+    end
+
   end
 
   def template
