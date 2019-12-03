@@ -35,44 +35,47 @@
   <div class="flex-grow-1"></div>
     <button class="align-items-center pulsate-bck" data-toggle="modal" data-target="#exampleModalCenter">Understand your template</button>
   </div>
-<p>
-<div class="d-flex d-flex-for-devise">
-  <span class="devise-span"><strong>Devise?</strong></span>
-    <div class="devise-checkbox">
-      <input type="checkbox" data-target="&devise" class="form-check-input devise-checkbox-input wald-checkbox" id="devise_checkbox">
+
+<div class="d-flex template-option-div">
+  <span class="template-option-span"><strong>Devise for user model?</strong></span>
+    <div class="devise-checkbox show-page-checkbox">
+      <input type="checkbox" data-target="&devise" class="form-check-input wald-checkbox" id="devise_checkbox">
     </div>
-    <span class="d-flex devise-hidden" id="show_hide_devise_span">
-      <span class="devise-for-span">Use devise for</span>
-      <div class="devise-dropdown">
-
-        <select class="form-control" id="devise-dropdown-select">
-          <% @project.models.each do |model| %>
-            <% if model == "user" %>
-              <option selected="selected" value="<%= model %>"><%= model %></option>
-            <% else %>
-              <option value="<%= model %>"><%= model %></option>
-            <% end %>
-          <% end %>
-        </select>
-
-      </div>
+    <span class="d-flex devise-hidden" id="devise_show_hide_span">
+      <span class="devise-for-span">
+        <% if @project.models.include?("user") %>
+          Devise will be applied to your 'user' model.
+        <% else %>
+          <span style="color: rgb(255, 95, 63)">You do not have a 'user' model.</span> A user model will be created for you if you select devise.
+        <% end %>
+      </span>
     </span>
  </div>
 
- <div class="d-flex d-flex-for-github">
-  <span class="github-span"><strong>Create repository on Github?</strong></span>
-    <div class="github-checkbox">
-      <input data-target="&github" type="checkbox" class="form-check-input github-checkbox-input wald-checkbox" id="github_checkbox">
+ <div class="d-flex template-option-div">
+  <span class="template-option-span"><strong>Create repository on Github?</strong></span>
+    <div class="github-checkbox show-page-checkbox">
+      <input data-target="&github" type="checkbox" class="form-check-input wald-checkbox" id="github_checkbox">
     </div>
  </div>
 
-  <div class="d-flex d-flex-for-heroku">
-    <span class="heroku-span"><strong>Deploy to Heroku?</strong></span>
-      <div class="heroku-checkbox">
-        <input data-target="&heroku" type="checkbox" class="form-check-input heroku-checkbox-input wald-checkbox" id="heroku_checkbox">
+  <div class="d-flex template-option-div">
+    <span class="template-option-span"><strong>Deploy to Heroku?</strong></span>
+      <div class="heroku-checkbox show-page-checkbox">
+        <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
       </div>
    </div>
-</p>
+
+<div class="d-flex flex-wrap template-option-div">
+  <span class="scaffold-template-option-span"><strong class="scaffold-span">Scaffold your models?</strong></span>
+  <% @project.models.each do |model| %>
+
+  <div class="heroku-checkbox show-page-checkbox">
+    <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox" id="s-<%= model %>">
+  </div>
+  <span class="template-option-span"><%= model %></span>
+  <% end %>
+</div>
 
 
 <div class="code-block">
@@ -158,3 +161,20 @@ rails new \
     </div>
   </div>
 </div>
+
+
+<!-- old code to be saved in case -->
+<!-- <span class="devise-for-span">Use devise for</span> -->
+<!-- <div class="devise-dropdown"> -->
+
+  <!-- <select class="form-control" id="devise-dropdown-select"> -->
+    <%# @project.models.each do |model| %>
+      <%# if model == "user" %>
+        <!-- <option selected="selected" value="<%#= model %>"><%#= model %></option> -->
+      <%# else %>
+        <!-- <option value="<%#= model %>"><%#= model %></option> -->
+      <%# end %>
+    <%# end %>
+  <!-- </select> -->
+
+<!-- </div> -->

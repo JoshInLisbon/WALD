@@ -60,13 +60,16 @@ const checkBoxes = () => {
   allCheckBoxes.forEach (box => {
     let checked = box.dataset.target;
     box.addEventListener ('change', (event) => {
+      if(document.querySelector(`#${checked.substr(1)}_show_hide_span`)) {
+        document.querySelector(`#${checked.substr(1)}_show_hide_span`).classList.toggle("devise-hidden")
+      }
       if (box.checked) {
         checkBoxArray.push(checked);
-      console.log(checkBoxArray);
-      let codeCommand = codeInputCommand.value;
-      const regex = /(\/templat[^\s]+)/
-      let match = codeCommand.match(regex)
-      codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+        console.log(checkBoxArray);
+        let codeCommand = codeInputCommand.value;
+        const regex = /(\/templat[^\s]+)/
+        let match = codeCommand.match(regex)
+        codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
       }
       else {
         let index = checkBoxArray.indexOf(checked)

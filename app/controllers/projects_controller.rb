@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
     check_devise(params[:all_params])
     check_github(params[:all_params])
     check_heroku(params[:all_params])
+    check_scaffold(params[:all_params])
     if @devise == true
       @devise_model = "user"
       devise_parse_xml(xml_string)
@@ -282,13 +283,23 @@ class ProjectsController < ApplicationController
       table_name = table[:table_name].gsub(/\s+/m, '_').downcase
 
       if table_name.length <= 1
-        command = "model #{table_name} "
+        singular_table_name = "#{table_name}"
       elsif table_name.chars.last(3).join == "ies"
-        command = "model #{table_name[0..-4]}y "
+        singular_table_name = "#{table_name[0..-4]}y"
       elsif table_name.chars.last == "s"
-        command = "model #{table_name[0..-2]} "
+        singular_table_name = "#{table_name[0..-2]}"
       else
-        command = "model #{table_name} "
+        singular_table_name = "#{table_name}"
+      end
+
+      if @scaffold_models.present?
+        if @scaffold_models.include?(singular_table_name)
+          command = "scaffold #{singular_table_name} "
+        else
+          command = "model #{singular_table_name} "
+        end
+      else
+        command = "model #{singular_table_name} "
       end
 
       table[:columns].each do |column|
@@ -320,6 +331,7 @@ class ProjectsController < ApplicationController
         cmd.include?("id") ? cmd = "" : cmd + " "
       end
       @rails_commands << splitted_commands.join("")
+
     end
     @rails_commands
   end
@@ -430,7 +442,11 @@ class ProjectsController < ApplicationController
       if singular_table_name == @devise_model
         command = "devise #{singular_table_name} "
       else
-        command = "model #{singular_table_name} "
+        if @scaffold_models.include?(singular_table_name)
+          command = "scaffold #{singular_table_name} "
+        else
+          command = "model #{singular_table_name} "
+        end
       end
 
       table[:columns].each do |column|
@@ -471,10 +487,13 @@ class ProjectsController < ApplicationController
     @commands
   end
 
-
   ##########################################
   # templates
   ##########################################
+
+  def check_scaffold(params)
+    @scaffold_models = params.scan(/&s-([^&\z]+)/).flatten.compact
+  end
 
   def heroku_commands
     if @heroku == true
