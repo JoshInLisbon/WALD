@@ -96,6 +96,16 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 }
 
 
+.template-option-div {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.template-option-span {
+  display: inline-block;
+  margin-right: 18px;
+}
+
 .d-flex-for-devise {
   display: inline-block;
 }
@@ -109,39 +119,61 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   display: inline-block;
 }
 
-.devise-span {
-  display: inline-block;
-  margin-right: 2.5%;
-}
 
-.github-span {
-  display: inline-block;
-  margin-right: 2.5%;
-}
 
-.heroku-span {
-  display: inline-block;
-  margin-right: 2.5%;
-}
+// .devise-span {
+//   display: inline-block;
+//   margin-right: 2.5%;
+// }
+
+// .github-span {
+//   display: inline-block;
+//   margin-right: ;
+// }
+
+// .heroku-span {
+//   display: inline-block;
+//   margin-right: 2.5%;
+// }
 
 .devise-for-span {
   margin-right: 9px;
 }
 
-.devise-checkbox {
+.show-page-checkbox {
   display: inline-block;
-  margin-top: -2px
+  margin-top: -2px;
+  margin-left: 8px;
 }
 
-.github-checkbox {
+.scaffold-template-option-span {
   display: inline-block;
-  margin-top: -2px
+  margin-right: 10px;
 }
 
-.heroku-checkbox {
-  display: inline-block;
-  margin-top: -2px
-}
+// .devise-checkbox {
+//   display: inline-block;
+//   margin-top: -2px;
+//   margin-left: 8px;
+// }
+
+// .wald-checkbox {
+//   display: inline-block;
+//   margin-top: -2px;
+//   margin-left: 8px;
+// }
+
+// .github-checkbox {
+//   display: inline-block;
+//   margin-top: -2px;
+//   margin-left: 8px;
+// }
+
+// .heroku-checkbox {
+//   display: inline-block;
+//   margin-top: -2px;
+//   margin-left: 8px;
+// }
 
 .devise-selector {
   display: inline-block;
@@ -154,7 +186,9 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   margin-top: -7px;
 }
 
-
+.scaffold-span {
+  margin-right: 8px;
+}
 
 
 
