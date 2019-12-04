@@ -10,19 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_28_102937) do
+ActiveRecord::Schema.define(version: 2019_12_04_114014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "app_files", force: :cascade do |t|
-    t.string "name"
-    t.text "content"
-    t.string "path"
+  create_table "commands", force: :cascade do |t|
+    t.text "cmd_string"
     t.bigint "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["project_id"], name: "index_app_files_on_project_id"
+    t.index ["project_id"], name: "index_commands_on_project_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -44,19 +42,19 @@ ActiveRecord::Schema.define(version: 2019_11_28_102937) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.string "provider"
     t.string "uid"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.integer "sign_in_count", default: 0, null: false
     t.string "name"
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "app_files", "projects"
+  add_foreign_key "commands", "projects"
   add_foreign_key "projects", "users"
 end
