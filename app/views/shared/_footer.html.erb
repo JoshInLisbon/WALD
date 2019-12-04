@@ -1,12 +1,16 @@
-<div class="footer border-top">
-  <div class="footer-links">
-    <a href="#" class="a1"><i class="fab fa-github"></i></a>
-    <a href="mailto:waldevelopers@gmail.com"  class="a2"><i class="fas fa-envelope"></i></a>
-    <a href="mailto:waldevelopers@gmail.com" class="a3" ><strong>Hire Us</strong></a>
-  </div>
+<% unless controller_name == "sessions" && action_name == "new" %>
+  <div class="footer border-top">
+    <div class="footer-links">
+      <a href="#" class="a1"><i class="fab fa-github"></i></a>
+      <a href="mailto:waldevelopers@gmail.com"  class="a2"><i class="fas fa-envelope"></i></a>
+      <a href="mailto:waldevelopers@gmail.com" class="a3" ><strong>Hire Us</strong></a>
+    </div>
 
-  <div class="footer-copyright">
-   <i class="far fa-copyright"></i> WALD, 2019
+    <div class="footer-copyright">
+     <i class="far fa-copyright"></i> WALD, 2019
+    </div>
   </div>
-</div>
+<% end %>
+
+
 
