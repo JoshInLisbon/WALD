@@ -11,10 +11,12 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
 
-  <body>
+  <body class="<%= controller_name %>-<%= action_name %>">
+    <% unless controller_name == "sessions" && action_name == "new" %>
     <div class="navbar-div <%= controller_name == 'pages' && action_name == 'home' ? 'navbar-transparent' : 'navbar-padding-class' %>">
       <%= render 'shared/navbar' %>
     </div>
+    <% end %>
     <div class="content-div <%= controller_name %>-<%= action_name %>">
       <%= render 'shared/flashes' %>
       <%= yield %>

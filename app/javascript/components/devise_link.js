@@ -65,11 +65,42 @@ const checkBoxes = () => {
       }
       if (box.checked) {
         checkBoxArray.push(checked);
-        console.log(checkBoxArray);
         let codeCommand = codeInputCommand.value;
         const regex = /(\/templat[^\s]+)/
         let match = codeCommand.match(regex)
         codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+        if (checked == '&devise') {
+          if(document.querySelector(`[data-target="&s-user"]`)) {
+            // document.querySelector(`[data-color="&s-user"]`).remove();
+            document.querySelector(`[data-color="&s-user"]`).style = "display: none;";
+            document.querySelector('[data-target="&s-user"]').classList.remove("scaffold-checkbox");
+            if(checkBoxArray.includes('&s-user')) {
+              let index = checkBoxArray.indexOf('&s-user');
+              checkBoxArray.splice(index, 1);
+              let match = codeCommand.match(regex);
+              codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+            }
+          }
+        }
+        if (checked == '&s-all') {
+          document.querySelector(`[data-color="&s-all"]`).classList.toggle("s-all-color-selected");
+          const allScaffoldCheckBoxes = document.querySelectorAll('.scaffold-checkbox');
+          let index = checkBoxArray.indexOf(checked)
+          checkBoxArray.splice(index, 1)
+          allScaffoldCheckBoxes.forEach ((sBox, i) => {
+              setTimeout(() => {
+                sBox.checked = true;
+                document.querySelector(`[data-color="${sBox.dataset.target}"]`).className += " s-color-selected";
+                checkBoxArray.push(sBox.dataset.target);
+                let match = codeCommand.match(regex)
+                codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+              }, 50 + (i * (50)))
+          });
+        }
+        if (document.querySelector(`[data-color="${box.dataset.target}"]`)) {
+          document.querySelector(`[data-color="${box.dataset.target}"]`).classList.toggle("s-color-selected");
+        }
+
       }
       else {
         let index = checkBoxArray.indexOf(checked)
@@ -78,7 +109,36 @@ const checkBoxes = () => {
         const regex = /(\/templat[^\s]+)/
         let match = codeCommand.match(regex)
         codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
-        console.log(checkBoxArray);
+        if (checked == '&devise') {
+          if(document.querySelector(`[data-target="&s-user"]`)) {
+            // document.querySelector(`[data-color="&s-user"]`).remove();
+            document.querySelector(`[data-color="&s-user"]`).style = "display: inline-block;";
+            document.querySelector('[data-target="&s-user"]').className += " scaffold-checkbox";
+            // if(checkBoxArray.includes('&s-user')) {
+            //   let index = checkBoxArray.indexOf('&s-user');
+            //   checkBoxArray.splice(index, 1);
+            //   let match = codeCommand.match(regex);
+            //   codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+            // }
+          }
+        }
+        if (checked == '&s-all') {
+          document.querySelector(`[data-color="&s-all"]`).classList.toggle("s-all-color-selected");
+          const allScaffoldCheckBoxes = document.querySelectorAll('.scaffold-checkbox');
+          allScaffoldCheckBoxes.forEach ((sBox, i) => {
+              setTimeout(() => {
+                sBox.checked = false;
+                document.querySelector(`[data-color="${sBox.dataset.target}"]`).classList.remove("s-color-selected");
+                let index = checkBoxArray.indexOf(sBox.dataset.target)
+                checkBoxArray.splice(index, 1)
+                let match = codeCommand.match(regex)
+                codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+              }, 50 + (i * (50)))
+          });
+        }
+        if (document.querySelector(`[data-color="${box.dataset.target}"]`)) {
+          document.querySelector(`[data-color="${box.dataset.target}"]`).classList.toggle("s-color-selected");
+        }
       }
     });
   });

@@ -62,6 +62,7 @@ class ProjectsController < ApplicationController
     check_github(params[:all_params])
     check_heroku(params[:all_params])
     check_scaffold(params[:all_params])
+    check_seed(params[:all_params])
     if @devise == true
       @devise_model = "user"
       devise_parse_xml(xml_string)
@@ -150,15 +151,17 @@ class ProjectsController < ApplicationController
     model_names = []
 
     tables.each do |table|
-      if table[:table_name].length <= 1
-        model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
-      elsif table[:table_name].chars.last(3).join == "ies"
-        model_names << "#{table[:table_name][0..-4]}y".gsub(/\s+/m, '_').downcase
-      elsif table[:table_name].chars.last == "s"
-        model_names << "#{table[:table_name][0..-2]}".gsub(/\s+/m, '_').downcase
-      else
-        model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
-      end
+      # if table[:table_name].length <= 1
+      #   model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
+      # elsif table[:table_name].chars.last(3).join == "ies"
+      #   model_names << "#{table[:table_name][0..-4]}y".gsub(/\s+/m, '_').downcase
+      # elsif table[:table_name].chars.last == "s"
+      #   model_names << "#{table[:table_name][0..-2]}".gsub(/\s+/m, '_').downcase
+      # else
+      #   model_names << "#{table[:table_name]}".gsub(/\s+/m, '_').downcase
+      # end
+
+      model_names << "#{table[:table_name].singularize}".gsub(/\s+/m, '_').downcase
     end
 
     model_names
@@ -241,17 +244,19 @@ class ProjectsController < ApplicationController
     @commands = []
 
     @tables_arr.each do |table|
-      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+      table_name = table[:table_name].singularize.gsub(/\s+/m, '_').downcase
 
-      if table_name.length <= 1
-        command = "rails g model #{table_name} "
-      elsif table_name.chars.last(3).join == "ies"
-        command = "rails g model #{table_name[0..-4]}y "
-      elsif table_name.chars.last == "s"
-        command = "rails g model #{table_name[0..-2]} "
-      else
-        command = "rails g model #{table_name} "
-      end
+      # if table_name.length <= 1
+      #   command = "rails g model #{table_name} "
+      # elsif table_name.chars.last(3).join == "ies"
+      #   command = "rails g model #{table_name[0..-4]}y "
+      # elsif table_name.chars.last == "s"
+      #   command = "rails g model #{table_name[0..-2]} "
+      # else
+      #   command = "rails g model #{table_name} "
+      # end
+
+      command = "rails g model #{table_name} "
 
       table[:columns].each do |column|
         next if column[:column_name] == "id"
@@ -263,17 +268,20 @@ class ProjectsController < ApplicationController
 
         if column[:fk] == true
           column[:relations].each do |relation|
-            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+            relation_table_name = relation[:relation_table].singularize.gsub(/\s+/m, '_').downcase
 
-            if relation_table_name.length <= 1
-              command += " #{relation_table_name}:references"
-            elsif relation_table_name.chars.last(3).join == "ies"
-              command += " #{relation_table_name[0..-4]}y:references"
-            elsif relation_table_name.chars.last == "s"
-              command += " #{relation_table_name[0..-2]}:references"
-            else
-              command += " #{relation_table_name}:references"
-            end
+            # if relation_table_name.length <= 1
+            #   command += " #{relation_table_name}:references"
+            # elsif relation_table_name.chars.last(3).join == "ies"
+            #   command += " #{relation_table_name[0..-4]}y:references"
+            # elsif relation_table_name.chars.last == "s"
+            #   command += " #{relation_table_name[0..-2]}:references"
+            # else
+            #   command += " #{relation_table_name}:references"
+            # end
+
+            command += " #{relation_table_name}:references"
+
           end
         end
       end
@@ -292,17 +300,17 @@ class ProjectsController < ApplicationController
     @rails_commands = []
 
     @tables_arr.each do |table|
-      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+      singular_table_name = table[:table_name].singularize.gsub(/\s+/m, '_').downcase
 
-      if table_name.length <= 1
-        singular_table_name = "#{table_name}"
-      elsif table_name.chars.last(3).join == "ies"
-        singular_table_name = "#{table_name[0..-4]}y"
-      elsif table_name.chars.last == "s"
-        singular_table_name = "#{table_name[0..-2]}"
-      else
-        singular_table_name = "#{table_name}"
-      end
+      # if table_name.length <= 1
+      #   singular_table_name = "#{table_name}"
+      # elsif table_name.chars.last(3).join == "ies"
+      #   singular_table_name = "#{table_name[0..-4]}y"
+      # elsif table_name.chars.last == "s"
+      #   singular_table_name = "#{table_name[0..-2]}"
+      # else
+      #   singular_table_name = "#{table_name}"
+      # end
 
       if @scaffold_models.present?
         if @scaffold_models.include?(singular_table_name)
@@ -324,17 +332,32 @@ class ProjectsController < ApplicationController
 
         if column[:fk] == true
           column[:relations].each do |relation|
-            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
 
-            if relation_table_name.length <= 1
-              command += " #{relation_table_name}:references"
-            elsif relation_table_name.chars.last(3).join == "ies"
-              command += " #{relation_table_name[0..-4]}y:references"
-            elsif relation_table_name.chars.last == "s"
-              command += " #{relation_table_name[0..-2]}:references"
-            else
-              command += " #{relation_table_name}:references"
-            end
+            relation_table_name = relation[:relation_table].singularize.gsub(/\s+/m, '_').downcase
+
+            # if relation_table_name.length <= 1
+            #   command += " #{relation_table_name}:references"
+            # elsif relation_table_name.chars.last(3).join == "ies"
+            #   command += " #{relation_table_name[0..-4]}y:references"
+            # elsif relation_table_name.chars.last == "s"
+            #   command += " #{relation_table_name[0..-2]}:references"
+            # else
+            #   command += " #{relation_table_name}:references"
+            # end
+
+            command += " #{relation_table_name}:references"
+
+            # relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+
+            # if relation_table_name.length <= 1
+            #   command += " #{relation_table_name}:references"
+            # elsif relation_table_name.chars.last(3).join == "ies"
+            #   command += " #{relation_table_name[0..-4]}y:references"
+            # elsif relation_table_name.chars.last == "s"
+            #   command += " #{relation_table_name[0..-2]}:references"
+            # else
+            #   command += " #{relation_table_name}:references"
+            # end
           end
         end
       end
@@ -353,6 +376,7 @@ class ProjectsController < ApplicationController
       "generate '#{command}'"
     end
     array.join("\n")
+
   end
 
   def check_devise(params)
@@ -376,6 +400,14 @@ class ProjectsController < ApplicationController
       @github = true
     else
       @github = false
+    end
+  end
+
+  def check_seed(params)
+    if params.match("&seed")
+      @seed = true
+    else
+      @seed = false
     end
   end
 
@@ -439,17 +471,17 @@ class ProjectsController < ApplicationController
     @commands = []
 
     @tables_arr.each do |table|
-      table_name = table[:table_name].gsub(/\s+/m, '_').downcase
+      singular_table_name = table[:table_name].singularize.gsub(/\s+/m, '_').downcase
 
-      if table_name.length <= 1
-        singular_table_name = "#{table_name}"
-      elsif table_name.chars.last(3).join == "ies"
-        singular_table_name = "#{table_name[0..-4]}y"
-      elsif table_name.chars.last == "s"
-        singular_table_name = "#{table_name[0..-2]}"
-      else
-        singular_table_name = "#{table_name}"
-      end
+      # if table_name.length <= 1
+      #   singular_table_name = "#{table_name}"
+      # elsif table_name.chars.last(3).join == "ies"
+      #   singular_table_name = "#{table_name[0..-4]}y"
+      # elsif table_name.chars.last == "s"
+      #   singular_table_name = "#{table_name[0..-2]}"
+      # else
+      #   singular_table_name = "#{table_name}"
+      # end
 
       if singular_table_name == @devise_model
         command = "devise #{singular_table_name} "
@@ -474,17 +506,31 @@ class ProjectsController < ApplicationController
 
         if column[:fk] == true
           column[:relations].each do |relation|
-            relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
+            # relation_table_name = relation[:relation_table].gsub(/\s+/m, '_').downcase
 
-            if relation_table_name.length <= 1
-              command += " #{relation_table_name}:references"
-            elsif relation_table_name.chars.last(3).join == "ies"
-              command += " #{relation_table_name[0..-4]}y:references"
-            elsif relation_table_name.chars.last == "s"
-              command += " #{relation_table_name[0..-2]}:references"
-            else
-              command += " #{relation_table_name}:references"
-            end
+            # if relation_table_name.length <= 1
+            #   command += " #{relation_table_name}:references"
+            # elsif relation_table_name.chars.last(3).join == "ies"
+            #   command += " #{relation_table_name[0..-4]}y:references"
+            # elsif relation_table_name.chars.last == "s"
+            #   command += " #{relation_table_name[0..-2]}:references"
+            # else
+            #   command += " #{relation_table_name}:references"
+            # end
+
+            relation_table_name = relation[:relation_table].singularize.gsub(/\s+/m, '_').downcase
+
+            # if relation_table_name.length <= 1
+            #   command += " #{relation_table_name}:references"
+            # elsif relation_table_name.chars.last(3).join == "ies"
+            #   command += " #{relation_table_name[0..-4]}y:references"
+            # elsif relation_table_name.chars.last == "s"
+            #   command += " #{relation_table_name[0..-2]}:references"
+            # else
+            #   command += " #{relation_table_name}:references"
+            # end
+
+            command += " #{relation_table_name}:references"
           end
         end
       end
@@ -553,6 +599,7 @@ class ProjectsController < ApplicationController
     gem 'simple_form'
     gem 'uglifier'
     gem 'webpacker'
+    gem 'faker'
 
     group :development do
       gem 'web-console', '>= 3.3.0'
@@ -714,6 +761,19 @@ class ProjectsController < ApplicationController
       #{models_without_pages}
       HTML
 
+      # Seeds
+      ########################################
+      run 'rm db/seeds.rb'
+      file 'db/seeds.rb', <<-RUBY
+
+      # This file should contain all the record creation needed to seed the database with its default values.
+      # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+      #
+      # The seeds below were created by WALD (We Are Lazy Developers)
+      #{seed_models}
+      RUBY
+      #{"rails_command 'db:seed'" if @seed == true}
+
       # Git
       ########################################
       git :init
@@ -785,6 +845,7 @@ class ProjectsController < ApplicationController
     gem 'simple_form'
     gem 'uglifier'
     gem 'webpacker'
+    gem 'faker'
 
     group :development do
       gem 'web-console', '>= 3.3.0'
@@ -1004,6 +1065,19 @@ class ProjectsController < ApplicationController
       #{models_without_pages}
       HTML
 
+      # Seeds
+      ########################################
+      run 'rm db/seeds.rb'
+      file 'db/seeds.rb', <<-RUBY
+
+      # This file should contain all the record creation needed to seed the database with its default values.
+      # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+      #
+      # The seeds below were created by WALD (We Are Lazy Developers)
+      #{seed_models}
+      RUBY
+      #{"rails_command 'db:seed'" if @seed == true}
+
       # Git
       ########################################
       git :init
@@ -1080,5 +1154,88 @@ class ProjectsController < ApplicationController
       end
     end
     no_indexes_array.join("\n")
+  end
+
+  ##########################################
+  # seeds
+  ##########################################
+
+  def seed_models
+    @tables_arr
+    if @seed = true
+      no_space_model_names
+      seeds_array = []
+      @tables_arr.each do |table|
+        seeds_array << "10.times do"
+        seeds_array << "#{table[:table_name].singularize.gsub(/_/m, ' ').split.map(&:capitalize).join('')}.create("
+        table[:columns].each_with_index do |column, i|
+          unless column[:column_name] == "id"
+            if column[:column_name].match(/(.+)_id/i)
+              @no_space_model_names_arr.each do |n_s_col|
+                if n_s_col.casecmp(column[:column_name].match(/(.+)_id/i)[1]) == 0
+                  string_arr = []
+                  n_s_col.scan(/([A-Z][a-z]*)/).each do |word|
+                    string_arr << word
+                  end
+                  string_arr << 'id'
+                  @adjusted_col_name = string_arr.flatten.join('_').downcase
+                end
+              end
+            else
+              @adjusted_col_name = column[:column_name]
+            end
+            seeds_array << "#{@adjusted_col_name}: #{seed_data_type(column[:data_type], column[:column_name])} #{i + 1 < table[:columns].length ? ',' : ''}"
+          end
+        end
+        seeds_array << ')'
+        seeds_array << "end"
+      end
+    end
+    seeds_array.join("\n")
+  end
+
+  def no_space_model_names
+    @no_space_model_names_arr = []
+    @project.models.each do |model|
+      @no_space_model_names_arr << model.gsub(/_/m, ' ').split.map(&:capitalize).join('')
+    end
+    @no_space_model_names_arr
+  end
+
+  def seed_data_type(data_type, column_name)
+    case data_type
+    when :integer
+      'rand(1..10)'
+    when :decimal
+      'rand()'
+    when :string
+      if column_name == "image" || column_name == "photo"
+        'Faker::LoremPixel.image(size: "500x500")'
+      elsif column_name == "password"
+        '"password"'
+      elsif column_name == "email"
+        'Faker::Internet.email'
+      elsif column_name == "name"
+        'Faker::Name.unique.name'
+      elsif column_name == "address"
+        'Faker::Address.full_address'
+      else
+        'Faker::Lorem.sentence(word_count: #{rand(2..8)})'
+      end
+    when :text
+      'Faker::Lorem.paragraph(sentence_count: 8)'
+    when :binary
+      '[0, 1].sample'
+    when :boolean
+      '[true, false].sample'
+    when :date
+      'rand(Time.now.to_date..(Time.now.to_date + 365))'
+    when :time
+      'rand(Time.now..(Time.now + 60 * 60 * 24))'
+    when :timestamp
+      'rand(Time.now..(Time.now + 60 * 60 * 24))'
+    when :datetime
+      'rand(Time.now..(Time.now + 60 * 60 * 24))'
+    end
   end
 end
