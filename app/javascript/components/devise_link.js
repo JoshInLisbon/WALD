@@ -71,9 +71,10 @@ const checkBoxes = () => {
         codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
         if (checked == '&devise') {
           if(document.querySelector(`[data-target="&s-user"]`)) {
-            // document.querySelector(`[data-color="&s-user"]`).remove();
             document.querySelector(`[data-color="&s-user"]`).style = "display: none;";
+            document.querySelector('[data-color="&s-user"]').classList.remove("s-color-selected");
             document.querySelector('[data-target="&s-user"]').classList.remove("scaffold-checkbox");
+            document.querySelector('[data-target="&s-user"]').checked = false;
             if(checkBoxArray.includes('&s-user')) {
               let index = checkBoxArray.indexOf('&s-user');
               checkBoxArray.splice(index, 1);
@@ -104,35 +105,48 @@ const checkBoxes = () => {
       }
       else {
         let index = checkBoxArray.indexOf(checked)
-        checkBoxArray.splice(index, 1)
+        if (index > 0) {
+          checkBoxArray.splice(index, 1)
+        }
         let codeCommand = codeInputCommand.value;
         const regex = /(\/templat[^\s]+)/
         let match = codeCommand.match(regex)
         codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
         if (checked == '&devise') {
+          console.log("hello");
           if(document.querySelector(`[data-target="&s-user"]`)) {
-            // document.querySelector(`[data-color="&s-user"]`).remove();
             document.querySelector(`[data-color="&s-user"]`).style = "display: inline-block;";
             document.querySelector('[data-target="&s-user"]').className += " scaffold-checkbox";
-            // if(checkBoxArray.includes('&s-user')) {
-            //   let index = checkBoxArray.indexOf('&s-user');
-            //   checkBoxArray.splice(index, 1);
-            //   let match = codeCommand.match(regex);
-            //   codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
-            // }
           }
+          let index = checkBoxArray.indexOf(checked)
+          console.log(index);
+          if (index >= 0) {
+            checkBoxArray.splice(index, 1)
+            let match = codeCommand.match(regex)
+            codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+          }
+          // let codeCommand = codeInputCommand.value;
+          // const regex = /(\/templat[^\s]+)/
+          // let match = codeCommand.match(regex)
+          // codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
         }
         if (checked == '&s-all') {
           document.querySelector(`[data-color="&s-all"]`).classList.toggle("s-all-color-selected");
           const allScaffoldCheckBoxes = document.querySelectorAll('.scaffold-checkbox');
+          console.log(allScaffoldCheckBoxes);
           allScaffoldCheckBoxes.forEach ((sBox, i) => {
               setTimeout(() => {
                 sBox.checked = false;
                 document.querySelector(`[data-color="${sBox.dataset.target}"]`).classList.remove("s-color-selected");
                 let index = checkBoxArray.indexOf(sBox.dataset.target)
-                checkBoxArray.splice(index, 1)
-                let match = codeCommand.match(regex)
-                codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+                console.log(checkBoxArray.indexOf(sBox.dataset.target))
+                console.log(sBox.dataset.target);
+                if (index >= 0) {
+                  checkBoxArray.splice(index, 1)
+                  let match = codeCommand.match(regex)
+                  console.log(checkBoxArray);
+                  codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+                }
               }, 50 + (i * (50)))
           });
         }
