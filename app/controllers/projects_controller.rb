@@ -353,6 +353,7 @@ class ProjectsController < ApplicationController
       "generate '#{command}'"
     end
     array.join("\n")
+
   end
 
   def check_devise(params)
@@ -1050,6 +1051,10 @@ class ProjectsController < ApplicationController
       puts '☎️ - Hire us: waldevelopers@gmail.com'
     end"
   end
+
+  #################################
+# method to generate Scaffold
+  #################################
 
   def pages_in_your_app
     indexes_array = []
