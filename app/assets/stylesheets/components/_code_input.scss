@@ -25,11 +25,7 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   margin-left: -8px;
 }
 
-.scaffold-template-option-span {
-  display: inline-block;
-  margin-right: 9px;
-  margin-left: 9px;
-}
+
 
 .scaffold-title-template-option-span {
   display: inline-block;
@@ -166,8 +162,15 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 .scaffold-template-option-span {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-left: 9px;
 }
+
+// .scaffold-template-option-span {
+//   display: inline-block;
+
+//   margin-left: 9px;
+// }
 
 // .devise-checkbox {
 //   display: inline-block;
@@ -210,10 +213,27 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   padding: 10px 0px 0px 10px;
 }
 
+.scaffold-checkbox-div {
+  padding: 4px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  margin-top: -5px;
+  margin-right: 8px;
+  margin-bottom: 14px;
+  color: #919294;
+}
+
+.s-color-selected {
+  // border: 1px solid rgb(255, 95, 63);
+  border: 1px solid $purple;
+  color: $dark-gray;
+}
 
 
-
-
+.s-all-color-selected {
+  color: $dark-gray;
+  border: 1px solid rgb(255, 95, 63);
+}
 
 
 
