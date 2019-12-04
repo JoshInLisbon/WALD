@@ -39,6 +39,28 @@
 
 <p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
 
+
+<div class="code-block">
+  <div class="code-row">
+    <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-command"></i></div>
+    <textarea class="code-input" rows="5" cols="50" id="code-input-command" spellcheck="false">
+rails new \
+  --database postgresql \
+  --webpack \
+  -m <%= project_template_url(@project) %> \
+  <%= @project.name.gsub(/\s+/m, '_').downcase %>
+    </textarea>
+  </div>
+</div>
+
+
+<p>
+  <strong>
+    Customise
+  </strong>
+</p>
+
+
 <div class="customise-options-div">
 
     <div class="d-flex template-option-div">
@@ -102,19 +124,6 @@
 
 
 
-</div>
-
-<div class="code-block">
-  <div class="code-row">
-    <div class="code-copy-icon"><i class="fas fa-copy" data-target="code-input-command"></i></div>
-    <textarea class="code-input" rows="5" cols="50" id="code-input-command" spellcheck="false">
-rails new \
-  --database postgresql \
-  --webpack \
-  -m <%= project_template_url(@project) %> \
-  <%= @project.name.gsub(/\s+/m, '_').downcase %>
-    </textarea>
-  </div>
 </div>
 
 <div class="my-4 border-bottom"></div>
