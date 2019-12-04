@@ -37,7 +37,8 @@ const copyToClipboard = () => {
         // selects the content of the text in the text area / input where there is the stuff I want to copy
         commadToCpy.select()
         // change the style of it (the coloured background)
-        commadToCpy.style = "color: #6C72FA; outline: none;"
+        // commadToCpy.style = "color: #6C72FA; outline: none;"
+        commadToCpy.className += " code-has-been-coppied";
         // copies the selected text
         document.execCommand("copy")
       }
