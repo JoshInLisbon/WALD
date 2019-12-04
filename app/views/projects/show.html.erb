@@ -144,11 +144,11 @@ rails new \
 
   <p><strong>Your XML File</strong></p>
   <p>Here you can check your XML schema and update it.</p>
-  <div class="code-block code-xmlfile">
+  <div class="code-block code-xmlfile d-flex">
   <div class="code-row">
     <div class="code-copy-icon"><i class="fas fa-copy" data-target="XML-input-command"></i></div>
-      <%= simple_form_for @project do |f| %>
-        <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "131.5", spellcheck: "false" %>
+      <%= simple_form_for @project, html: { class: "show-xml-form"} do |f| %>
+        <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "50", spellcheck: "false" %>
         <%= f.submit 'Update XML', class: "btn btn convert-now-button hvr-grow my-3" %>
       <% end %>
     </div>

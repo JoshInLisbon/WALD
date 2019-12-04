@@ -41,6 +41,11 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 .code-row {
   display: flex;
+  width: 100%;
+}
+
+.show-xml-form {
+  width: 100%;
 }
 
 
@@ -51,6 +56,7 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 #XML-input-command {
   height: 435px;
+  width: 100%;
 }
 
 // .code-input-big {
