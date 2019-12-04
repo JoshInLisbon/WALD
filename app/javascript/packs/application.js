@@ -19,7 +19,6 @@ if(projectShow) {
   // githubCheckbox();
   checkBoxes();
   alertsInfo();
-
 }
 
 const projectIndex = document.querySelector(".projects-index");
