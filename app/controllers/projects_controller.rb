@@ -1189,6 +1189,17 @@ class ProjectsController < ApplicationController
                   @adjusted_col_name = string_arr.flatten.join('_').downcase
                 end
               end
+            elsif column[:column_name].match(/id_(.+)/i)
+              @no_space_model_names_arr.each do |n_s_col|
+                if n_s_col.casecmp(column[:column_name].match(/id_(.+)/i)[1]) == 0
+                  string_arr = []
+                  n_s_col.scan(/([A-Z][a-z]*)/).each do |word|
+                    string_arr << word
+                  end
+                  string_arr << 'id'
+                  @adjusted_col_name = string_arr.flatten.join('_').downcase
+                end
+              end
             else
               @adjusted_col_name = column[:column_name]
             end
