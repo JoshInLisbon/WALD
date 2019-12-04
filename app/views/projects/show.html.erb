@@ -29,73 +29,80 @@
 <div class="mb-4 mt-2 border-bottom"></div>
 
 
-<p><strong>Create a Rails project</strong></p>
-<div class="d-flex" style="margin-bottom: 15px;">
-<p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
+
+<div class="d-flex">
+  <p><strong>Create a Rails project</strong></p>
   <div class="flex-grow-1"></div>
     <button class="align-items-center pulsate-bck" data-toggle="modal" data-target="#exampleModalCenter">Understand your template</button>
   </div>
 
 
-  <div class="d-flex template-option-div">
-   <span class="template-option-span">Create repository on <strong>Github</strong>?</span>
-     <div class="github-checkbox show-page-checkbox">
-       <input data-target="&github" type="checkbox" class="form-check-input wald-checkbox" id="github_checkbox">
-     </div>
-  </div>
+<p>This command generates a new Rails project in a directory named '<%= @project.name.gsub(/\s+/m, '_').downcase %>'. </p>
 
-   <div class="d-flex template-option-div">
-     <span class="template-option-span">Deploy to <strong>Heroku</strong>?</span>
-       <div class="heroku-checkbox show-page-checkbox">
-         <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
+<div class="customise-options-div">
+
+    <div class="d-flex template-option-div">
+     <span class="template-option-span">Create repository on <strong>Github</strong>?</span>
+       <div class="github-checkbox show-page-checkbox">
+         <input data-target="&github" type="checkbox" class="form-check-input wald-checkbox" id="github_checkbox">
        </div>
     </div>
 
-<div class="d-flex template-option-div">
-  <span class="template-option-span"><strong>Devise</strong> for user model?</span>
-    <div class="devise-checkbox show-page-checkbox">
-      <input type="checkbox" data-target="&devise" class="form-check-input wald-checkbox" id="devise_checkbox">
-    </div>
-    <span class="d-flex devise-hidden" id="devise_show_hide_span">
-      <span class="devise-for-span">
-        <% if @project.models.include?("user") %>
-          Devise will be applied to your 'user' model.
-        <% else %>
-          <span style="color: rgb(255, 95, 63)">You do not have a 'user' model.</span> A user model will be created for you if you select devise.
-        <% end %>
+     <div class="d-flex template-option-div">
+       <span class="template-option-span">Deploy to <strong>Heroku</strong>?</span>
+         <div class="heroku-checkbox show-page-checkbox">
+           <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
+         </div>
+      </div>
+
+      <div class="d-flex template-option-div">
+       <span class="template-option-span"><strong>Seed</strong> your models?</span>
+         <div class="seed-checkbox show-page-checkbox">
+           <input data-target="&seed" type="checkbox" class="form-check-input wald-checkbox" id="seed_checkbox">
+         </div>
+      </div>
+
+  <div class="d-flex template-option-div">
+    <span class="template-option-span"><strong>Devise</strong> for user model?</span>
+      <div class="devise-checkbox show-page-checkbox">
+        <input type="checkbox" data-target="&devise" class="form-check-input wald-checkbox" id="devise_checkbox">
+      </div>
+      <span class="d-flex devise-hidden" id="devise_show_hide_span">
+        <span class="devise-for-span">
+          <% if @project.models.include?("user") %>
+            Devise will be applied to your 'user' model.
+          <% else %>
+            <span style="color: rgb(255, 95, 63)">You do not have a 'user' model.</span> A user model will be created for you if you select devise.
+          <% end %>
+        </span>
       </span>
-    </span>
- </div>
-
-
-
-<div class="d-flex flex-wrap template-option-div" style="margin-bottom: 0.2rem;">
-  <span class="scaffold-title-template-option-span"><span class="scaffold-span"><strong>Scaffold</strong> your models?</span></span>
-
-
-  <div class="scaffold-checkbox-div" data-color="&s-all">
-    <div class="heroku-checkbox show-page-checkbox">
-      <input data-target="&s-all" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox" id="s-all">
-    </div>
-    <span class="scaffold-template-option-span">all</span>
-  </div>
-  <% @project.models.each do |model| %>
-  <div class="scaffold-checkbox-div" data-color="&s-<%= model %>">
-    <div class="heroku-checkbox show-page-checkbox">
-      <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox scaffold-checkbox" id="s-<%= model %>">
-    </div>
-    <span class="scaffold-template-option-span"><%= model %></span>
-  </div>
-  <% end %>
-</div>
-
-<div class="d-flex template-option-div">
- <span class="template-option-span"><strong>Seed</strong> your models?</span>
-   <div class="seed-checkbox show-page-checkbox">
-     <input data-target="&seed" type="checkbox" class="form-check-input wald-checkbox" id="seed_checkbox">
    </div>
-</div>
 
+
+  <span class="scaffold-title-template-option-span"><span class="scaffold-span"><strong>Scaffold</strong> your models?</span></span>
+  <div class="d-flex flex-wrap scaffold-template-option-div">
+    <!-- <span class="scaffold-title-template-option-span"><span class="scaffold-span"><strong>Scaffold</strong> your models?</span></span> -->
+
+
+    <div class="scaffold-checkbox-div" data-color="&s-all">
+      <div class="heroku-checkbox show-page-checkbox">
+        <input data-target="&s-all" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox" id="s-all">
+      </div>
+      <span class="scaffold-template-option-span">all</span>
+    </div>
+    <% @project.models.each do |model| %>
+    <div class="scaffold-checkbox-div" data-color="&s-<%= model %>">
+      <div class="heroku-checkbox show-page-checkbox">
+        <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox scaffold-checkbox" id="s-<%= model %>">
+      </div>
+      <span class="scaffold-template-option-span"><%= model %></span>
+    </div>
+    <% end %>
+  </div>
+
+
+
+</div>
 
 <div class="code-block">
   <div class="code-row">

@@ -20,6 +20,12 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   }
 }
 
+.customise-options-div {
+  background-color: $light-gray;
+  padding: 20px 30px;
+  margin-bottom: 1rem;
+}
+
 .in-div-wald-checkbox {
   margin-top: -13px;
   margin-left: -8px;
@@ -30,6 +36,7 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 .scaffold-title-template-option-span {
   display: inline-block;
   margin-right: 0px;
+  margin-bottom: 1rem;
 }
 
 .code-row {
@@ -110,9 +117,17 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 }
 
 
+
+
 .template-option-div {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed white;
+}
+
+.scaffold-template-option-div {
+  display: inline-block;
 }
 
 .template-option-span {
