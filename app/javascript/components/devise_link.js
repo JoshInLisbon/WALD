@@ -105,7 +105,7 @@ const checkBoxes = () => {
       }
       else {
         let index = checkBoxArray.indexOf(checked)
-        if (index > 0) {
+        if (index >= 0) {
           checkBoxArray.splice(index, 1)
         }
         let codeCommand = codeInputCommand.value;
@@ -188,5 +188,5 @@ const alertsInfo = () => {
 }
 
 
-export { alertsInfo }
+// export { alertsInfo }
 export { checkBoxes }
