@@ -1,0 +1,3 @@
+[submodule "public/wwwsqldesigner"]
+	path = public/wwwsqldesigner
+	url = git@github.com:ondras/wwwsqldesigner.git
