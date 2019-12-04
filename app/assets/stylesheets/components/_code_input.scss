@@ -1,7 +1,7 @@
 .code-block {
   background: #23241f;
   padding: 20px 30px;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 $highlight-col: rgba(235, 255, 238, 0.74);
@@ -20,24 +20,32 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   }
 }
 
+.customise-options-div {
+  background-color: $light-gray;
+  padding: 20px 30px;
+  margin-bottom: 1rem;
+}
+
 .in-div-wald-checkbox {
   margin-top: -13px;
   margin-left: -8px;
 }
 
-.scaffold-template-option-span {
-  display: inline-block;
-  margin-right: 9px;
-  margin-left: 9px;
-}
+
 
 .scaffold-title-template-option-span {
   display: inline-block;
   margin-right: 0px;
+  margin-bottom: 1rem;
 }
 
 .code-row {
   display: flex;
+  width: 100%;
+}
+
+.show-xml-form {
+  width: 100%;
 }
 
 
@@ -48,6 +56,7 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 #XML-input-command {
   height: 435px;
+  width: 100%;
 }
 
 // .code-input-big {
@@ -114,9 +123,17 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 }
 
 
+
+
 .template-option-div {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed white;
+}
+
+.scaffold-template-option-div {
+  display: inline-block;
 }
 
 .template-option-span {
@@ -166,8 +183,15 @@ $highlight-col: rgba(235, 255, 238, 0.74);
 
 .scaffold-template-option-span {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-left: 9px;
 }
+
+// .scaffold-template-option-span {
+//   display: inline-block;
+
+//   margin-left: 9px;
+// }
 
 // .devise-checkbox {
 //   display: inline-block;
@@ -210,13 +234,25 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   padding: 10px 0px 0px 10px;
 }
 
+.scaffold-checkbox-div {
+  padding: 4px;
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  margin-top: -5px;
+  margin-right: 8px;
+  margin-bottom: 14px;
+  color: #919294;
+}
+
+.s-color-selected {
+  // border: 1px solid rgb(255, 95, 63);
+  border: 1px solid $purple;
+  color: $dark-gray;
+}
 
 
-
-
-
-
-
-
-
+.s-all-color-selected {
+  color: $dark-gray;
+  border: 1px solid rgb(255, 95, 63);
+}
 
