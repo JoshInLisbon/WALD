@@ -69,12 +69,20 @@
 
 
 
-<div class="d-flex flex-wrap template-option-div">
+<div class="d-flex flex-wrap template-option-div" style="margin-bottom: 0.2rem;">
   <span class="scaffold-title-template-option-span"><span class="scaffold-span"><strong>Scaffold</strong> your models?</span></span>
-  <% @project.models.each do |model| %>
-  <div>
+
+
+  <div class="scaffold-checkbox-div" data-color="&s-all">
     <div class="heroku-checkbox show-page-checkbox">
-      <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox" id="s-<%= model %>">
+      <input data-target="&s-all" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox" id="s-all">
+    </div>
+    <span class="scaffold-template-option-span">all</span>
+  </div>
+  <% @project.models.each do |model| %>
+  <div class="scaffold-checkbox-div" data-color="&s-<%= model %>">
+    <div class="heroku-checkbox show-page-checkbox">
+      <input data-target="&s-<%= model %>" type="checkbox" class="form-check-input wald-checkbox in-div-wald-checkbox scaffold-checkbox" id="s-<%= model %>">
     </div>
     <span class="scaffold-template-option-span"><%= model %></span>
   </div>
