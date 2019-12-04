@@ -1051,6 +1051,10 @@ class ProjectsController < ApplicationController
     end"
   end
 
+  #################################
+# method to generate Scaffold
+  #################################
+
   def pages_in_your_app
     indexes_array = []
     if @scaffold_models.present?
