@@ -108,17 +108,36 @@ rails new \
 
   <div class="my-4 border-bottom"></div>
 
-  <p><strong>Your XML File</strong></p>
-  <p>Here you can check your XML schema and update it.</p>
-  <div class="code-block code-xmlfile">
-  <div class="code-row">
-    <div class="code-copy-icon"><i class="fas fa-copy" data-target="XML-input-command"></i></div>
-      <%= simple_form_for @project do |f| %>
-        <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "131.5", spellcheck: "false" %>
-        <%= f.submit 'Update XML', class: "btn btn convert-now-button hvr-grow my-3" %>
-      <% end %>
+        <p><strong>Your XML File</strong></p>
+        <p>Here you can check your XML schema and update it.</p>
+<button onclick="flip()">flip the card</button>
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+  function flip() {
+    $('.card').toggleClass('flipped');
+  }
+</script>
+<section class="xml-container">
+  <div class="card" onclick="flip()">
+    <div class="front">
+      <div class="card-flip">
+
+        <div class="code-block code-xmlfile">
+        <div class="code-row">
+          <div class="code-copy-icon"><i class="fas fa-copy" data-target="XML-input-command"></i>
+            <%= simple_form_for @project do |f| %>
+              <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "131.5", spellcheck: "false" %>
+              <%= f.submit 'Update XML', class: "btn btn convert-now-button hvr-grow my-3" %>
+            <% end %>
+        </div>
+        </div>
+      </div>
     </div>
+    <div class="back">VISUAL SCHEMA</div>
   </div>
+</section>
+
 
   <div class="share-link-mobile">
     <div class="my-4 border-bottom"></div>
