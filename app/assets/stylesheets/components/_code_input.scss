@@ -4,6 +4,19 @@
   margin-bottom: 1rem;
 }
 
+.code-block-commands {
+  background: #23241f;
+  padding: 20px 30px 0 30px;
+  margin-bottom: 1rem;
+}
+
+.code-has-been-coppied {
+  color: #6C72FA !important;
+  outline: none !important;
+}
+
+
+
 $highlight-col: rgba(235, 255, 238, 0.74);
 
 .code-input {

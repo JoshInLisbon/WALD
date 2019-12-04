@@ -95,13 +95,14 @@ const checkBoxes = () => {
                 checkBoxArray.push(sBox.dataset.target);
                 let match = codeCommand.match(regex)
                 codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
+                resizeBox();
               }, 50 + (i * (50)))
           });
         }
         if (document.querySelector(`[data-color="${box.dataset.target}"]`)) {
           document.querySelector(`[data-color="${box.dataset.target}"]`).classList.toggle("s-color-selected");
         }
-
+        resizeBox();
       }
       else {
         let index = checkBoxArray.indexOf(checked)
@@ -113,13 +114,11 @@ const checkBoxes = () => {
         let match = codeCommand.match(regex)
         codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
         if (checked == '&devise') {
-          console.log("hello");
           if(document.querySelector(`[data-target="&s-user"]`)) {
             document.querySelector(`[data-color="&s-user"]`).style = "display: inline-block;";
             document.querySelector('[data-target="&s-user"]').className += " scaffold-checkbox";
           }
           let index = checkBoxArray.indexOf(checked)
-          console.log(index);
           if (index >= 0) {
             checkBoxArray.splice(index, 1)
             let match = codeCommand.match(regex)
@@ -133,18 +132,14 @@ const checkBoxes = () => {
         if (checked == '&s-all') {
           document.querySelector(`[data-color="&s-all"]`).classList.toggle("s-all-color-selected");
           const allScaffoldCheckBoxes = document.querySelectorAll('.scaffold-checkbox');
-          console.log(allScaffoldCheckBoxes);
           allScaffoldCheckBoxes.forEach ((sBox, i) => {
               setTimeout(() => {
                 sBox.checked = false;
                 document.querySelector(`[data-color="${sBox.dataset.target}"]`).classList.remove("s-color-selected");
                 let index = checkBoxArray.indexOf(sBox.dataset.target)
-                console.log(checkBoxArray.indexOf(sBox.dataset.target))
-                console.log(sBox.dataset.target);
                 if (index >= 0) {
                   checkBoxArray.splice(index, 1)
                   let match = codeCommand.match(regex)
-                  console.log(checkBoxArray);
                   codeInputCommand.value = codeCommand.replace(regex, `/template/${checkBoxArray.join("")}`);
                 }
               }, 50 + (i * (50)))
@@ -158,6 +153,15 @@ const checkBoxes = () => {
   });
 }
 
+export const resizeBox = () => {
+  var scroll_height = $("#code-input-command").get(0).scrollHeight;
+  $("#code-input-command").css('height', scroll_height + 'px');
+}
+
+// export const resizeBox = () => {
+//   const inputCommandTA = document.querySelector('#code-input-command');
+//   console.log("hi!");
+// }
 
 
 // export { githubCheckbox }
@@ -187,6 +191,6 @@ const alertsInfo = () => {
   });
 }
 
-
+// export { resizeBox }
 // export { alertsInfo }
 export { checkBoxes }
