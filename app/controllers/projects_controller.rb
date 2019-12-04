@@ -739,6 +739,10 @@ class ProjectsController < ApplicationController
     JS
       end
 
+      # Building _index.html.erb if Scaffold
+      ########################################
+      #{alter_scaffold if @scaffold_models.any?}
+
       # Building your models
       #{ method(@rails_commands) }
       rails_command 'db:migrate'
@@ -982,6 +986,10 @@ class ProjectsController < ApplicationController
     .DS_Store
     TXT
 
+    # Building _index.html.erb if Scaffold
+    ########################################
+    #{alter_scaffold if @scaffold_models.any?}
+
     # Building your models (including devise model)
       # Devise install + user
       ########################################
@@ -1181,6 +1189,17 @@ class ProjectsController < ApplicationController
                   @adjusted_col_name = string_arr.flatten.join('_').downcase
                 end
               end
+            elsif column[:column_name].match(/id_(.+)/i)
+              @no_space_model_names_arr.each do |n_s_col|
+                if n_s_col.casecmp(column[:column_name].match(/id_(.+)/i)[1]) == 0
+                  string_arr = []
+                  n_s_col.scan(/([A-Z][a-z]*)/).each do |word|
+                    string_arr << word
+                  end
+                  string_arr << 'id'
+                  @adjusted_col_name = string_arr.flatten.join('_').downcase
+                end
+              end
             else
               @adjusted_col_name = column[:column_name]
             end
@@ -1189,6 +1208,11 @@ class ProjectsController < ApplicationController
         end
         seeds_array << ')'
         seeds_array << "end"
+        if table[:table_name].singularize.downcase == "user" && @devise == true
+          email_and_pw_check = seeds_array.join(" ").scan(/(email)|(password)/).flatten.compact
+          seeds_array.insert(-3, ", email: Faker::Internet.email") unless email_and_pw_check.include?("email")
+          seeds_array.insert(-3, ", password: 'password'") unless email_and_pw_check.include?("password")
+        end
       end
     end
     seeds_array.join("\n")
@@ -1237,5 +1261,69 @@ class ProjectsController < ApplicationController
     when :datetime
       'rand(Time.now..(Time.now + 60 * 60 * 24))'
     end
+  end
+
+  def alter_scaffold
+    "file 'lib/templates/erb/scaffold/index.html.erb', <<-HTML
+
+    <p id=\"notice\"><%%= notice %></p>
+
+    <h1><%= plural_table_name.downcase %></h1>
+
+    <table>
+      <thead>
+        <tr>
+          <% attributes.reject(&:password_digest?).each do |attribute| -%>
+            <th><%= attribute.human_name %></th>
+          <% end -%>
+          <th colspan=\"3\"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+          <tr>
+            <% attributes.reject(&:password_digest?).each do |attribute| -%>
+              <% if attribute.type == :references %>
+                <td><%%= link_to \"<%= attribute.name %>_\\\#{<%= singular_table_name %>.<%= attribute.column_name %>}\", <%= singular_table_name %>.<%= attribute.name %> %></td>
+              <% else %>
+                <td><%%= <%= singular_table_name %>.<%= attribute.column_name %> %></td>
+              <% end %>
+            <% end -%>
+            <td><%%= link_to 'Show', <%= model_resource_name %> %></td>
+            <td><%%= link_to 'Edit', edit_<%= singular_route_name %>_path(<%= singular_table_name %>) %></td>
+            <td><%%= link_to 'Destroy', <%= model_resource_name %>, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <%% end %>
+      </tbody>
+    </table>
+
+    <br>
+
+    <%%= link_to 'New <%= singular_table_name.titleize %>', new_<%= singular_route_name %>_path %>
+
+
+
+    HTML
+
+    file 'lib/templates/erb/scaffold/show.html.erb', <<-HTML
+    <p id=\"notice\"><%%= notice %></p>
+
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+    <p>
+      <strong><%= attribute.human_name %>:</strong>
+    <% if attribute.reference? -%>
+      <%%= link_to \"<%= attribute.name %>_\\\#{@<%= singular_table_name %>.<%= attribute.column_name %>}\", @<%= singular_table_name %>.<%= attribute.name %> %>
+    <% else -%>
+      <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
+    <% end -%>
+    </p>
+
+    <% end -%>
+    <%%= link_to 'Edit', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>) %> |
+    <%%= link_to 'Back', <%= index_helper %>_path %>
+
+    HTML
+    "
   end
 end
