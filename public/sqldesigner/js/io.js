@@ -6,7 +6,7 @@ SQL.IO = function(owner) {
 		container:OZ.$("io")
 	};
 
-	var ids = ["saveload","clientlocalsave", "clientsave", "clientlocalload", "clientlocallist","clientload", "clientsql", 
+	var ids = ["saveload","clientlocalsave", "clientsave", "clientlocalload", "clientlocallist","clientload", "clientsql",
 				"dropboxsave", "dropboxload", "dropboxlist",
 				"quicksave", "serversave", "serverload",
 				"serverlist", "serverimport"];
@@ -16,7 +16,7 @@ SQL.IO = function(owner) {
 		this.dom[id] = elm;
 		elm.value = _(id);
 	}
-	
+
 	this.dom.quicksave.value += " (F2)";
 
 	var ids = ["client","server","output","backendlabel"];
@@ -25,21 +25,21 @@ SQL.IO = function(owner) {
 		var elm = OZ.$(id);
 		elm.innerHTML = _(id);
 	}
-	
+
 	this.dom.ta = OZ.$("textarea");
 	this.dom.backend = OZ.$("backend");
 
-	/* init dropbox before hiding the container so it can adjust its buttons */	
+	/* init dropbox before hiding the container so it can adjust its buttons */
 	this.dropBoxInit();
 
 	this.dom.container.parentNode.removeChild(this.dom.container);
 	this.dom.container.style.visibility = "";
-	
+
 	this.saveresponse = this.saveresponse.bind(this);
 	this.loadresponse = this.loadresponse.bind(this);
 	this.listresponse = this.listresponse.bind(this);
 	this.importresponse = this.importresponse.bind(this);
-	
+
 	OZ.Event.add(this.dom.saveload, "click", this.click.bind(this));
 	OZ.Event.add(this.dom.clientlocalsave, "click", this.clientlocalsave.bind(this));
 	OZ.Event.add(this.dom.clientsave, "click", this.clientsave.bind(this));
@@ -98,7 +98,7 @@ SQL.IO.prototype.fromXMLText = function(xml) {
 		} else {
 			throw new Error("No XML parser available.");
 		}
-	} catch(e) { 
+	} catch(e) {
 		alert(_("xmlerror")+': '+e.message);
 		return;
 	}
@@ -108,7 +108,7 @@ SQL.IO.prototype.fromXMLText = function(xml) {
 SQL.IO.prototype.fromXML = function(xmlDoc) {
 	if (!xmlDoc || !xmlDoc.documentElement) {
 		alert(_("xmlerror")+': Null document');
-		return false; 
+		return false;
 	}
 	this.owner.fromXML(xmlDoc.documentElement);
 	this.owner.window.close();
@@ -144,11 +144,11 @@ SQL.IO.prototype.promptName = function(title, suffix) {
 }
 
 SQL.IO.prototype.clientlocalsave = function() {
-	if (!window.localStorage) { 
+	if (!window.localStorage) {
 		alert("Sorry, your browser does not seem to support localStorage.");
 		return;
 	}
-	
+
 	var xml = this.owner.toXML();
 	if (xml.length >= (5*1024*1024)/2) { /* this is a very big db structure... */
 		alert("Warning: your database structure is above 5 megabytes in size, this is above the localStorage single key limit allowed by some browsers, example Mozilla Firefox 10");
@@ -159,7 +159,7 @@ SQL.IO.prototype.clientlocalsave = function() {
 	if (!key) { return; }
 
 	key = "wwwsqldesigner_databases_" + (key || "default");
-	
+
 	try {
 		localStorage.setItem(key, xml);
 		if (localStorage.getItem(key) != xml) { throw new Error("Content verification failed"); }
@@ -169,16 +169,16 @@ SQL.IO.prototype.clientlocalsave = function() {
 }
 
 SQL.IO.prototype.clientlocalload = function() {
-	if (!window.localStorage) { 
+	if (!window.localStorage) {
 		alert("Sorry, your browser does not seem to support localStorage.");
 		return;
 	}
-	
+
 	var key = this.promptName("serverloadprompt");
 	if (!key) { return; }
 
 	key = "wwwsqldesigner_databases_" + (key || "default");
-	
+
 	try {
 		var xml = localStorage.getItem(key);
 		if (!xml) { throw new Error("No data available"); }
@@ -186,23 +186,23 @@ SQL.IO.prototype.clientlocalload = function() {
 		alert("Error loading database structure from localStorage! ("+e.message+")");
 		return;
 	}
-	
+
 	this.fromXMLText(xml);
 }
 
 SQL.IO.prototype.clientlocallist = function() {
-	if (!window.localStorage) { 
+	if (!window.localStorage) {
 		alert("Sorry, your browser does not seem to support localStorage.");
 		return;
 	}
-	
+
 	/* --- Define some useful vars --- */
 	var baseKeysName = "wwwsqldesigner_databases_";
 	var localLen = localStorage.length;
 	var data = "";
 	var schemasFound = false;
 	var code = 200;
-	
+
 	/* --- work --- */
 	try {
 		for (var i = 0; i< localLen; ++i) {
@@ -319,7 +319,7 @@ SQL.IO.prototype.dropboxsave = function() {
 		if (!key) { return; }
 
 		var filename = (key || "default") + ".xml";
-	
+
 		sql_io.listresponse("Saving...", 200);
 		var xml = sql_io.owner.toXML();
 		sql_io.dropboxClient.writeFile(filename, xml, function(error, stat) {
@@ -339,7 +339,7 @@ SQL.IO.prototype.dropboxload = function() {
 		if (!key) { return; }
 
 		var filename = (key || "default") + ".xml";
-	
+
 		sql_io.listresponse("Loading...", 200);
 		sql_io.dropboxClient.readFile(filename, function(error, data) {
 			sql_io.listresponse("", 200);
@@ -408,7 +408,10 @@ SQL.IO.prototype.serversave = function(e, keyword) {
 	this._name = name;
 	var xml = this.owner.toXML();
 	var bp = this.owner.getOption("xhrpath");
+
 	var url = bp + "backend/"+this.dom.backend.value+"/?action=save&keyword="+encodeURIComponent(name);
+  console.log("heeey", url)
+  debugger
 	var h = {"Content-type":"application/xml"};
 	this.owner.window.showThrobber();
 	this.owner.setTitle(name);
@@ -416,6 +419,7 @@ SQL.IO.prototype.serversave = function(e, keyword) {
 }
 
 SQL.IO.prototype.quicksave = function(e) {
+  console.log("quickSave")
 	this.serversave(e, this._name);
 }
 
