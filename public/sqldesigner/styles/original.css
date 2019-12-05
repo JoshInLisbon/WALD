@@ -242,7 +242,7 @@ body {
 
 #textarea {
 	width: 650px;
-	height: 200px;
+	max-height: 64px;
 }
 
 #opts {
