@@ -28,7 +28,7 @@ body {
 #bar {
 	text-align: center;
 	background-color: #ccc;
-	position: fixed; 
+	position: fixed;
 	top: 0px;
 	right: 0px;
 	width: 150px;
@@ -216,6 +216,8 @@ body {
 	visibility: hidden;
 	background-color: #fff;
 	border: 6px double #333;
+/*  height: 50%;
+  width: 50%;*/
 }
 
 #windowtitle {
@@ -248,7 +250,7 @@ body {
 }
 
 #keys {
-	white-space: nowrap; 
+	white-space: nowrap;
 	text-align: center;
 }
 
