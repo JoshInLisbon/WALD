@@ -32,7 +32,7 @@ var DATATYPES = false;
 var LOCALE = {};
 var SQL = {
 	_subscribers: {},
-	
+
 	publish: function(message, publisher, data) {
 		var subscribers = this._subscribers[message] || [];
 		var obj = {
@@ -41,7 +41,7 @@ var SQL = {
 		}
 		subscribers.forEach(function(subscriber) { subscriber(obj); });
 	},
-	
+
 	subscribe: function(message, subscriber) {
 		if (!(message in this._subscribers)) {
 			this._subscribers[message] = [];
@@ -49,7 +49,7 @@ var SQL = {
 		var index = this._subscribers[message].indexOf(subscriber);
 		if (index == -1) { this._subscribers[message].push(subscriber); }
 	},
-	
+
 	unsubscribe: function(message, subscriber) {
 		var index = this._subscribers[message].indexOf(subscriber);
 		if (index > -1) { this._subscribers[message].splice(index, 1); }
@@ -60,6 +60,6 @@ var SQL = {
 	}
 }
 
-window.onbeforeunload = function(e) {
-	return ""; /* some browsers will show this text, some won't. */
-}
+// window.onbeforeunload = function(e) {
+// 	return "";  some browsers will show this text, some won't.
+// }
