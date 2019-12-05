@@ -1,3 +1,23 @@
+#openSchema {
+  -webkit-transition: width 0.1s; /* Safari prior 6.1 */
+  transition: width 0.1s;
+  background: #6C72FA;
+  border-radius: 4px;
+  padding: 0;
+  text-align: center;
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+  p {
+    margin: 0;
+    padding: 15px 30px 15px 30px;
+  }
+  display: inline-block;
+  cursor: pointer;
+  &:hover {
+
+  }
+}
+
 .code-block {
   background: #23241f;
   padding: 20px 30px;

@@ -3,6 +3,7 @@ const showSchema = () => {
   openSchemaBtn.addEventListener('click', (event) => {
     openIframe();
     loadSchema();
+    openSchemaBtn.style = "width: 100%; height: auto;"
   });
 
   const loadSchema = (event) => {
