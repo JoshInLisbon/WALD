@@ -1,0 +1,27 @@
+// modal to show schema on home page
+
+#db_scheme_modal {
+  display: none;
+  width: calc(100vw - 20px);
+  // height: calc(100vh - 93px);
+  // margin: 2.75rem auto;
+  padding: 1rem;
+
+  h4 {
+  color: $dark-gray;
+  }
+  span {
+    color:$mid-gray;
+  }
+}
+
+.modal-body {
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.modal-content {
+  height: 100%;
+}
