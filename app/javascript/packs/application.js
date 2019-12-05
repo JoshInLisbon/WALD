@@ -1,5 +1,7 @@
 import "bootstrap";
 import swal from 'sweetalert';
+import gsap from 'gsap';
+import TweenMax from 'gsap';
 import { copyToClipboard } from "../components/copy_to_clipboard"
 import { indexSearch } from "../components/index_search"
 

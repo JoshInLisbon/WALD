@@ -3092,6 +3092,11 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2, graceful-fs@^4.2.2
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
 
+gsap@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/gsap/-/gsap-3.0.1.tgz#946b49e860487bd23e6c884b95152d556a5f86f1"
+  integrity sha512-9nzEBF7Ss9Ogyw6oEOXZxxVYH8WNRA/nHmIp3DrPOTKmlLxX9MN2ovSoH9TApA+rucBgp9veCedujp5oSQRvZw==
+
 handle-thing@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.0.tgz#0e039695ff50c93fc288557d696f3c1dc6776754"
