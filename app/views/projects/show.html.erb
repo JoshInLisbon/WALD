@@ -167,18 +167,21 @@ rails new \
 
 <!-- code to display schema builder -->
 
-<div class="container">
-  <button id="openSchema" class="btn btn convert-now-button hvr-grow mb-3 ml-auto">Visual schema</button>
 
-  <div class="iframe-wrapper" id="db-scheme-iframe-wrapper" style="display: none;">
-    <iframe
-        title="Schema Frame"
-        width="100%"
-        height="550"
-        src="<%= "/sqldesigner/index.html" %>">
-    </iframe>
+  <!-- <button id="openSchema" class="btn btn convert-now-button mb-3 ml-auto">Visual schema</button> -->
+  <div id="openSchema" class="mb-3 ml-auto"><p>Visualise Schema</p>
+    <div class="iframe-wrapper" id="db-scheme-iframe-wrapper" style="display: none;">
+      <iframe
+          title="Schema Frame"
+          width="100%"
+          height="550"
+          src="<%= "/sqldesigner/index.html" %>">
+      </iframe>
+    </div>
   </div>
-</div>
+
+
+
 
 
  <!--    </div> -->
