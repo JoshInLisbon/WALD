@@ -11,12 +11,12 @@ import { githubCheckbox } from "../components/devise_link"
 import { checkBoxes } from "../components/devise_link"
 import { alertsInfo } from "../components/devise_link"
 import { confirmation } from "../components/destroy_confirmation"
-import { loadSchema } from "../components/schema_loader"
+import { showSchema } from "../components/schema_loader"
 
 
 const projectShow = document.querySelector(".projects-show");
 if(projectShow) {
-  loadSchema();
+  showSchema();
   // deviseLink();
   copyToClipboard();
   // githubLink();
