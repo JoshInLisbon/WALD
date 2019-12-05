@@ -12,6 +12,13 @@ const loadSchema = (event) => {
 
   textArea.value = xmlCode;
   loadDb.click();
+
+  const toggle = innerDoc.querySelector('#toggle');
+  toggle.classList.toggle('on');
+  toggle.classList.toggle('off');
+
+  const bar = innerDoc.querySelector('#bar');
+  bar.style = "overflow: hidden; height: 22px;";
 }
 
 setTimeout(() => {window.onload = loadSchema()}, 1000);
