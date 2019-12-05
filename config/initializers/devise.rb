@@ -298,7 +298,7 @@ Devise.setup do |config|
   # config.sign_in_after_change_password = true
 
   # this is to enter with Heroku Callback
-  # config.omniauth :github, 'aa5bf00433cf39e5d44d', 'c5463ba790ef4be0ed27c5ba91afd9b68444d1ab', scope: 'user:email'
+  config.omniauth :github, 'aa5bf00433cf39e5d44d', 'c5463ba790ef4be0ed27c5ba91afd9b68444d1ab', scope: 'user:email'
   # this is to enter with localhost Callback
-  config.omniauth :github, 'dd1516b6c99658e979f3', 'c1500fc6589324444cda804c3a5932126748d5a8', scope: 'user:email'
+  # config.omniauth :github, 'dd1516b6c99658e979f3', 'c1500fc6589324444cda804c3a5932126748d5a8', scope: 'user:email'
 end
