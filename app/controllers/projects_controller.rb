@@ -1180,8 +1180,11 @@ class ProjectsController < ApplicationController
       no_space_model_names
       seeds_array = []
       @tables_arr.each do |table|
+        table_seeds_array = []
         seeds_array << "10.times { |index|"
+        table_seeds_array << "10.times { |index|"
         seeds_array << "#{table[:table_name].singularize.gsub(/_/m, ' ').split.map(&:capitalize).join('')}.create("
+        table_seeds_array << "#{table[:table_name].singularize.gsub(/_/m, ' ').split.map(&:capitalize).join('')}.create("
         table[:columns].each_with_index do |column, i|
           unless column[:column_name] == "id"
             if column[:column_name].match(/(.+)_id/i)
@@ -1210,13 +1213,16 @@ class ProjectsController < ApplicationController
               @adjusted_col_name = column[:column_name]
             end
             seeds_array << "#{@adjusted_col_name}: #{seed_data_type(column[:data_type], column[:column_name])} #{i + 1 < table[:columns].length ? ',' : ''}"
+            table_seeds_array << "#{@adjusted_col_name}: #{seed_data_type(column[:data_type], column[:column_name])} #{i + 1 < table[:columns].length ? ',' : ''}"
           end
         end
         seeds_array << ')'
+        table_seeds_array << ')'
         seeds_array << "} \n"
+        table_seeds_array << "} \n"
         if table[:table_name].singularize.downcase == "user" && @devise == true
           email_and_pw_check = seeds_array.join(" ").scan(/(email)|(password)/).flatten.compact
-          if seeds_array.length < 4
+          if table_seeds_array.length < 5
             seeds_array.insert(-3, 'email: \"\\#{index}@email.com\",')
             seeds_array.insert(-3, "password: 'password'")
           else
@@ -1247,9 +1253,9 @@ class ProjectsController < ApplicationController
       if column_name == "image" || column_name == "photo"
         'Faker::LoremPixel.image(size: "500x500")'
       elsif column_name == "password"
-        '"password"'
+        "'password'"
       elsif column_name == "email"
-        'Faker::Internet.email'
+        '\"\\#{index}@email.com\"'
       elsif column_name == "name"
         'Faker::Name.unique.name'
       elsif column_name == "address"
