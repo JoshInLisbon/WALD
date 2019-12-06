@@ -4,6 +4,14 @@ const showSchema = () => {
     openIframe();
     loadSchema();
     openSchemaBtn.style = "width: 100%; height: auto;"
+    const shutEyes = document.querySelector('.eyes-on');
+    const shutEyesHov = document.querySelector('.eyes-hov-on');
+    const openEyes = document.querySelector('.eyes-off');
+    const openEyesHov = document.querySelector('.eyes-hov-off');
+    shutEyes.classList.toggle('imp_d_none');
+    shutEyesHov.classList.toggle('imp_d_none');
+    openEyes.classList.toggle('imp_d_none');
+    openEyesHov.classList.toggle('imp_d_none');
   });
 
   const loadSchema = (event) => {
@@ -26,7 +34,7 @@ const showSchema = () => {
     toggle.classList.toggle('off');
 
     const bar = innerDoc.querySelector('#bar');
-    bar.style = "overflow: hidden; height: 22px;";
+    bar.style = "overflow: hidden; height: 0px;";
   }
 
   const openIframe = () => {
