@@ -170,9 +170,16 @@ rails new \
 
 
   <!-- <button id="openSchema" class="btn btn convert-now-button mb-3 ml-auto">Visual schema</button> -->
-  <div id="openSchema" class="mb-3 ml-auto"><p>Visualise Schema</p>
+  <div id="openSchema" class="mb-3 ml-auto">
+    <div class="d-flex justify-content-center">
+      <p>Visualise Schema</p>
+      <%= image_tag "shut.png", class: "eyes-img eyes-on", id: "shut-eyes" %>
+      <%= image_tag "hov-shut.png", class: "eyes-img eyes-hov-on", id: "shut-eyes" %>
+      <%= image_tag "open.png", class: "eyes-img eyes-off imp_d_none", id: "open-eyes" %>
+      <%= image_tag "hov-open.png", class: "eyes-img eyes-hov-off imp_d_none", id: "open-eyes" %>
+    </div>
     <div class="iframe-wrapper" id="db-scheme-iframe-wrapper" style="display: none;">
-      <iframe
+      <iframe id="show-iframe"
           title="Schema Frame"
           width="100%"
           height="550"
