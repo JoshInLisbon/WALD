@@ -75,7 +75,11 @@ rails new \
          <div class="heroku-checkbox show-page-checkbox">
            <input data-target="&heroku" type="checkbox" class="form-check-input wald-checkbox" id="heroku_checkbox">
          </div>
-         <span class="devise-for-span" style="opacity: 0.5;">You must be logged-in to Heroku</span>
+        <span class="devise-for-span devise-hidden" id="heroku_show_hide_span">
+         <span>
+         You must be logged-in to Heroku
+         </span>
+        </span>
       </div>
 
       <div class="d-flex template-option-div">
