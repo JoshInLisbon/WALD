@@ -11,6 +11,8 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   color: white !important;
   font-family: 'Roboto', sans-serif;
   // display: flex;
+  ::selection { background: transparent; }
+  ::-moz-selection { background: transparent; }
   p {
     display: inline-block;
     margin: 0;
@@ -31,6 +33,8 @@ $highlight-col: rgba(235, 255, 238, 0.74);
   }
   cursor: pointer;
   &:hover {
+    ::selection { background: transparent; }
+    ::-moz-selection { background: transparent; }
     p {
     color: #ff5f3f;
     }
