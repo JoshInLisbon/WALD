@@ -1,7 +1,7 @@
 
 $highlight-col: rgba(235, 255, 238, 0.74);
 
-#openSchema {
+.openSchema {
   background-color: $highlight-col;
   // background: #6C72FA;
   border-radius: 4px;
@@ -51,6 +51,61 @@ $highlight-col: rgba(235, 255, 238, 0.74);
     }
     .eyes-hov-off {
       display: inline-block;
+    }
+  }
+}
+
+
+.openSchemaOpen {
+  background-color: $highlight-col;
+  // background: #6C72FA;
+  border-radius: 4px;
+  border: 1px solid #6C72FA;
+  padding: 0;
+  text-align: center;
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+  // display: flex;
+  ::selection { background: transparent; }
+  ::-moz-selection { background: transparent; }
+  p {
+    display: inline-block;
+    margin: 0;
+    padding: 17px 10px 15px 10px;
+    color: #6C72FA;
+  }
+  .eyes-hov-on {
+    display: none;
+  }
+  .eyes-on {
+    display: inline-block;
+  }
+  .eyes-off {
+    display: inline-block;
+  }
+  .eyes-hov-off {
+
+  }
+  cursor: pointer;
+  &:hover {
+    ::selection { background: transparent; }
+    ::-moz-selection { background: transparent; }
+    p {
+
+    }
+    background-color: rgb(235, 255, 238);
+
+    .eyes-hov-on {
+      display: inline-block;
+    }
+    .eyes-on {
+      display: none;
+    }
+    .eyes-off {
+      display: inline-block;
+    }
+    .eyes-hov-off {
+      // display: inline-block;
     }
   }
 }
