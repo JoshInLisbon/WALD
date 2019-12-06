@@ -11,7 +11,9 @@ const showSchema = () => {
     shutEyes.classList.toggle('imp_d_none');
     shutEyesHov.classList.toggle('imp_d_none');
     openEyes.classList.toggle('imp_d_none');
-    openEyesHov.classList.toggle('imp_d_none');
+    // openEyesHov.classList.toggle('imp_d_none');
+    openSchemaBtn.classList.toggle('openSchema');
+    openSchemaBtn.classList.toggle('openSchemaOpen');
   });
 
   const loadSchema = (event) => {
