@@ -158,25 +158,11 @@ rails new \
 <!--   <div class="card-xml">
     <div class="front"> -->
 
-  <p><strong>Your XML File</strong></p>
-  <p>Here you can check your XML schema and update it.</p>
-  <div class="code-block code-xmlfile d-flex">
-  <div class="code-row">
-    <div class="code-copy-icon"><i class="fas fa-copy" data-target="XML-input-command"></i></div>
-      <%= simple_form_for @project, html: { class: "show-xml-form"} do |f| %>
-        <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "50", spellcheck: "false" %>
-        <%= f.submit 'Update XML', class: "btn btn convert-now-button hvr-grow my-3" %>
-      <% end %>
-    </div>
-  </div>
+  <p><strong>Your Schema</strong></p>
 
-<!-- code to display schema builder -->
-
-
-  <!-- <button id="openSchema" class="btn btn convert-now-button mb-3 ml-auto">Visual schema</button> -->
   <div id="openSchema" class="mb-3 ml-auto">
     <div class="d-flex justify-content-center">
-      <p>Visualise Schema</p>
+      <p>Visualise your Schema</p>
       <%= image_tag "shut.png", class: "eyes-img eyes-on", id: "shut-eyes" %>
       <%= image_tag "hov-shut.png", class: "eyes-img eyes-hov-on", id: "shut-eyes" %>
       <%= image_tag "open.png", class: "eyes-img eyes-off imp_d_none", id: "open-eyes" %>
@@ -191,6 +177,23 @@ rails new \
       </iframe>
     </div>
   </div>
+
+  <p>Access your <strong>XML</strong> and update it.</p>
+  <div class="code-block code-xmlfile d-flex">
+  <div class="code-row">
+    <div class="code-copy-icon"><i class="fas fa-copy" data-target="XML-input-command"></i></div>
+      <%= simple_form_for @project, html: { class: "show-xml-form"} do |f| %>
+        <%= f.text_area :xml_schema, id: "XML-input-command", class: "code-input", rows: "5", cols: "50", spellcheck: "false" %>
+        <%= f.submit 'Update XML', class: "btn btn convert-now-button hvr-grow my-3" %>
+      <% end %>
+    </div>
+  </div>
+
+<!-- code to display schema builder -->
+
+
+  <!-- <button id="openSchema" class="btn btn convert-now-button mb-3 ml-auto">Visual schema</button> -->
+
 
 
 
