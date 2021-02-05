@@ -33,7 +33,7 @@
       <% else %>
         <!-- <li class="align-self-center flex-grow-1" id="wald-text">  We Are Lazy Developers </li> -->
         <li id="navbar-login-button" class="nav-item" style ="text-color: white;">
-          <%= link_to "Sign in with", user_github_omniauth_authorize_path, style: "color: white;" %> <i class="fab fa-github" style="color: white;"></i><br />
+          <%= link_to "Sign in with", user_github_omniauth_authorize_path, method: :post, style: "color: white;" %> <i class="fab fa-github" style="color: white;"></i><br />
         </li>
       <% end %>
     </ul>
