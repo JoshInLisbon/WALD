@@ -6,7 +6,7 @@
     "bootstrap": "^4.3.1",
     "gsap": "^3.0.1",
     "highlightjs": "^9.16.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "popper.js": "^1.16.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^9.4.1"
